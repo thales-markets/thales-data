@@ -29,10 +29,11 @@ program
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 'mainnet')
 
-	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp }) => {
+	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
-			.markets({ max, creator, isOpen, minTimestamp, maxTimestamp })
+			.markets({ max, creator, isOpen, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -42,10 +43,11 @@ program
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The market address')
 	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 'mainnet')
 
-	.action(async ({ max, type, market, account }) => {
+	.action(async ({ max, type, market, account, network }) => {
 		binaryOptions
-			.optionTransactions({ max, type, market, account })
+			.optionTransactions({ max, type, market, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -54,10 +56,11 @@ program
 	.command('binaryOptions.marketsBidOn')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 'mainnet')
 
-	.action(async ({ max, account }) => {
+	.action(async ({ max, account, network }) => {
 		binaryOptions
-			.marketsBidOn({ max, account })
+			.marketsBidOn({ max, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -68,10 +71,11 @@ program
 	.option('-M, --market <value>', 'The market address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 'mainnet')
 
-	.action(async ({ max, market, minTimestamp, maxTimestamp }) => {
+	.action(async ({ max, market, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
-			.historicalOptionPrice({ max, market, minTimestamp, maxTimestamp })
+			.historicalOptionPrice({ max, market, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

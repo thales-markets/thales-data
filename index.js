@@ -5,7 +5,12 @@ const pageResults = require('graph-results-pager');
 const { hexToAscii, getHashFromId } = require('./utils');
 
 const graphAPIEndpoints = {
-	binaryOptions: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options',
+	binaryOptions: {
+		mainnet: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options',
+		ropsten: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten',
+		rinkeby: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby',
+		kovan: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan',
+	},
 };
 
 module.exports = {
@@ -18,9 +23,10 @@ module.exports = {
 			isOpen = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			network = 'mainnet',
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions,
+				api: graphAPIEndpoints.binaryOptions[network],
 				max,
 				query: {
 					entity: 'markets',
@@ -90,9 +96,9 @@ module.exports = {
 				),
 			);
 		},
-		optionTransactions({ max = Infinity, market = undefined, account = undefined } = {}) {
+		optionTransactions({ max = Infinity, market = undefined, account = undefined, network = 'mainnet' } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions,
+				api: graphAPIEndpoints.binaryOptions[network],
 				max,
 				query: {
 					entity: 'optionTransactions',
@@ -120,9 +126,9 @@ module.exports = {
 				})),
 			);
 		},
-		marketsBidOn({ max = Infinity, account = undefined } = {}) {
+		marketsBidOn({ max = Infinity, account = undefined, network = 'mainnet' } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions,
+				api: graphAPIEndpoints.binaryOptions[network],
 				max,
 				query: {
 					entity: 'optionTransactions',
@@ -143,9 +149,10 @@ module.exports = {
 			market = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			network = 'mainnet',
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions,
+				api: graphAPIEndpoints.binaryOptions[network],
 				max,
 				query: {
 					entity: 'historicalOptionPrices',
