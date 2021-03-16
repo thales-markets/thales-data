@@ -6,10 +6,10 @@ const { hexToAscii, getHashFromId } = require('./utils');
 
 const graphAPIEndpoints = {
 	binaryOptions: {
-		mainnet: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options',
-		ropsten: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten',
-		rinkeby: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby',
-		kovan: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan',
+		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options', // mainnet
+		3: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten', // ropsten
+		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
+		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
 	},
 };
 
@@ -23,7 +23,7 @@ module.exports = {
 			isOpen = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 'mainnet',
+			network = 1,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
@@ -96,7 +96,7 @@ module.exports = {
 				),
 			);
 		},
-		optionTransactions({ max = Infinity, market = undefined, account = undefined, network = 'mainnet' } = {}) {
+		optionTransactions({ max = Infinity, market = undefined, account = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -126,7 +126,7 @@ module.exports = {
 				})),
 			);
 		},
-		marketsBidOn({ max = Infinity, account = undefined, network = 'mainnet' } = {}) {
+		marketsBidOn({ max = Infinity, account = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -149,7 +149,7 @@ module.exports = {
 			market = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 'mainnet',
+			network = 1,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],

@@ -29,7 +29,7 @@ program
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 'mainnet')
+	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
@@ -43,7 +43,7 @@ program
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The market address')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 'mainnet')
+	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, type, market, account, network }) => {
 		binaryOptions
@@ -56,7 +56,7 @@ program
 	.command('binaryOptions.marketsBidOn')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 'mainnet')
+	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, account, network }) => {
 		binaryOptions
@@ -71,7 +71,7 @@ program
 	.option('-M, --market <value>', 'The market address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 'mainnet')
+	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, market, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
