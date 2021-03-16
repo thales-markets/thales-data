@@ -1,0 +1,32 @@
+{
+	"name": "thales-data",
+	"license": "MIT",
+	"version": "0.0.1",
+	"author": "Thales",
+	"main": "index.js",
+	"browser": "browser.js",
+	"bin": {
+		"thalesData": "bin.js"
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pack": "webpack --mode production",
+		"prepublish": "npm run pack"
+	},
+	"dependencies": {
+		"commander": "6.1.0",
+		"csv-stringify": "5.3.3",
+		"graph-results-pager": "1.0.3",
+		"graphql": "14.5.8",
+		"node-fetch": "2.6.1"
+	},
+	"devDependencies": {
+		"eslint": "5.16.0",
+		"eslint-config-prettier": "4.3.0",
+		"eslint-plugin-import": "2.18.2",
+		"eslint-plugin-prettier": "3.1.0",
+		"prettier": "1.17.1",
+		"webpack": "4.41.2",
+		"webpack-cli": "3.3.9"
+	}
+}
