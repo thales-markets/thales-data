@@ -178,5 +178,69 @@ module.exports = {
 				})),
 			);
 		},
+		trades({
+			max = 100,
+			makerToken = undefined,
+			takerToken = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'trades',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							makerToken: makerToken ? `\\"${makerToken}\\"` : undefined,
+							takerToken: takerToken ? `\\"${takerToken}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: [
+						'id',
+						'transactionHash',
+						'timestamp',
+						'orderHash',
+						'maker',
+						'taker',
+						'makerToken',
+						'takerToken',
+						'makerAmount',
+						'takerAmount',
+					],
+				},
+			}).then(results =>
+				results.map(
+					({
+						id,
+						transactionHash,
+						timestamp,
+						orderHash,
+						maker,
+						taker,
+						makerToken,
+						takerToken,
+						makerAmount,
+						takerAmount,
+					}) => ({
+						id,
+						transactionHash,
+						timestamp: Number(timestamp * 1000),
+						orderHash,
+						maker,
+						taker,
+						makerToken,
+						takerToken,
+						makerAmount: makerAmount / 1e18,
+						takerAmount: takerAmount / 1e18,
+					}),
+				),
+			);
+		},
 	},
 };

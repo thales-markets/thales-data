@@ -80,4 +80,20 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('binaryOptions.trades')
+	.option('-m, --max <value>', 'Maximum number of results', 100)
+	.option('-w, --makerToken <value>', 'The address of the maker token')
+	.option('-v, --takerToken <value>', 'The address of the taker token')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, makerToken, takerToken, minTimestamp, maxTimestamp, network }) => {
+		binaryOptions
+			.trades({ max, makerToken, takerToken, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);
