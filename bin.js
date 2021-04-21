@@ -82,7 +82,7 @@ program
 
 program
 	.command('binaryOptions.trades')
-	.option('-m, --max <value>', 'Maximum number of results', 100)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-w, --makerToken <value>', 'The address of the maker token')
 	.option('-v, --takerToken <value>', 'The address of the taker token')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')

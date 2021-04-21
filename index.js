@@ -179,7 +179,7 @@ module.exports = {
 			);
 		},
 		trades({
-			max = 100,
+			max = Infinity,
 			makerToken = undefined,
 			takerToken = undefined,
 			minTimestamp = undefined,
