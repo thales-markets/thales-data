@@ -7,10 +7,8 @@ This is a collection of utilities to query binary options data from Ethereum. Th
 The below all return a Promise that resolves with the requested results.
 
 1. `binaryOptions.markets` Get all the binary options markets created.
-2. `binaryOptions.marketsBidOn({ account })` Get all the binary options markets with bids from `account`.
-3. `binaryOptions.optionTransactions` Get all the Bid and Refund transactions made to the binary options markets.
-4. `binaryOptions.historicalOptionPrice` Get historical records of every option price for every market.
-5. `binaryOptions.trades({ makerToken, takerToken })` Get all trades between `makerToken` and `takerToken`.
+2. `binaryOptions.optionTransactions` Get all the transactions made to the binary options markets.
+3. `binaryOptions.trades({ makerToken, takerToken })` Get all trades between `makerToken` and `takerToken`.
 
 ## Use this as a node or webpack dependency
 

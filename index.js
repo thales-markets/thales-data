@@ -31,7 +31,7 @@ module.exports = {
 				query: {
 					entity: 'markets',
 					selection: {
-						orderBy: 'biddingEndDate',
+						orderBy: 'maturityDate',
 						orderDirection: 'desc',
 						where: {
 							creator: creator ? `\\"${creator}\\"` : undefined,
@@ -46,12 +46,9 @@ module.exports = {
 						'creator',
 						'currencyKey',
 						'strikePrice',
-						'biddingEndDate',
 						'maturityDate',
 						'expiryDate',
 						'isOpen',
-						'longPrice',
-						'shortPrice',
 						'poolSize',
 						'result',
 						'longAddress',
@@ -66,12 +63,9 @@ module.exports = {
 						creator,
 						currencyKey,
 						strikePrice,
-						biddingEndDate,
 						maturityDate,
 						expiryDate,
 						isOpen,
-						longPrice,
-						shortPrice,
 						poolSize,
 						result,
 						longAddress,
@@ -82,12 +76,9 @@ module.exports = {
 						creator,
 						currencyKey: hexToAscii(currencyKey),
 						strikePrice: strikePrice / 1e18,
-						biddingEndDate: Number(biddingEndDate) * 1000,
 						maturityDate: Number(maturityDate) * 1000,
 						expiryDate: Number(expiryDate) * 1000,
 						isOpen,
-						longPrice: longPrice / 1e18,
-						shortPrice: shortPrice / 1e18,
 						poolSize: poolSize / 1e18,
 						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
 						longAddress,
@@ -123,58 +114,6 @@ module.exports = {
 					amount: amount / 1e18,
 					market,
 					fee: fee ? fee / 1e18 : null,
-				})),
-			);
-		},
-		marketsBidOn({ max = Infinity, account = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'optionTransactions',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							type: 'bid',
-							account: account ? `\\"${account}\\"` : undefined,
-						},
-					},
-					properties: ['market'],
-				},
-			}).then(results => results.map(({ market }) => market).filter((val, i, arr) => arr.indexOf(val) === i));
-		},
-		historicalOptionPrice({
-			max = Infinity,
-			market = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 1,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'historicalOptionPrices',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							market: market ? `\\"${market}\\"` : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'longPrice', 'shortPrice', 'poolSize', 'market'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, longPrice, shortPrice, poolSize, market }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					longPrice: longPrice / 1e18,
-					shortPrice: shortPrice / 1e18,
-					poolSize: poolSize / 1e18,
-					market,
 				})),
 			);
 		},

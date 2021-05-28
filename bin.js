@@ -53,34 +53,6 @@ program
 	});
 
 program
-	.command('binaryOptions.marketsBidOn')
-	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
-
-	.action(async ({ max, account, network }) => {
-		binaryOptions
-			.marketsBidOn({ max, account, network })
-			.then(logResults())
-			.then(showResultCount({ max }));
-	});
-
-program
-	.command('binaryOptions.historicalOptionPrice')
-	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-M, --market <value>', 'The market address')
-	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
-	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
-
-	.action(async ({ max, market, minTimestamp, maxTimestamp, network }) => {
-		binaryOptions
-			.historicalOptionPrice({ max, market, minTimestamp, maxTimestamp, network })
-			.then(logResults())
-			.then(showResultCount({ max }));
-	});
-
-program
 	.command('binaryOptions.trades')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-w, --makerToken <value>', 'The address of the maker token')
