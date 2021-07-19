@@ -41,6 +41,8 @@ module.exports = {
 						},
 					},
 					properties: [
+						'customMarket',
+						'customOracle',
 						'id',
 						'timestamp',
 						'creator',
@@ -50,16 +52,16 @@ module.exports = {
 						'expiryDate',
 						'isOpen',
 						'poolSize',
-						'result',
 						'longAddress',
 						'shortAddress',
-						'customMarket',
-						'customOracle',
+						'result',
 					],
 				},
 			}).then(results =>
 				results.map(
 					({
+						customMarket,
+						customOracle,
 						id,
 						timestamp,
 						creator,
@@ -69,12 +71,12 @@ module.exports = {
 						expiryDate,
 						isOpen,
 						poolSize,
-						result,
 						longAddress,
 						shortAddress,
+						result,
+					}) => ({
 						customMarket,
 						customOracle,
-					}) => ({
 						address: id,
 						timestamp: Number(timestamp * 1000),
 						creator,
@@ -84,11 +86,9 @@ module.exports = {
 						expiryDate: Number(expiryDate) * 1000,
 						isOpen,
 						poolSize: poolSize / 1e18,
-						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
 						longAddress,
 						shortAddress,
-						customMarket,
-						customOracle,
+						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
 					}),
 				),
 			);
