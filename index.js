@@ -53,6 +53,8 @@ module.exports = {
 						'result',
 						'longAddress',
 						'shortAddress',
+						'customMarket',
+						'customOracle',
 					],
 				},
 			}).then(results =>
@@ -70,6 +72,8 @@ module.exports = {
 						result,
 						longAddress,
 						shortAddress,
+						customMarket,
+						customOracle,
 					}) => ({
 						address: id,
 						timestamp: Number(timestamp * 1000),
@@ -83,6 +87,8 @@ module.exports = {
 						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
 						longAddress,
 						shortAddress,
+						customMarket,
+						customOracle,
 					}),
 				),
 			);
