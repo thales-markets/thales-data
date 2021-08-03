@@ -44,5 +44,5 @@ thalesData.binaryOptions
 
 ```bash
 # get markets ordered from latest to earliest
-npx synthetix-data binaryOptions.markets
+npx thales-data binaryOptions.markets
 ```
