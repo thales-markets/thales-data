@@ -1,6 +1,6 @@
 # thales-data
 
-This is a collection of utilities to query binary options data from Ethereum. This data has been indexed by The Graph via the subgraph the Thales team maintains: https://thegraph.com/explorer/subgraph/thales-markets/thales-options
+This is a collection of utilities to query Thales data from Ethereum. This data has been indexed by The Graph via the subgraph the Thales team maintains ([the subgraph code repo](https://github.com/thales-markets/thales-subgraph)).
 
 ## Supported queries
 
@@ -16,4 +16,33 @@ The below all return a Promise that resolves with the requested results.
 const thalesData = require('thales-data'); // common js
 // or
 import thalesData from 'thales-data'; // es modules
+
+// query and log resolved results
+thalesData.binaryOptions
+	.markets({
+		network: 1, // mainnet
+		max: 1000, // return first 1000 records
+	})
+	.then(markets => console.log(markets));
+```
+
+### Use in a browser
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/thales-data/browser.js"></script>
+<script>
+	window.thalesData.binaryOptions
+		.markets({
+			network: 1, // mainnet
+			max: 1000, // return first 1000 records
+		})
+		.then(console.log);
+</script>
+```
+
+## How to query via the npm library (CLI)
+
+```bash
+# get markets ordered from latest to earliest
+npx synthetix-data binaryOptions.markets
 ```
