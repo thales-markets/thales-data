@@ -13,6 +13,7 @@ The below all return a Promise that resolves with the requested results.
 1. `binaryOptions.markets` Get all the binary options markets created.
 2. `binaryOptions.optionTransactions` Get all the transactions made to the binary options markets.
 3. `binaryOptions.trades({ makerToken, takerToken })` Get all trades between `makerToken` and `takerToken`.
+4. `binaryOptions.tokenTransactions({ account })` Get all the transactions made with THALES token from the `account`.
 
 ## Use this as a node or webpack dependency
 

@@ -187,5 +187,31 @@ module.exports = {
 				),
 			);
 		},
+		tokenTransactions({ max = Infinity, type = undefined, account = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'tokenTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, type, account, amount }) => ({
+					hash: getHashFromId(id),
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount: amount / 1e18,
+				})),
+			);
+		},
 	},
 };
