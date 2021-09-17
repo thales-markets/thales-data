@@ -213,5 +213,26 @@ module.exports = {
 				})),
 			);
 		},
+		ongoingAirdropNewRoots({ max = Infinity, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'ongoingAirdropNewRoots',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+					},
+					properties: ['id', 'timestamp', 'root', 'period'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, root, period }) => ({
+					hash: getHashFromId(id),
+					timestamp: Number(timestamp * 1000),
+					root,
+					period,
+				})),
+			);
+		},
 	},
 };
