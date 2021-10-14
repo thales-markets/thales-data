@@ -157,6 +157,9 @@ module.exports = {
 						'takerToken',
 						'makerAmount',
 						'takerAmount',
+						'market',
+						'orderSide',
+						'optionSide',
 					],
 				},
 			}).then(results =>
@@ -172,6 +175,9 @@ module.exports = {
 						takerToken,
 						makerAmount,
 						takerAmount,
+						market,
+						orderSide,
+						optionSide,
 					}) => ({
 						id,
 						transactionHash,
@@ -183,6 +189,9 @@ module.exports = {
 						takerToken,
 						makerAmount: makerAmount / 1e18,
 						takerAmount: takerAmount / 1e18,
+						market,
+						orderSide,
+						optionSide,
 					}),
 				),
 			);
