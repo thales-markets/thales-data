@@ -1,7 +1,7 @@
 # thales-data
 
 [![npm version](https://badge.fury.io/js/thales-data.svg)](https://badge.fury.io/js/thales-data)
-[![Discord](https://img.shields.io/discord/906484044915687464.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord.com/channels/906484044915687464)
+[![Discord](https://img.shields.io/discord/906484044915687464.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord.com/invite/rB3AWKwACM)
 [![Twitter Follow](https://img.shields.io/twitter/follow/thalesmarket.svg?label=thalesmarket&style=social)](https://twitter.com/thalesmarket)
 
 This is a collection of utilities to query Thales data from Ethereum. This data has been indexed by The Graph via the subgraph the Thales team maintains ([the subgraph code repo](https://github.com/thales-markets/thales-subgraph)).
