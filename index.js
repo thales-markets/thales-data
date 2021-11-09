@@ -10,7 +10,7 @@ const graphAPIEndpoints = {
 		3: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten', // ropsten
 		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
-		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-ovm', // optimism kovan
+		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 	},
 };
 
@@ -241,6 +241,92 @@ module.exports = {
 					timestamp: Number(timestamp * 1000),
 					root,
 					period,
+				})),
+			);
+		},
+		thalesRoyaleGames({ max = Infinity, address = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyaleGames',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							address: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'address'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, address }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					address,
+				})),
+			);
+		},
+		thalesRoyalePlayers({ max = Infinity, id = undefined, game = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyalePlayers',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: id ? `\\"${id}\\"` : undefined,
+							game: game ? `\\"${game}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'game', 'isAlive'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, game, isAlive }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					game,
+					isAlive,
+				})),
+			);
+		},
+		thalesRoyalePositions({
+			max = Infinity,
+			id = undefined,
+			game = undefined,
+			player = undefined,
+			round = undefined,
+			position = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyalePositions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: id ? `\\"${id}\\"` : undefined,
+							game: game ? `\\"${game}\\"` : undefined,
+							player: player ? `\\"${player}\\"` : undefined,
+							round: round ? `\\"${round}\\"` : undefined,
+							position: position ? `\\"${position}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'game', 'player', 'round', 'position'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, game, player, round, position }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					game,
+					player,
+					round: Number(round),
+					position: Number(position),
 				})),
 			);
 		},
