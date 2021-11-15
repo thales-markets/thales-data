@@ -281,14 +281,15 @@ module.exports = {
 							game: game ? `\\"${game}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'game', 'isAlive'],
+					properties: ['id', 'timestamp', 'game', 'isAlive', 'deathRound'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, game, isAlive }) => ({
+				results.map(({ id, timestamp, game, isAlive, deathRound }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					game,
 					isAlive,
+					deathRound: Number(deathRound),
 				})),
 			);
 		},
