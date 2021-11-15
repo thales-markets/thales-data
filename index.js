@@ -267,7 +267,35 @@ module.exports = {
 				})),
 			);
 		},
-		thalesRoyalePlayers({ max = Infinity, id = undefined, game = undefined, network = 1 } = {}) {
+		thalesRoyaleRounds({ max = Infinity, id = undefined, game = undefined, round = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyaleRounds',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: id ? `\\"${id}\\"` : undefined,
+							game: game ? `\\"${game}\\"` : undefined,
+							round: round ? `\\"${round}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'game', 'round', 'totalPlayersPerRound', 'eliminatedPerRound'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, game, round, totalPlayersPerRound, eliminatedPerRound }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					game,
+					round: Number(round),
+					totalPlayersPerRound: Number(totalPlayersPerRound),
+					eliminatedPerRound: Number(eliminatedPerRound),
+				})),
+			);
+		},
+		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, game = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -278,14 +306,16 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							id: id ? `\\"${id}\\"` : undefined,
+							address: address ? `\\"${address}\\"` : undefined,
 							game: game ? `\\"${game}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'game', 'isAlive', 'deathRound'],
+					properties: ['id', 'address', 'timestamp', 'game', 'isAlive', 'deathRound'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, game, isAlive, deathRound }) => ({
+				results.map(({ id, address, timestamp, game, isAlive, deathRound }) => ({
 					id,
+					address,
 					timestamp: Number(timestamp * 1000),
 					game,
 					isAlive,

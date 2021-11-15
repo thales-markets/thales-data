@@ -108,15 +108,31 @@ program
 	});
 
 program
+	.command('binaryOptions.thalesRoyaleRounds')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-i, --id <value>', 'The position id')
+	.option('-g, --game <value>', 'The game address')
+	.option('-r, --round <value>', 'The round')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, id, game, round, network }) => {
+		binaryOptions
+			.thalesRoyaleRounds({ max, id, game, round, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.thalesRoyalePlayers')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The player id')
+	.option('-a, --address <value>', 'The player address')
 	.option('-g, --game <value>', 'The game address')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, id, game, network }) => {
+	.action(async ({ max, id, address, game, network }) => {
 		binaryOptions
-			.thalesRoyalePlayers({ max, id, game, network })
+			.thalesRoyalePlayers({ max, id, address, game, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
