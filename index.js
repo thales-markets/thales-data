@@ -310,16 +310,17 @@ module.exports = {
 							game: game ? `\\"${game}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'address', 'timestamp', 'game', 'isAlive', 'deathRound'],
+					properties: ['id', 'address', 'timestamp', 'game', 'isAlive', 'deathRound', 'number'],
 				},
 			}).then(results =>
-				results.map(({ id, address, timestamp, game, isAlive, deathRound }) => ({
+				results.map(({ id, address, timestamp, game, isAlive, deathRound, number }) => ({
 					id,
 					address,
 					timestamp: Number(timestamp * 1000),
 					game,
 					isAlive,
 					deathRound: Number(deathRound),
+					number: Number(number),
 				})),
 			);
 		},
@@ -358,6 +359,29 @@ module.exports = {
 					player,
 					round: Number(round),
 					position: Number(position),
+				})),
+			);
+		},
+		stakers({ max = Infinity, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'stakers',
+					selection: {
+						orderBy: 'totalStakedAmount',
+						orderDirection: 'desc',
+					},
+					properties: ['id', 'timestamp', 'stakedAmount', 'escrowedAmount', 'totalStakedAmount', 'unstakingAmount'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, stakedAmount, escrowedAmount, totalStakedAmount, unstakingAmount }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					stakedAmount: stakedAmount / 1e18,
+					escrowedAmount: escrowedAmount / 1e18,
+					totalStakedAmount: totalStakedAmount / 1e18,
+					unstakingAmount: unstakingAmount / 1e18,
 				})),
 			);
 		},

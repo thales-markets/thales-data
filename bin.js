@@ -154,4 +154,16 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('binaryOptions.stakers')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, network }) => {
+		binaryOptions
+			.stakers({ max, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);
