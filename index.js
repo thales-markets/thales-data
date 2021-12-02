@@ -11,6 +11,7 @@ const graphAPIEndpoints = {
 		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-optimism', // optimism
 	},
 };
 
