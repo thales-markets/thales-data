@@ -109,10 +109,21 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'type', 'account', 'currencyKey', 'side', 'amount', 'market', 'fee'],
+					properties: [
+						'id',
+						'timestamp',
+						'type',
+						'account',
+						'currencyKey',
+						'side',
+						'amount',
+						'market',
+						'fee',
+						'blockNumber',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, currencyKey, side, amount, market, fee }) => ({
+				results.map(({ id, timestamp, type, account, currencyKey, side, amount, market, fee, blockNumber }) => ({
 					hash: getHashFromId(id),
 					timestamp: Number(timestamp * 1000),
 					type,
@@ -122,6 +133,7 @@ module.exports = {
 					amount: amount / 1e18,
 					market,
 					fee: fee ? fee / 1e18 : null,
+					blockNumber: Number(blockNumber),
 				})),
 			);
 		},
@@ -162,6 +174,7 @@ module.exports = {
 						'market',
 						'orderSide',
 						'optionSide',
+						'blockNumber',
 					],
 				},
 			}).then(results =>
@@ -180,6 +193,7 @@ module.exports = {
 						market,
 						orderSide,
 						optionSide,
+						blockNumber,
 					}) => ({
 						id,
 						transactionHash,
@@ -194,6 +208,7 @@ module.exports = {
 						market,
 						orderSide,
 						optionSide,
+						blockNumber: Number(blockNumber),
 					}),
 				),
 			);
