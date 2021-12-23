@@ -77,6 +77,7 @@ module.exports = {
 						longAddress,
 						shortAddress,
 						result,
+						finalPrice,
 					}) => ({
 						customMarket,
 						customOracle,
@@ -92,6 +93,7 @@ module.exports = {
 						longAddress,
 						shortAddress,
 						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
+						finalPrice: finalPrice / 1e18,
 					}),
 				),
 			);
