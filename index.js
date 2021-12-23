@@ -57,6 +57,7 @@ module.exports = {
 						'longAddress',
 						'shortAddress',
 						'result',
+						'finalPrice',
 					],
 				},
 			}).then(results =>
