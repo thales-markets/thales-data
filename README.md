@@ -14,7 +14,7 @@ The below all return a Promise that resolves with the requested results.
 2. `binaryOptions.optionTransactions` Get all the transactions made to the binary options markets.
 3. `binaryOptions.trades({ makerToken, takerToken })` Get all trades between `makerToken` and `takerToken`.
 4. `binaryOptions.tokenTransactions({ account })` Get all the transactions made with THALES token from the `account`.
-5. `binaryOptions.thalesRoyaleGames` Get all addresses of Thales Royale games.
+5. `binaryOptions.thalesRoyaleSeasons` Get all addresses of Thales Royale seasons.
 6. `binaryOptions.thalesRoyalePlayers` Get all players signed up for Thales Royale games.
 7. `binaryOptions.thalesRoyalePositions` Get all positions selected by players of Thales Royale games.
 

@@ -276,17 +276,41 @@ module.exports = {
 							address: address ? `\\"${address}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'address'],
+					properties: ['id', 'timestamp', 'address', 'season'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, address }) => ({
+				results.map(({ id, timestamp, address, season }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					address,
+					season: Number(season),
 				})),
 			);
 		},
-		thalesRoyaleRounds({ max = Infinity, id = undefined, game = undefined, round = undefined, network = 1 } = {}) {
+		thalesRoyaleSeasons({ max = Infinity, season = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyaleSeasons',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							season: season ? `\\"${season}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'season'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, season }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					season: Number(season),
+				})),
+			);
+		},
+		thalesRoyaleRounds({ max = Infinity, id = undefined, season = undefined, round = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -297,24 +321,31 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							id: id ? `\\"${id}\\"` : undefined,
-							game: game ? `\\"${game}\\"` : undefined,
 							round: round ? `\\"${round}\\"` : undefined,
+							season: season ? `\\"${season}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'game', 'round', 'totalPlayersPerRound', 'eliminatedPerRound'],
+					properties: [
+						'id',
+						'timestamp',
+						'season',
+						'round',
+						'totalPlayersPerRoundPerSeason',
+						'eliminatedPerRoundPerSeason',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, game, round, totalPlayersPerRound, eliminatedPerRound }) => ({
+				results.map(({ id, timestamp, season, round, totalPlayersPerRoundPerSeason, eliminatedPerRoundPerSeason }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
-					game,
+					season: Number(season),
 					round: Number(round),
-					totalPlayersPerRound: Number(totalPlayersPerRound),
-					eliminatedPerRound: Number(eliminatedPerRound),
+					totalPlayersPerRoundPerSeason: Number(totalPlayersPerRoundPerSeason),
+					eliminatedPerRoundPerSeason: Number(eliminatedPerRoundPerSeason),
 				})),
 			);
 		},
-		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, game = undefined, network = 1 } = {}) {
+		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, season = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -326,17 +357,17 @@ module.exports = {
 						where: {
 							id: id ? `\\"${id}\\"` : undefined,
 							address: address ? `\\"${address}\\"` : undefined,
-							game: game ? `\\"${game}\\"` : undefined,
+							season: season ? `\\"${season}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'address', 'timestamp', 'game', 'isAlive', 'deathRound', 'number'],
+					properties: ['id', 'address', 'timestamp', 'season', 'isAlive', 'deathRound', 'number'],
 				},
 			}).then(results =>
-				results.map(({ id, address, timestamp, game, isAlive, deathRound, number }) => ({
+				results.map(({ id, address, timestamp, season, isAlive, deathRound, number }) => ({
 					id,
 					address,
 					timestamp: Number(timestamp * 1000),
-					game,
+					season: Number(season),
 					isAlive,
 					deathRound: Number(deathRound),
 					number: Number(number),
@@ -346,7 +377,7 @@ module.exports = {
 		thalesRoyalePositions({
 			max = Infinity,
 			id = undefined,
-			game = undefined,
+			season = undefined,
 			player = undefined,
 			round = undefined,
 			position = undefined,
@@ -362,19 +393,19 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							id: id ? `\\"${id}\\"` : undefined,
-							game: game ? `\\"${game}\\"` : undefined,
+							season: season ? `\\"${season}\\"` : undefined,
 							player: player ? `\\"${player}\\"` : undefined,
 							round: round ? `\\"${round}\\"` : undefined,
 							position: position ? `\\"${position}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'game', 'player', 'round', 'position'],
+					properties: ['id', 'timestamp', 'season', 'player', 'round', 'position'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, game, player, round, position }) => ({
+				results.map(({ id, timestamp, player, round, position }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
-					game,
+					season: Number(season),
 					player,
 					round: Number(round),
 					position: Number(position),

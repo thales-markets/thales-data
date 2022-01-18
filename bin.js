@@ -108,16 +108,29 @@ program
 	});
 
 program
+	.command('binaryOptions.thalesRoyaleSeasons')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-s, --season <value>', 'Season number')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, season, network }) => {
+		binaryOptions
+			.thalesRoyaleSeasons({ max, season, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.thalesRoyaleRounds')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
-	.option('-g, --game <value>', 'The game address')
+	.option('-g, --season <value>', 'Season number')
 	.option('-r, --round <value>', 'The round')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, id, game, round, network }) => {
+	.action(async ({ max, id, season, round, network }) => {
 		binaryOptions
-			.thalesRoyaleRounds({ max, id, game, round, network })
+			.thalesRoyaleRounds({ max, id, season, round, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -127,12 +140,12 @@ program
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The player id')
 	.option('-a, --address <value>', 'The player address')
-	.option('-g, --game <value>', 'The game address')
+	.option('-g, --season <value>', 'Season number')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, id, address, game, network }) => {
+	.action(async ({ max, id, address, season, network }) => {
 		binaryOptions
-			.thalesRoyalePlayers({ max, id, address, game, network })
+			.thalesRoyalePlayers({ max, id, address, season, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -141,15 +154,15 @@ program
 	.command('binaryOptions.thalesRoyalePositions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
-	.option('-g, --game <value>', 'The game address')
+	.option('-g, --season <value>', 'Season number')
 	.option('-p, --player <value>', 'The player address')
 	.option('-r, --round <value>', 'The round')
 	.option('-s, --position <value>', 'The position')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, id, game, player, round, position, network }) => {
+	.action(async ({ max, id, season, player, round, position, network }) => {
 		binaryOptions
-			.thalesRoyalePositions({ max, id, game, player, round, position, network })
+			.thalesRoyalePositions({ max, id, season, player, round, position, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
