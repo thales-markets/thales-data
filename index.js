@@ -330,16 +330,22 @@ module.exports = {
 						'timestamp',
 						'season',
 						'round',
+						'result',
+						'strikePrice',
+						'finalPrice',
 						'totalPlayersPerRoundPerSeason',
 						'eliminatedPerRoundPerSeason',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, season, round, totalPlayersPerRoundPerSeason, eliminatedPerRoundPerSeason }) => ({
+				results.map(({ id, timestamp, season, round, result, strikePrice, finalPrice, totalPlayersPerRoundPerSeason, eliminatedPerRoundPerSeason }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					season: Number(season),
 					round: Number(round),
+					result: result ? Number(result) : null,
+					strikePrice: strikePrice ? strikePrice / 1e18 : null,
+					finalPrice: finalPrice ? finalPrice / 1e18 : null,
 					totalPlayersPerRoundPerSeason: Number(totalPlayersPerRoundPerSeason),
 					eliminatedPerRoundPerSeason: Number(eliminatedPerRoundPerSeason),
 				})),
