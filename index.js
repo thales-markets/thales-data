@@ -230,15 +230,16 @@ module.exports = {
 							type: type ? `\\"${type}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
+					properties: ['id', 'timestamp', 'type', 'account', 'amount', 'blockNumber'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount }) => ({
+				results.map(({ id, timestamp, type, account, amount, blockNumber }) => ({
 					hash: getHashFromId(id),
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
 					amount: amount / 1e18,
+					blockNumber: Number(blockNumber),
 				})),
 			);
 		},
@@ -338,17 +339,29 @@ module.exports = {
 					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, season, round, result, strikePrice, finalPrice, totalPlayersPerRoundPerSeason, eliminatedPerRoundPerSeason }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-					round: Number(round),
-					result: result ? Number(result) : null,
-					strikePrice: strikePrice ? strikePrice / 1e18 : null,
-					finalPrice: finalPrice ? finalPrice / 1e18 : null,
-					totalPlayersPerRoundPerSeason: Number(totalPlayersPerRoundPerSeason),
-					eliminatedPerRoundPerSeason: Number(eliminatedPerRoundPerSeason),
-				})),
+				results.map(
+					({
+						id,
+						timestamp,
+						season,
+						round,
+						result,
+						strikePrice,
+						finalPrice,
+						totalPlayersPerRoundPerSeason,
+						eliminatedPerRoundPerSeason,
+					}) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						season: Number(season),
+						round: Number(round),
+						result: result ? Number(result) : null,
+						strikePrice: strikePrice ? strikePrice / 1e18 : null,
+						finalPrice: finalPrice ? finalPrice / 1e18 : null,
+						totalPlayersPerRoundPerSeason: Number(totalPlayersPerRoundPerSeason),
+						eliminatedPerRoundPerSeason: Number(eliminatedPerRoundPerSeason),
+					}),
+				),
 			);
 		},
 		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, season = undefined, network = 1 } = {}) {
