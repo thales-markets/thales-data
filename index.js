@@ -25,6 +25,8 @@ module.exports = {
 			isOpen = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			minMaturity = undefined,
+			maxMaturity = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -40,6 +42,8 @@ module.exports = {
 							isOpen: isOpen !== undefined ? isOpen : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							maturityDate_gte: minMaturity || undefined,
+							maturityDate_lte: maxMaturity || undefined,
 						},
 					},
 					properties: [
