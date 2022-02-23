@@ -152,6 +152,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			maker = undefined, 
 			taker = undefined,
+			market = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -169,6 +170,7 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 							maker: maker ? `\\"${maker}\\"` : undefined,
 							taker: taker ? `\\"${taker}\\"` : undefined,
+							market: market ? `\\"${market}\\"` : undefined,
 						},
 					},
 					properties: [
