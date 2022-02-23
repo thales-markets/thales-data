@@ -150,7 +150,8 @@ module.exports = {
 			takerToken = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			account = undefined,
+			maker = undefined, 
+			taker = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -166,8 +167,8 @@ module.exports = {
 							takerToken: takerToken ? `\\"${takerToken}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
-							maker: account ? `\\"${account}\\"` : undefined,
-							taker: account ? `\\"${account}\\"` : undefined,
+							maker: maker ? `\\"${maker}\\"` : undefined,
+							taker: taker ? `\\"${taker}\\"` : undefined,
 						},
 					},
 					properties: [
