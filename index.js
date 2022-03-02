@@ -150,7 +150,7 @@ module.exports = {
 			takerToken = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			maker = undefined, 
+			maker = undefined,
 			taker = undefined,
 			market = undefined,
 			network = 1,
@@ -438,6 +438,28 @@ module.exports = {
 					player,
 					round: Number(round),
 					position: Number(position),
+				})),
+			);
+		},
+		thalesRoyalePasses({ max = Infinity, address = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyalePasses',
+					selection: {
+						orderBy: 'id',
+						orderDirection: 'asc',
+						where: {
+							address: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'address'],
+				},
+			}).then(results =>
+				results.map(({ id, address }) => ({
+					id,
+					address,
 				})),
 			);
 		},

@@ -17,6 +17,7 @@ The below all return a Promise that resolves with the requested results.
 5. `binaryOptions.thalesRoyaleSeasons` Get all addresses of Thales Royale seasons.
 6. `binaryOptions.thalesRoyalePlayers` Get all players signed up for Thales Royale games.
 7. `binaryOptions.thalesRoyalePositions` Get all positions selected by players of Thales Royale games.
+8. `binaryOptions.thalesRoyalePasses` Get all Royale Passes per player of Thales Royale games.
 
 ## Use this as a node or webpack dependency
 

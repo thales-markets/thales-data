@@ -168,6 +168,19 @@ program
 	});
 
 program
+	.command('binaryOptions.thalesRoyalePasses')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --address <value>', 'The owner address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, address, network }) => {
+		binaryOptions
+			.thalesRoyalePasses({ max, address, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.stakers')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-n, --network <value>', 'The network', 1)
