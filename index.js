@@ -13,6 +13,9 @@ const graphAPIEndpoints = {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-optimism', // optimism
 	},
+	exoticMarkets: {
+		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
+	},
 };
 
 module.exports = {
@@ -484,6 +487,78 @@ module.exports = {
 					totalStakedAmount: totalStakedAmount / 1e18,
 					unstakingAmount: unstakingAmount / 1e18,
 				})),
+			);
+		},
+	},
+	exoticMarkets: {
+		markets({
+			max = Infinity,
+			creator = undefined,
+			isOpen = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 69,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.exoticMarkets[network],
+				max,
+				query: {
+					entity: 'markets',
+					selection: {
+						orderBy: 'endOfPositioning',
+						orderDirection: 'desc',
+						where: {
+							creator: creator ? `\\"${creator}\\"` : undefined,
+							isOpen: isOpen !== undefined ? isOpen : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: [
+						'id',
+						'timestamp',
+						'creator',
+						'address',
+						'question',
+						'dataSource',
+						'endOfPositioning',
+						'ticketPrice',
+						'isWithdrawalAllowed',
+						'positions',
+						'tags',
+						'isOpen',
+					],
+				},
+			}).then(results =>
+				results.map(
+					({
+						id,
+						timestamp,
+						creator,
+						address,
+						question,
+						dataSource,
+						endOfPositioning,
+						ticketPrice,
+						isWithdrawalAllowed,
+						positions,
+						tags,
+						isOpen,
+					}) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						creator,
+						address,
+						question,
+						dataSource,
+						endOfPositioning: Number(endOfPositioning) * 1000,
+						ticketPrice: ticketPrice / 1e18,
+						isWithdrawalAllowed,
+						positions,
+						tags,
+						isOpen,
+					}),
+				),
 			);
 		},
 	},
