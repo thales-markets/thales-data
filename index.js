@@ -526,7 +526,10 @@ module.exports = {
 						'isWithdrawalAllowed',
 						'positions',
 						'tags',
+						'isTicketType',
 						'isOpen',
+						'numberOfDisputes',
+						'numberOfOpenDisputes',
 					],
 				},
 			}).then(results =>
@@ -543,7 +546,10 @@ module.exports = {
 						isWithdrawalAllowed,
 						positions,
 						tags,
+						isTicketType,
 						isOpen,
+						numberOfDisputes,
+						numberOfOpenDisputes,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -556,9 +562,51 @@ module.exports = {
 						isWithdrawalAllowed,
 						positions,
 						tags,
+						isTicketType,
 						isOpen,
+						numberOfDisputes: numberOfDisputes / 1e18,
+						numberOfOpenDisputes: numberOfOpenDisputes / 1e18,
 					}),
 				),
+			);
+		},
+		disputes({
+			max = Infinity,
+			disputor = undefined,
+			market = undefined,
+			status = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 69,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.exoticMarkets[network],
+				max,
+				query: {
+					entity: 'disputes',
+					selection: {
+						orderBy: 'creationDate',
+						orderDirection: 'desc',
+						where: {
+							disputor: disputor ? `\\"${disputor}\\"` : undefined,
+							market: market ? `\\"${market}\\"` : undefined,
+							status: status !== undefined ? status : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'creationDate', 'market', 'disputor', 'reasonForDispute', 'status'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, creationDate, market, disputor, reasonForDispute, status }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					creationDate: Number(creationDate * 1000),
+					market,
+					disputor,
+					reasonForDispute,
+					status,
+				})),
 			);
 		},
 	},
