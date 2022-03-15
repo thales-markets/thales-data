@@ -211,16 +211,32 @@ program
 program
 	.command('exoticMarkets.disputes')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-d, --disputor <value>', 'The address of the dispute creator')
+	.option('-d, --disputer <value>', 'The address of the dispute creator')
 	.option('-M, --market <value>', 'The address of the market')
-	.option('-s, --status', 'The status of the dispute')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 69)
 
-	.action(async ({ max, disputor, market, status, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, disputor, market, minTimestamp, maxTimestamp, network }) => {
 		exoticMarkets
-			.disputes({ max, disputor, market, status, minTimestamp, maxTimestamp, network })
+			.disputes({ max, disputor, market, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('exoticMarkets.disputeVotes')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-M, --market <value>', 'The address of the market')
+	.option('-d, --dispute <value>', 'The dispute number')
+	.option('-v, --voter <value>', 'The address of the voter')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 69)
+
+	.action(async ({ max, market, dispute, voter, minTimestamp, maxTimestamp, network }) => {
+		exoticMarkets
+			.disputeVotes({ max, market, dispute, voter, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
