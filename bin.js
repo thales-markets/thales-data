@@ -217,9 +217,9 @@ program
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 69)
 
-	.action(async ({ max, disputor, market, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, disputer, market, minTimestamp, maxTimestamp, network }) => {
 		exoticMarkets
-			.disputes({ max, disputor, market, minTimestamp, maxTimestamp, network })
+			.disputes({ max, disputer, market, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
