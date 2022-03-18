@@ -241,4 +241,20 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('exoticMarkets.positions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-M, --market <value>', 'The address of the market')
+	.option('-a, --account <value>', 'The account address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 69)
+
+	.action(async ({ max, market, account, minTimestamp, maxTimestamp, network }) => {
+		exoticMarkets
+			.positions({ max, market, account, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

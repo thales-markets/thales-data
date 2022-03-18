@@ -686,16 +686,54 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'market', 'dispute', 'voter', 'vote'],
+					properties: ['id', 'timestamp', 'market', 'dispute', 'voter', 'vote', 'position'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, market, dispute, voter, vote }) => ({
+				results.map(({ id, timestamp, market, dispute, voter, vote, position }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					market,
 					dispute: Number(dispute),
 					voter,
 					vote: Number(vote),
+					position: Number(position),
+				})),
+			);
+		},
+		positions({
+			max = Infinity,
+			market = undefined,
+			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 69,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.exoticMarkets[network],
+				max,
+				query: {
+					entity: 'positions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							market: market ? `\\"${market}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'market', 'account', 'position', 'isWithdrawn', 'isClaimed'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, market, account, position, isWithdrawn, isClaimed }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					market,
+					account,
+					position: Number(position),
+					isWithdrawn,
+					isClaimed,
 				})),
 			);
 		},
