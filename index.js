@@ -392,10 +392,10 @@ module.exports = {
 							season: season ? `\\"${season}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'address', 'timestamp', 'season', 'isAlive', 'deathRound', 'number'],
+					properties: ['id', 'address', 'timestamp', 'season', 'isAlive', 'deathRound', 'number', 'defaultPosition'],
 				},
 			}).then(results =>
-				results.map(({ id, address, timestamp, season, isAlive, deathRound, number }) => ({
+				results.map(({ id, address, timestamp, season, isAlive, deathRound, number, defaultPosition }) => ({
 					id,
 					address,
 					timestamp: Number(timestamp * 1000),
@@ -403,6 +403,7 @@ module.exports = {
 					isAlive,
 					deathRound: Number(deathRound),
 					number: Number(number),
+					defaultPosition: Number(defaultPosition),
 				})),
 			);
 		},
