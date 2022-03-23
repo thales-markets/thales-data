@@ -596,7 +596,7 @@ module.exports = {
 						isResolved,
 						isCancelled,
 						winningPosition: Number(winningPosition),
-						backstopTimeout: backstopTimeout / 1e18,
+						backstopTimeout: Number(backstopTimeout),
 						isPaused,
 						isDisputed,
 						disputeClosedTime: Number(disputeClosedTime * 1000),
