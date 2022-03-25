@@ -543,6 +543,7 @@ module.exports = {
 						'isPaused',
 						'isDisputed',
 						'disputeClosedTime',
+						'poolSize',
 					],
 				},
 			}).then(results =>
@@ -574,6 +575,7 @@ module.exports = {
 						isPaused,
 						isDisputed,
 						disputeClosedTime,
+						poolSize,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -601,6 +603,7 @@ module.exports = {
 						isPaused,
 						isDisputed,
 						disputeClosedTime: Number(disputeClosedTime * 1000),
+						poolSize: poolSize / 1e18,
 					}),
 				),
 			);
