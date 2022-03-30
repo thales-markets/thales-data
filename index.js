@@ -544,6 +544,8 @@ module.exports = {
 						'isDisputed',
 						'disputeClosedTime',
 						'poolSize',
+						'numberOfParticipants',
+						'noWinner',
 					],
 				},
 			}).then(results =>
@@ -576,6 +578,8 @@ module.exports = {
 						isDisputed,
 						disputeClosedTime,
 						poolSize,
+						numberOfParticipants,
+						noWinner,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -599,11 +603,13 @@ module.exports = {
 						isResolved,
 						isCancelled,
 						winningPosition: Number(winningPosition),
-						backstopTimeout: Number(backstopTimeout),
+						backstopTimeout: Number(backstopTimeout * 1000),
 						isPaused,
 						isDisputed,
 						disputeClosedTime: Number(disputeClosedTime * 1000),
 						poolSize: poolSize / 1e18,
+						numberOfParticipants: Number(numberOfParticipants),
+						noWinner,
 					}),
 				),
 			);
@@ -640,6 +646,7 @@ module.exports = {
 						'disputer',
 						'reasonForDispute',
 						'isInPositioningPhase',
+						'disputeCode',
 					],
 				},
 			}).then(results =>
@@ -653,6 +660,7 @@ module.exports = {
 						disputer,
 						reasonForDispute,
 						isInPositioningPhase,
+						disputeCode,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -662,6 +670,7 @@ module.exports = {
 						disputer,
 						reasonForDispute,
 						isInPositioningPhase,
+						disputeCode: Number(disputeCode),
 					}),
 				),
 			);
