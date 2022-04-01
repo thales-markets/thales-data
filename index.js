@@ -545,7 +545,8 @@ module.exports = {
 						'disputeClosedTime',
 						'poolSize',
 						'numberOfParticipants',
-						'noWinner',
+						'noWinners',
+						'cancelledByCreator',
 					],
 				},
 			}).then(results =>
@@ -579,7 +580,8 @@ module.exports = {
 						disputeClosedTime,
 						poolSize,
 						numberOfParticipants,
-						noWinner,
+						noWinners,
+						cancelledByCreator,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -609,7 +611,8 @@ module.exports = {
 						disputeClosedTime: Number(disputeClosedTime * 1000),
 						poolSize: poolSize / 1e18,
 						numberOfParticipants: Number(numberOfParticipants),
-						noWinner,
+						noWinners,
+						cancelledByCreator,
 					}),
 				),
 			);
