@@ -408,6 +408,42 @@ module.exports = {
 				})),
 			);
 		},
+		thalesRoyalePassportPlayers({
+			max = Infinity,
+			id = undefined,
+			owner = undefined,
+			season = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyalePassportPlayers',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: id ? `\\"${id}\\"` : undefined,
+							owner: owner ? `\\"${owner}\\"` : undefined,
+							season: season ? `\\"${season}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'owner', 'timestamp', 'season', 'isAlive', 'deathRound', 'number', 'defaultPositions'],
+				},
+			}).then(results =>
+				results.map(({ id, owner, timestamp, season, isAlive, deathRound, number, defaultPositions }) => ({
+					id,
+					owner,
+					timestamp: Number(timestamp * 1000),
+					season: Number(season),
+					isAlive,
+					deathRound: Number(deathRound),
+					number: Number(number),
+					defaultPositions,
+				})),
+			);
+		},
 		thalesRoyalePositions({
 			max = Infinity,
 			id = undefined,
@@ -441,6 +477,44 @@ module.exports = {
 					timestamp: Number(timestamp * 1000),
 					season: Number(season),
 					player,
+					round: Number(round),
+					position: Number(position),
+				})),
+			);
+		},
+		thalesRoyalePassportPositions({
+			max = Infinity,
+			id = undefined,
+			season = undefined,
+			tokenPlayer = undefined,
+			round = undefined,
+			position = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'thalesRoyalePositions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: id ? `\\"${id}\\"` : undefined,
+							season: season ? `\\"${season}\\"` : undefined,
+							tokenPlayer: tokenPlayer ? `\\"${tokenPlayer}\\"` : undefined,
+							round: round ? `\\"${round}\\"` : undefined,
+							position: position ? `\\"${position}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'season', 'tokenPlayer', 'round', 'position'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, tokenPlayer, round, position }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					season: Number(season),
+					tokenPlayer: Number(tokenPlayer),
 					round: Number(round),
 					position: Number(position),
 				})),

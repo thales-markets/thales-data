@@ -151,6 +151,21 @@ program
 	});
 
 program
+	.command('binaryOptions.thalesRoyalePassportPlayers')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-i, --id <value>', 'The player id')
+	.option('-o, --owner <value>', 'The address of the owner')
+	.option('-g, --season <value>', 'Season number')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, id, owner, season, network }) => {
+		binaryOptions
+			.thalesRoyalePlayers({ max, id, owner, season, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.thalesRoyalePositions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
@@ -163,6 +178,23 @@ program
 	.action(async ({ max, id, season, player, round, position, network }) => {
 		binaryOptions
 			.thalesRoyalePositions({ max, id, season, player, round, position, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('binaryOptions.thalesRoyalePassportPositions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-i, --id <value>', 'The position id')
+	.option('-g, --season <value>', 'Season number')
+	.option('-t, --tokenPlayer <value>', 'The token player ID')
+	.option('-r, --round <value>', 'The round')
+	.option('-s, --position <value>', 'The position')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, id, season, tokenPlayer, round, position, network }) => {
+		binaryOptions
+			.thalesRoyalePositions({ max, id, season, tokenPlayer, round, position, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
