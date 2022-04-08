@@ -13,6 +13,7 @@ const graphAPIEndpoints = {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-optimism', // optimism
 		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
+		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 	},
 	exoticMarkets: {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
