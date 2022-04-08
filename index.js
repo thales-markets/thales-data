@@ -496,7 +496,7 @@ module.exports = {
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
 				query: {
-					entity: 'thalesRoyalePositions',
+					entity: 'thalesRoyalePassportPositions',
 					selection: {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',

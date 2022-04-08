@@ -160,7 +160,7 @@ program
 
 	.action(async ({ max, id, owner, season, network }) => {
 		binaryOptions
-			.thalesRoyalePlayers({ max, id, owner, season, network })
+			.thalesRoyalePassportPlayers({ max, id, owner, season, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -194,7 +194,7 @@ program
 
 	.action(async ({ max, id, season, tokenPlayer, round, position, network }) => {
 		binaryOptions
-			.thalesRoyalePositions({ max, id, season, tokenPlayer, round, position, network })
+			.thalesRoyalePassportPositions({ max, id, season, tokenPlayer, round, position, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
