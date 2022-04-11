@@ -107,7 +107,13 @@ module.exports = {
 				),
 			);
 		},
-		optionTransactions({ max = Infinity, market = undefined, account = undefined, network = 1 } = {}) {
+		optionTransactions({
+			max = Infinity,
+			type = undefined,
+			market = undefined,
+			account = undefined,
+			network = 1,
+		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -117,6 +123,7 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
+							type: type ? `\\"${type}\\"` : undefined,
 							market: market ? `\\"${market}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
 						},

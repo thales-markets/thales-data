@@ -41,6 +41,7 @@ program
 program
 	.command('binaryOptions.optionTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-t, --type <value>', 'The transaction type')
 	.option('-M, --market <value>', 'The market address')
 	.option('-a, --account <value>', 'The account address')
 	.option('-n, --network <value>', 'The network', 1)
