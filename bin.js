@@ -289,4 +289,19 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('exoticMarkets.marketTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-M, --market <value>', 'The market address')
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, market, type, account, network }) => {
+		exoticMarkets
+			.marketTransactions({ max, market, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

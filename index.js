@@ -829,5 +829,41 @@ module.exports = {
 				})),
 			);
 		},
+		marketTransactions({
+			max = Infinity,
+			market = undefined,
+			type = undefined,
+			account = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.exoticMarkets[network],
+				max,
+				query: {
+					entity: 'marketTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							market: market ? `\\"${market}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['hash', 'timestamp', 'blockNumber', 'type', 'market', 'account', 'amount', 'position'],
+				},
+			}).then(results =>
+				results.map(({ hash, timestamp, blockNumber, type, market, account, amount, position }) => ({
+					hash,
+					timestamp: Number(timestamp * 1000),
+					blockNumber: Number(blockNumber),
+					type,
+					market,
+					account,
+					amount: amount / 1e18,
+					position: Number(position),
+				})),
+			);
+		},
 	},
 };
