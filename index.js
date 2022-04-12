@@ -17,6 +17,7 @@ const graphAPIEndpoints = {
 	},
 	exoticMarkets: {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
 	},
 };
 
