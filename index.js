@@ -25,7 +25,7 @@ module.exports = {
 	graphAPIEndpoints,
 	binaryOptions: {
 		markets({
-			max = 100,
+			max = Infinity,
 			creator = undefined,
 			isOpen = undefined,
 			minTimestamp = undefined,
