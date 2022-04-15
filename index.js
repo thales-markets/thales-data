@@ -229,8 +229,14 @@ module.exports = {
 						taker,
 						makerToken,
 						takerToken,
-						makerAmount: network === 137 ? makerAmount / 1e6 : makerAmount / 1e18,
-						takerAmount: network === 137 ? takerAmount / 1e6 : takerAmount / 1e18,
+						makerAmount:
+							network === 137 && makerToken === '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+								? makerAmount / 1e6
+								: makerAmount / 1e18,
+						takerAmount:
+							network === 137 && takerToken === '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+								? takerAmount / 1e6
+								: takerAmount / 1e18,
 						market,
 						orderSide,
 						optionSide,
