@@ -245,6 +245,28 @@ module.exports = {
 				),
 			);
 		},
+		positionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'positionBalances',
+					selection: {
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'account', 'amount', 'position{id, side}'],
+				},
+			}).then(results =>
+				results.map(({ id, account, amount, position }) => ({
+					id,
+					account,
+					amount,
+					position,
+				})),
+			);
+		},
 		tokenTransactions({ max = Infinity, type = undefined, account = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
