@@ -337,7 +337,7 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'account', 'amount', 'position{id, side}'],
+					properties: ['id', 'account', 'amount', 'position {id, side, market { id, result}}'],
 				},
 			}).then(results =>
 				results.map(({ id, account, amount, position }) => ({
