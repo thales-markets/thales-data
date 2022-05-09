@@ -144,6 +144,7 @@ module.exports = {
 						'timestamp',
 						'currencyKey',
 						'maturityDate',
+						'expiryDate',
 						'leftPrice',
 						'rightPrice',
 						'inAddress',
@@ -162,6 +163,7 @@ module.exports = {
 						timestamp,
 						currencyKey,
 						maturityDate,
+						expiryDate,
 						leftPrice,
 						rightPrice,
 						inAddress,
@@ -176,6 +178,7 @@ module.exports = {
 						timestamp: Number(timestamp * 1000),
 						currencyKey: hexToAscii(currencyKey),
 						maturityDate: Number(maturityDate) * 1000,
+						expiryDate: Number(expiryDate) * 1000,
 						leftPrice: leftPrice / 1e18,
 						rightPrice: rightPrice / 1e18,
 						inAddress,
@@ -337,7 +340,12 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'account', 'amount', 'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}'],
+					properties: [
+						'id',
+						'account',
+						'amount',
+						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}',
+					],
 				},
 			}).then(results =>
 				results.map(({ id, account, amount, position }) => ({
