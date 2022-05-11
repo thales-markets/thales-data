@@ -24,7 +24,7 @@ const showResultCount = ({ max }) => results => {
 
 program
 	.command('binaryOptions.markets')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -40,7 +40,7 @@ program
 
 program
 	.command('binaryOptions.optionTransactions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-M, --market <value>', 'The market address')
 	.option('-a, --account <value>', 'The account address')
@@ -55,7 +55,7 @@ program
 
 program
 	.command('binaryOptions.trades')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-w, --makerToken <value>', 'The address of the maker token')
 	.option('-v, --takerToken <value>', 'The address of the taker token')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -71,7 +71,7 @@ program
 
 program
 	.command('binaryOptions.positionBalances')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-w, --account <value>', 'The address of the wallet')
 	.option('-v, --amount <value>', 'Amount of position in wallet')
 	.option('-t, --position <value>', 'Position in question')
@@ -86,7 +86,7 @@ program
 
 program
 	.command('binaryOptions.rangedPositionBalances')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-w, --account <value>', 'The address of the wallet')
 	.option('-v, --amount <value>', 'Amount of position in wallet')
 	.option('-t, --position <value>', 'Position in question')
@@ -101,7 +101,7 @@ program
 
 program
 	.command('binaryOptions.tokenTransactions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
 	.option('-n, --network <value>', 'The network', 1)
@@ -115,7 +115,7 @@ program
 
 program
 	.command('binaryOptions.ongoingAirdropNewRoots')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, network }) => {
@@ -127,7 +127,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyaleGames')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --address <value>', 'The game address')
 	.option('-n, --network <value>', 'The network', 1)
 
@@ -140,7 +140,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyaleSeasons')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-s, --season <value>', 'Season number')
 	.option('-n, --network <value>', 'The network', 1)
 
@@ -153,7 +153,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyaleRounds')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
 	.option('-g, --season <value>', 'Season number')
 	.option('-r, --round <value>', 'The round')
@@ -168,7 +168,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyalePlayers')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The player id')
 	.option('-a, --address <value>', 'The player address')
 	.option('-g, --season <value>', 'Season number')
@@ -183,7 +183,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyalePassportPlayers')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The player id')
 	.option('-o, --owner <value>', 'The address of the owner')
 	.option('-g, --season <value>', 'Season number')
@@ -198,7 +198,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyalePositions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
 	.option('-g, --season <value>', 'Season number')
 	.option('-p, --player <value>', 'The player address')
@@ -215,7 +215,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyalePassportPositions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-i, --id <value>', 'The position id')
 	.option('-g, --season <value>', 'Season number')
 	.option('-t, --tokenPlayer <value>', 'The token player ID')
@@ -232,7 +232,7 @@ program
 
 program
 	.command('binaryOptions.thalesRoyalePasses')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --address <value>', 'The owner address')
 	.option('-n, --network <value>', 'The network', 1)
 
@@ -245,7 +245,7 @@ program
 
 program
 	.command('binaryOptions.stakers')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, network }) => {
@@ -257,7 +257,7 @@ program
 
 program
 	.command('exoticMarkets.markets')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -273,7 +273,7 @@ program
 
 program
 	.command('exoticMarkets.disputes')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-d, --disputer <value>', 'The address of the dispute creator')
 	.option('-M, --market <value>', 'The address of the market')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -289,7 +289,7 @@ program
 
 program
 	.command('exoticMarkets.disputeVotes')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The address of the market')
 	.option('-d, --dispute <value>', 'The dispute number')
 	.option('-v, --voter <value>', 'The address of the voter')
@@ -306,7 +306,7 @@ program
 
 program
 	.command('exoticMarkets.positions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The address of the market')
 	.option('-a, --account <value>', 'The account address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -322,7 +322,7 @@ program
 
 program
 	.command('exoticMarkets.marketTransactions')
-	.option('-m, --max <value>', 'Maximum number of results', 1000)
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The market address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
