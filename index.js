@@ -371,7 +371,7 @@ module.exports = {
 						'id',
 						'account',
 						'amount',
-						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice}',
+						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice}}',
 					],
 				},
 			}).then(results =>
