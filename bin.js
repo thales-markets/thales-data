@@ -85,6 +85,21 @@ program
 	});
 
 program
+	.command('binaryOptions.rangedPositionBalances')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-w, --account <value>', 'The address of the wallet')
+	.option('-v, --amount <value>', 'Amount of position in wallet')
+	.option('-t, --position <value>', 'Position in question')
+	.option('-n, --network <value>', 'The network', 137)
+
+	.action(async ({ max, account, network }) => {
+		binaryOptions
+			.rangedPositionBalances({ max, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.tokenTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-t, --type <value>', 'The transaction type')

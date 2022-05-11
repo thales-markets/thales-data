@@ -356,6 +356,33 @@ module.exports = {
 				})),
 			);
 		},
+		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'rangedPositionBalances',
+					selection: {
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: [
+						'id',
+						'account',
+						'amount',
+						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice}',
+					],
+				},
+			}).then(results =>
+				results.map(({ id, account, amount, position }) => ({
+					id,
+					account,
+					amount,
+					position,
+				})),
+			);
+		},
 		tokenTransactions({ max = Infinity, type = undefined, account = undefined, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],

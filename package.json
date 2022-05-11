@@ -1,7 +1,7 @@
 {
 	"name": "thales-data",
 	"license": "MIT",
-	"version": "1.0.38",
+	"version": "1.0.39",
 	"author": "Thales",
 	"main": "index.js",
 	"browser": "browser.js",
