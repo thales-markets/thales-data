@@ -967,15 +967,16 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'market', 'account', 'position', 'isWithdrawn', 'isClaimed'],
+					properties: ['id', 'timestamp', 'market', 'account', 'position', 'positions', 'isWithdrawn', 'isClaimed'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, market, account, position, isWithdrawn, isClaimed }) => ({
+				results.map(({ id, timestamp, market, account, position, positions, isWithdrawn, isClaimed }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					market,
 					account,
 					position: Number(position),
+					positions,
 					isWithdrawn,
 					isClaimed,
 				})),
@@ -1002,10 +1003,20 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
-					properties: ['hash', 'timestamp', 'blockNumber', 'type', 'market', 'account', 'amount', 'position'],
+					properties: [
+						'hash',
+						'timestamp',
+						'blockNumber',
+						'type',
+						'market',
+						'account',
+						'amount',
+						'position',
+						'positions',
+					],
 				},
 			}).then(results =>
-				results.map(({ hash, timestamp, blockNumber, type, market, account, amount, position }) => ({
+				results.map(({ hash, timestamp, blockNumber, type, market, account, amount, position, positions }) => ({
 					hash,
 					timestamp: Number(timestamp * 1000),
 					blockNumber: Number(blockNumber),
@@ -1014,6 +1025,7 @@ module.exports = {
 					account,
 					amount: amount / 1e18,
 					position: Number(position),
+					positions,
 				})),
 			);
 		},
