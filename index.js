@@ -19,6 +19,9 @@ const graphAPIEndpoints = {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
 	},
+	sportMarkets: {
+		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
+	},
 };
 
 module.exports = {
@@ -1027,6 +1030,85 @@ module.exports = {
 					position: Number(position),
 					positions,
 				})),
+			);
+		},
+	},
+	sportMarkets: {
+		markets({
+			max = Infinity,
+			isOpen = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 42,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'markets',
+					selection: {
+						orderBy: 'maturityDate',
+						orderDirection: 'asc',
+						where: {
+							isOpen: isOpen !== undefined ? isOpen : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: [
+						'id',
+						'timestamp',
+						'address',
+						'maturityDate',
+						'tags',
+						'isOpen',
+						'isResolved',
+						'finalResult',
+						'poolSize',
+						'numberOfParticipants',
+						'homeTeam',
+						'awayTeam',
+						'homeOdds',
+						'awayOdds',
+						'drawOdds',
+					],
+				},
+			}).then(results =>
+				results.map(
+					({
+						id,
+						timestamp,
+						address,
+						maturityDate,
+						tags,
+						isOpen,
+						isResolved,
+						finalResult,
+						poolSize,
+						numberOfParticipants,
+						homeTeam,
+						awayTeam,
+						homeOdds,
+						awayOdds,
+						drawOdds,
+					}) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						address,
+						maturityDate: Number(maturityDate * 1000),
+						tags,
+						isOpen,
+						isResolved,
+						finalResult: Number(finalResult),
+						poolSize: poolSize / 1e18,
+						homeTeam,
+						awayTeam,
+						numberOfParticipants: Number(numberOfParticipants),
+						homeOdds: Number(homeOdds),
+						awayOdds: Number(awayOdds),
+						drawOdds: Number(drawOdds),
+					}),
+				),
 			);
 		},
 	},

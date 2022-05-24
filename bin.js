@@ -3,7 +3,7 @@
 const program = require('commander');
 const stringify = require('csv-stringify');
 
-const { binaryOptions, exoticMarkets } = require('.');
+const { binaryOptions, exoticMarkets, sportMarkets } = require('.');
 
 const logResults = ({ json, csv } = {}) => results => {
 	if (json) {
@@ -331,6 +331,21 @@ program
 	.action(async ({ max, market, type, account, network }) => {
 		exoticMarkets
 			.marketTransactions({ max, market, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('sportMarkets.markets')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-o, --isOpen', 'If the market is open or not')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 42)
+
+	.action(async ({ max, isOpen, minTimestamp, maxTimestamp, network }) => {
+		sportMarkets
+			.markets({ max, isOpen, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
