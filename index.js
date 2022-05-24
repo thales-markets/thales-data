@@ -1045,7 +1045,7 @@ module.exports = {
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
 				query: {
-					entity: 'markets',
+					entity: 'sportMarkets',
 					selection: {
 						orderBy: 'maturityDate',
 						orderDirection: 'asc',
