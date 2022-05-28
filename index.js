@@ -359,6 +359,54 @@ module.exports = {
 				})),
 			);
 		},
+		referrers({ max = Infinity, address = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'referrers',
+					selection: {
+						where: {
+							id: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
+					id,
+					trades,
+					totalVolume,
+					totalEarned,
+					timestamp,
+				})),
+			);
+		},
+		referralTransfers({ max = Infinity, trader = undefined, refferer = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'referralTransfers',
+					selection: {
+						where: {
+							trader: trader ? `\\"${trader}\\"` : undefined,
+							refferer: refferer ? `\\"${refferer}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'refferer', 'trader', 'amount', 'volume', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, refferer, trader, amount, volume, timestamp }) => ({
+					id,
+					refferer,
+					trader,
+					amount,
+					volume,
+					timestamp,
+				})),
+			);
+		},
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
