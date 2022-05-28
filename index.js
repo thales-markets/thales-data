@@ -407,6 +407,30 @@ module.exports = {
 				})),
 			);
 		},
+		referredTraders({ max = Infinity, refferer = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'referredTraders',
+					selection: {
+						where: {
+							refferer: refferer ? `\\"${refferer}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'refferer { id }', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
+					id,
+					trades,
+					totalVolume,
+					totalEarned,
+					refferer,
+					timestamp,
+				})),
+			);
+		},
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
