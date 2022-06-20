@@ -375,14 +375,14 @@ module.exports = {
 			}).then(results =>
 				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
 					id,
-					trades,
-					totalVolume,
-					totalEarned,
-					timestamp,
+					trades: Number(trades),
+					totalVolume: totalVolume / 1e18,
+					totalEarned: totalEarned / 1e18,
+					timestamp: Number(timestamp * 1000),
 				})),
 			);
 		},
-		referralTransfers({ max = Infinity, trader = undefined, refferer = undefined, network = 137 } = {}) {
+		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -391,7 +391,7 @@ module.exports = {
 					selection: {
 						where: {
 							trader: trader ? `\\"${trader}\\"` : undefined,
-							refferer: refferer ? `\\"${refferer}\\"` : undefined,
+							refferer: referrer ? `\\"${referrer}\\"` : undefined,
 						},
 					},
 					properties: ['id', 'refferer', 'trader', 'amount', 'volume', 'timestamp'],
@@ -401,13 +401,13 @@ module.exports = {
 					id,
 					refferer,
 					trader,
-					amount,
-					volume,
-					timestamp,
+					amount: amount / 1e18,
+					volume: volume / 1e18,
+					timestamp: Number(timestamp * 1000),
 				})),
 			);
 		},
-		referredTraders({ max = Infinity, refferer = undefined, network = 137 } = {}) {
+		referredTraders({ max = Infinity, referrer = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -415,7 +415,7 @@ module.exports = {
 					entity: 'referredTraders',
 					selection: {
 						where: {
-							refferer: refferer ? `\\"${refferer}\\"` : undefined,
+							refferer: referrer ? `\\"${referrer}\\"` : undefined,
 						},
 					},
 					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'refferer { id }', 'timestamp'],
@@ -423,11 +423,11 @@ module.exports = {
 			}).then(results =>
 				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
 					id,
-					trades,
-					totalVolume,
-					totalEarned,
+					trades: Number(trades),
+					totalVolume: totalVolume / 1e18,
+					totalEarned: totalEarned / 1e18,
 					refferer,
-					timestamp,
+					timestamp: Number(timestamp * 1000),
 				})),
 			);
 		},
