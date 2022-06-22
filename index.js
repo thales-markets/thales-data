@@ -1189,5 +1189,41 @@ module.exports = {
 				),
 			);
 		},
+		transactions({
+			max = Infinity,
+			isOpen = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 42,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'marketTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							isOpen: isOpen !== undefined ? isOpen : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'position'],
+				},
+			}).then(results =>
+				results.map(({ id, hash, timestamp, type, account, market, amount, position }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					hash,
+					type,
+					account,
+					market,
+					amount: Number(amount) / 1e18,
+					position: Number(position),
+				})),
+			);
+		},
 	},
 };
