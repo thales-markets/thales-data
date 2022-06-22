@@ -1189,12 +1189,12 @@ module.exports = {
 				),
 			);
 		},
-		transactions({
+		marketTransactions({
 			max = Infinity,
-			isOpen = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 42,
+			market = undefined,
+			type = undefined,
+			account = undefined,
+			network = 1,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1205,9 +1205,9 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
-							isOpen: isOpen !== undefined ? isOpen : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
+							market: market ? `\\"${market}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
 					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'position'],
