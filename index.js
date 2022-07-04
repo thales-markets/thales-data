@@ -21,6 +21,7 @@ const graphAPIEndpoints = {
 	},
 	sportMarkets: {
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
 	},
 };
 
