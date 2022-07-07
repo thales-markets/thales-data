@@ -362,6 +362,7 @@ program
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
+
 program
 	.command('sportMarkets.marketTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
