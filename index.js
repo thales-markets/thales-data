@@ -1244,11 +1244,8 @@ module.exports = {
 						'id',
 						'account',
 						'amount',
-						'position {id, side, market { timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'position {id, side, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
 					],
-
-					id,
-
 				},
 			}).then(results =>
 				results.map(({ id, account, amount, position }) => ({
