@@ -353,10 +353,8 @@ program
 program
 	.command('sportMarkets.positionBalances')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-w, --account <value>', 'The address of the wallet')
-	.option('-v, --amount <value>', 'Amount of position in wallet')
-	.option('-t, --position <value>', 'Position in question')
-	.option('-n, --network <value>', 'The network', 137)
+	.option('-a, --account <value>', 'The address of the wallet')
+	.option('-n, --network <value>', 'The network', 42)
 
 	.action(async ({ max, account, network }) => {
 		sportMarkets
