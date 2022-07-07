@@ -350,4 +350,33 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('sportMarkets.positionBalances')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-w, --account <value>', 'The address of the wallet')
+	.option('-v, --amount <value>', 'Amount of position in wallet')
+	.option('-t, --position <value>', 'Position in question')
+	.option('-n, --network <value>', 'The network', 137)
+
+	.action(async ({ max, account, network }) => {
+		sportMarkets
+			.positionBalances({ max, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+program
+	.command('sportMarkets.marketTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-M, --market <value>', 'The market address')
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, market, type, account, network }) => {
+		sportMarkets
+			.marketTransactions({ max, market, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

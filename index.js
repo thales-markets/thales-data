@@ -1229,5 +1229,35 @@ module.exports = {
 				})),
 			);
 		},
+		positionBalances({ max = Infinity, account = undefined, network = 42 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'positionBalances',
+					selection: {
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: [
+						'id',
+						'account',
+						'amount',
+						'position {id, side, market { timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+					],
+
+					id,
+
+				},
+			}).then(results =>
+				results.map(({ id, account, amount, position }) => ({
+					id,
+					account,
+					amount,
+					position,
+				})),
+			);
+		},
 	},
 };
