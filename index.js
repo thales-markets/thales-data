@@ -1124,7 +1124,7 @@ module.exports = {
 						orderBy: 'maturityDate',
 						orderDirection: 'asc',
 						where: {
-							id: market ? `\\"${market}\\"` : undefined,
+							address: market ? `\\"${market}\\"` : undefined,
 							isOpen: isOpen !== undefined ? isOpen : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
