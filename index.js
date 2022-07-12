@@ -1112,6 +1112,7 @@ module.exports = {
 			isOpen = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			market = undefined,
 			network = 42,
 		} = {}) {
 			return pageResults({
@@ -1123,6 +1124,7 @@ module.exports = {
 						orderBy: 'maturityDate',
 						orderDirection: 'asc',
 						where: {
+							id: market ? `\\"${market}\\"` : undefined,
 							isOpen: isOpen !== undefined ? isOpen : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
