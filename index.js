@@ -1216,10 +1216,10 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 						},
 					},
-					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'position'],
+					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'paid', 'position'],
 				},
 			}).then(results =>
-				results.map(({ id, hash, timestamp, type, account, market, amount, position }) => ({
+				results.map(({ id, hash, timestamp, type, account, market, amount, paid, position }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					hash,
@@ -1227,6 +1227,7 @@ module.exports = {
 					account,
 					market,
 					amount: Number(amount) / 1e18,
+					paid: Number(paid) / 1e18,
 					position: Number(position),
 				})),
 			);
