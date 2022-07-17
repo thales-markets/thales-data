@@ -465,6 +465,8 @@ module.exports = {
 			account = undefined,
 			network = 1,
 			onlyWithProtocolReward = false,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
@@ -477,6 +479,8 @@ module.exports = {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
 							...(onlyWithProtocolReward && { protocolRewards_not: 0 }),
 						},
 					},
