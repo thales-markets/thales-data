@@ -459,7 +459,13 @@ module.exports = {
 				})),
 			);
 		},
-		tokenTransactions({ max = Infinity, type = undefined, account = undefined, network = 1 } = {}) {
+		tokenTransactions({
+			max = Infinity,
+			type = undefined,
+			account = undefined,
+			network = 1,
+			onlyWithProtocolReward = false,
+		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
 				max,
@@ -471,17 +477,19 @@ module.exports = {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
+							...(onlyWithProtocolReward && { protocolRewards_not: 0 }),
 						},
 					},
-					properties: ['id', 'timestamp', 'type', 'account', 'amount', 'blockNumber'],
+					properties: ['id', 'timestamp', 'protocolRewards', 'type', 'account', 'amount', 'blockNumber'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount, blockNumber }) => ({
+				results.map(({ id, timestamp, type, account, amount, blockNumber, protocolRewards }) => ({
 					hash: getHashFromId(id),
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
 					amount: amount / 1e18,
+					protocolRewards: protocolRewards / 1e18,
 					blockNumber: Number(blockNumber),
 				})),
 			);
