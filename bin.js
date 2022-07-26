@@ -114,6 +114,20 @@ program
 	});
 
 program
+	.command('binaryOptions.accountBuyVolumes')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, type, account, network }) => {
+		binaryOptions
+			.accountBuyVolumes({ max, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('binaryOptions.ongoingAirdropNewRoots')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-n, --network <value>', 'The network', 1)

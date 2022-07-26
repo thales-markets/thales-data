@@ -498,6 +498,41 @@ module.exports = {
 				})),
 			);
 		},
+		accountBuyVolumes({
+			max = Infinity,
+			type = undefined,
+			account = undefined,
+			network = 1,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'accountBuyVolumes',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, type, account, amount }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount: amount / 1e18,
+				})),
+			);
+		},
 		ongoingAirdropNewRoots({ max = Infinity, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.binaryOptions[network],
