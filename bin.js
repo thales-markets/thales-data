@@ -270,6 +270,19 @@ program
 	});
 
 program
+	.command('binaryOptions.canClaimOnBehalfItems')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-s, --sender <value>', 'The sender address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, sender, network }) => {
+		binaryOptions
+			.canClaimOnBehalfItems({ max, sender, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('exoticMarkets.markets')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')

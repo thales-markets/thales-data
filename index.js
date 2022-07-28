@@ -841,6 +841,40 @@ module.exports = {
 				})),
 			);
 		},
+		canClaimOnBehalfItems({
+			max = Infinity,
+			sender = undefined,
+			network = 1,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.binaryOptions[network],
+				max,
+				query: {
+					entity: 'canClaimOnBehalfItems',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							sender: sender ? `\\"${sender}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'transactionHash', 'timestamp', 'sender', 'account', 'canClaimOnBehalf'],
+				},
+			}).then(results =>
+				results.map(({ id, transactionHash, timestamp, sender, account, canClaimOnBehalf }) => ({
+					id,
+					hash: transactionHash,
+					timestamp: Number(timestamp * 1000),
+					sender,
+					account,
+					canClaimOnBehalf,
+				})),
+			);
+		},
 	},
 	exoticMarkets: {
 		markets({
