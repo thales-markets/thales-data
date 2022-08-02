@@ -4,17 +4,54 @@ const pageResults = require('graph-results-pager');
 
 const { hexToAscii, getHashFromId } = require('./utils');
 
+// const graphAPIEndpoints = {
+// 	binaryOptions: {
+// 		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options', // mainnet
+// 		3: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten', // ropsten
+// 		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
+// 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
+// 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
+// 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-optimism', // optimism
+// 		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
+// 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
+// 	},
+// 	exoticMarkets: {
+// 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
+// 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
+// 	},
+// 	sportMarkets: {
+// 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
+// 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
+// 	},
+// };
+
 const graphAPIEndpoints = {
-	binaryOptions: {
+	thalesRoyale: {
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale', // optimism
+		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale-kovan', // optimism kovan
+	},
+	token: {
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
+		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-kovan', // optimism kovan
+	},
+	thalesMarkets: {
 		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options', // mainnet
 		3: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten', // ropsten
 		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-optimism', // optimism
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
 		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
+
+		positions: {
+			69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-v2', // optimism
+			80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
+			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
+		},
 	},
+
 	exoticMarkets: {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
@@ -40,7 +77,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
 				query: {
 					entity: 'markets',
@@ -125,7 +162,7 @@ module.exports = {
 			network = 10,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
 				query: {
 					entity: 'rangedMarkets',
@@ -204,7 +241,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
 				query: {
 					entity: 'optionTransactions',
@@ -257,7 +294,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
 				query: {
 					entity: 'trades',
@@ -335,7 +372,7 @@ module.exports = {
 		},
 		positionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets.positions[network],
 				max,
 				query: {
 					entity: 'positionBalances',
@@ -360,81 +397,9 @@ module.exports = {
 				})),
 			);
 		},
-		referrers({ max = Infinity, address = undefined, network = 137 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'referrers',
-					selection: {
-						where: {
-							id: address ? `\\"${address}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
-				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: totalVolume / 1e18,
-					totalEarned: totalEarned / 1e18,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
-		},
-		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 137 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'referralTransfers',
-					selection: {
-						where: {
-							trader: trader ? `\\"${trader}\\"` : undefined,
-							refferer: referrer ? `\\"${referrer}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'refferer', 'trader', 'amount', 'volume', 'timestamp'],
-				},
-			}).then(results =>
-				results.map(({ id, refferer, trader, amount, volume, timestamp }) => ({
-					id,
-					refferer,
-					trader,
-					amount: amount / 1e18,
-					volume: volume / 1e18,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
-		},
-		referredTraders({ max = Infinity, referrer = undefined, network = 137 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'referredTraders',
-					selection: {
-						where: {
-							refferer: referrer ? `\\"${referrer}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'refferer { id }', 'timestamp'],
-				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: totalVolume / 1e18,
-					totalEarned: totalEarned / 1e18,
-					refferer,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
-		},
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesMarkets.positions[network],
 				max,
 				query: {
 					entity: 'rangedPositionBalances',
@@ -459,6 +424,114 @@ module.exports = {
 				})),
 			);
 		},
+		accountBuyVolumes({
+			max = Infinity,
+			type = undefined,
+			account = undefined,
+			network = 1,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'accountBuyVolumes',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, type, account, amount }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount: amount / 1e18,
+				})),
+			);
+		},
+		referrers({ max = Infinity, address = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'referrers',
+					selection: {
+						where: {
+							id: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
+					id,
+					trades: Number(trades),
+					totalVolume: totalVolume / 1e18,
+					totalEarned: totalEarned / 1e18,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
+		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'referralTransfers',
+					selection: {
+						where: {
+							trader: trader ? `\\"${trader}\\"` : undefined,
+							refferer: referrer ? `\\"${referrer}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'refferer', 'trader', 'amount', 'volume', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, refferer, trader, amount, volume, timestamp }) => ({
+					id,
+					refferer,
+					trader,
+					amount: amount / 1e18,
+					volume: volume / 1e18,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
+		referredTraders({ max = Infinity, referrer = undefined, network = 137 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'referredTraders',
+					selection: {
+						where: {
+							refferer: referrer ? `\\"${referrer}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'refferer { id }', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
+					id,
+					trades: Number(trades),
+					totalVolume: totalVolume / 1e18,
+					totalEarned: totalEarned / 1e18,
+					refferer,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
+
 		tokenTransactions({
 			max = Infinity,
 			type = undefined,
@@ -469,7 +542,7 @@ module.exports = {
 			maxTimestamp = undefined,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.token[network],
 				max,
 				query: {
 					entity: 'tokenTransactions',
@@ -498,44 +571,10 @@ module.exports = {
 				})),
 			);
 		},
-		accountBuyVolumes({
-			max = Infinity,
-			type = undefined,
-			account = undefined,
-			network = 1,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'accountBuyVolumes',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							account: account ? `\\"${account}\\"` : undefined,
-							type: type ? `\\"${type}\\"` : undefined,
-							timestamp_gte: minTimestamp ? minTimestamp : undefined,
-							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: amount / 1e18,
-				})),
-			);
-		},
+
 		ongoingAirdropNewRoots({ max = Infinity, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.token[network],
 				max,
 				query: {
 					entity: 'ongoingAirdropNewRoots',
@@ -554,9 +593,66 @@ module.exports = {
 				})),
 			);
 		},
+		stakers({ max = Infinity, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.token[network],
+				max,
+				query: {
+					entity: 'stakers',
+					selection: {
+						orderBy: 'totalStakedAmount',
+						orderDirection: 'desc',
+					},
+					properties: ['id', 'timestamp', 'stakedAmount', 'escrowedAmount', 'totalStakedAmount', 'unstakingAmount'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, stakedAmount, escrowedAmount, totalStakedAmount, unstakingAmount }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					stakedAmount: stakedAmount / 1e18,
+					escrowedAmount: escrowedAmount / 1e18,
+					totalStakedAmount: totalStakedAmount / 1e18,
+					unstakingAmount: unstakingAmount / 1e18,
+				})),
+			);
+		},
+		canClaimOnBehalfItems({
+			max = Infinity,
+			sender = undefined,
+			network = 1,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.token[network],
+				max,
+				query: {
+					entity: 'canClaimOnBehalfItems',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							sender: sender ? `\\"${sender}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'transactionHash', 'timestamp', 'sender', 'account', 'canClaimOnBehalf'],
+				},
+			}).then(results =>
+				results.map(({ id, transactionHash, timestamp, sender, account, canClaimOnBehalf }) => ({
+					id,
+					hash: transactionHash,
+					timestamp: Number(timestamp * 1000),
+					sender,
+					account,
+					canClaimOnBehalf,
+				})),
+			);
+		},
 		thalesRoyaleGames({ max = Infinity, address = undefined, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyaleGames',
@@ -580,7 +676,7 @@ module.exports = {
 		},
 		thalesRoyaleSeasons({ max = Infinity, season = undefined, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyaleSeasons',
@@ -603,7 +699,7 @@ module.exports = {
 		},
 		thalesRoyaleRounds({ max = Infinity, id = undefined, season = undefined, round = undefined, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyaleRounds',
@@ -656,7 +752,7 @@ module.exports = {
 		},
 		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, season = undefined, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyalePlayers',
@@ -692,7 +788,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyalePassportPlayers',
@@ -730,7 +826,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyalePositions',
@@ -768,7 +864,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyalePassportPositions',
@@ -798,7 +894,7 @@ module.exports = {
 		},
 		thalesRoyalePasses({ max = Infinity, address = undefined, network = 1 } = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
+				api: graphAPIEndpoints.thalesRoyale[network],
 				max,
 				query: {
 					entity: 'thalesRoyalePasses',
@@ -815,63 +911,6 @@ module.exports = {
 				results.map(({ id, address }) => ({
 					id,
 					address,
-				})),
-			);
-		},
-		stakers({ max = Infinity, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'stakers',
-					selection: {
-						orderBy: 'totalStakedAmount',
-						orderDirection: 'desc',
-					},
-					properties: ['id', 'timestamp', 'stakedAmount', 'escrowedAmount', 'totalStakedAmount', 'unstakingAmount'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, stakedAmount, escrowedAmount, totalStakedAmount, unstakingAmount }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					stakedAmount: stakedAmount / 1e18,
-					escrowedAmount: escrowedAmount / 1e18,
-					totalStakedAmount: totalStakedAmount / 1e18,
-					unstakingAmount: unstakingAmount / 1e18,
-				})),
-			);
-		},
-		canClaimOnBehalfItems({
-			max = Infinity,
-			sender = undefined,
-			network = 1,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.binaryOptions[network],
-				max,
-				query: {
-					entity: 'canClaimOnBehalfItems',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							sender: sender ? `\\"${sender}\\"` : undefined,
-							timestamp_gte: minTimestamp ? minTimestamp : undefined,
-							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
-						},
-					},
-					properties: ['id', 'transactionHash', 'timestamp', 'sender', 'account', 'canClaimOnBehalf'],
-				},
-			}).then(results =>
-				results.map(({ id, transactionHash, timestamp, sender, account, canClaimOnBehalf }) => ({
-					id,
-					hash: transactionHash,
-					timestamp: Number(timestamp * 1000),
-					sender,
-					account,
-					canClaimOnBehalf,
 				})),
 			);
 		},
