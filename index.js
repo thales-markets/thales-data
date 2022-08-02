@@ -1207,6 +1207,8 @@ module.exports = {
 						where: {
 							address: market ? `\\"${market}\\"` : undefined,
 							isOpen: isOpen !== undefined ? isOpen : undefined,
+							isCanceled: isCanceled !== undefined ? isCanceled : undefined,
+							isResolved: isResolved !== undefined ? isResolved : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 						},
