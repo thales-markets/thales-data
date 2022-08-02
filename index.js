@@ -1191,6 +1191,8 @@ module.exports = {
 		markets({
 			max = Infinity,
 			isOpen = undefined,
+			isCanceled = undefined,
+			isResolved = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			market = undefined,

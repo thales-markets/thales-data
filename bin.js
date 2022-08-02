@@ -366,13 +366,15 @@ program
 	.command('sportMarkets.markets')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-o, --isOpen', 'If the market is open or not')
+	.option('-c, --isCanceled', 'If the market is canceled or not')
+	.option('-r, --isResolved', 'If the market is resolved or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 42)
 
-	.action(async ({ max, isOpen, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, isOpen, isCanceled, isResolved, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
-			.markets({ max, isOpen, minTimestamp, maxTimestamp, network })
+			.markets({ max, isOpen, isCanceled, isResolved, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
