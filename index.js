@@ -31,7 +31,7 @@ const graphAPIEndpoints = {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale-kovan', // optimism kovan
 	},
 	token: {
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // optimism
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-kovan', // optimism kovan
 	},
 	thalesMarkets: {
@@ -1380,6 +1380,28 @@ module.exports = {
 					account,
 					amount,
 					position,
+				})),
+			);
+		},
+		claimTx({ max = Infinity, account = undefined, network = 42 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'claimTx',
+					selection: {
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'account', 'amount', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, account, amount, timestamp }) => ({
+					id,
+					account,
+					amount,
+					timestamp,
 				})),
 			);
 		},

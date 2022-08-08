@@ -407,4 +407,17 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('sportMarkets.claimTx')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --account <value>', 'The address of the wallet')
+	.option('-n, --network <value>', 'The network', 42)
+
+	.action(async ({ max, account, network }) => {
+		sportMarkets
+			.claimTx({ max, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);
