@@ -410,7 +410,7 @@ program
 	});
 
 program
-	.command('sportMarkets.claimTx')
+	.command('sportMarkets.claimTxes')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --account <value>', 'The address of the wallet')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')

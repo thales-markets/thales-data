@@ -1388,7 +1388,7 @@ module.exports = {
 			);
 		},
 
-		claimTx({
+		claimTxes({
 			max = Infinity,
 			account = undefined,
 			minTimestamp = undefined,
@@ -1399,7 +1399,7 @@ module.exports = {
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
 				query: {
-					entity: 'claimTx',
+					entity: 'claimTxes',
 					selection: {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
