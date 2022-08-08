@@ -398,6 +398,8 @@ program
 	.option('-M, --market <value>', 'The market address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, market, type, account, network }) => {
@@ -411,11 +413,13 @@ program
 	.command('sportMarkets.claimTx')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --account <value>', 'The address of the wallet')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 42)
 
-	.action(async ({ max, account, network }) => {
+	.action(async ({ max, account, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
-			.claimTx({ max, account, network })
+			.claimTx({ max, account, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

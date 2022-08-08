@@ -1324,6 +1324,8 @@ module.exports = {
 			market = undefined,
 			type = undefined,
 			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -1338,6 +1340,8 @@ module.exports = {
 							market: market ? `\\"${market}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
 					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'paid', 'position'],
@@ -1383,7 +1387,14 @@ module.exports = {
 				})),
 			);
 		},
-		claimTx({ max = Infinity, account = undefined, network = 42 } = {}) {
+
+		claimTx({
+			max = Infinity,
+			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 42,
+		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
@@ -1392,6 +1403,8 @@ module.exports = {
 					selection: {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
 					properties: ['id', 'account', 'amount', 'timestamp'],
