@@ -476,8 +476,8 @@ module.exports = {
 				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
 					id,
 					trades: Number(trades),
-					totalVolume: totalVolume / 1e18,
-					totalEarned: totalEarned / 1e18,
+					totalVolume: network === 137 ? totalVolume / 1e6 : totalVolume / 1e18,
+					totalEarned: network === 137 ? totalEarned / 1e6 : totalEarned / 1e18,
 					timestamp: Number(timestamp * 1000),
 				})),
 			);
@@ -501,8 +501,8 @@ module.exports = {
 					id,
 					refferer,
 					trader,
-					amount: amount / 1e18,
-					volume: volume / 1e18,
+					amount: network === 137 ? amount / 1e6 : amount / 1e18,
+					volume: network === 137 ? volume / 1e6 : volume / 1e18,
 					timestamp: Number(timestamp * 1000),
 				})),
 			);
@@ -524,8 +524,8 @@ module.exports = {
 				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
 					id,
 					trades: Number(trades),
-					totalVolume: totalVolume / 1e18,
-					totalEarned: totalEarned / 1e18,
+					totalVolume: network === 137 ? totalVolume / 1e6 : totalVolume / 1e18,
+					totalEarned: network === 137 ? totalEarned / 1e6 : totalEarned / 1e18,
 					refferer,
 					timestamp: Number(timestamp * 1000),
 				})),
