@@ -1323,10 +1323,21 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
-					properties: ['id', 'hash', 'timestamp', 'type', 'account', 'market', 'amount', 'paid', 'position'],
+					properties: [
+						'id',
+						'hash',
+						'timestamp',
+						'type',
+						'account',
+						'market',
+						'amount',
+						'paid',
+						'position',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, hash, timestamp, type, account, market, amount, paid, position }) => ({
+				results.map(({ id, hash, timestamp, type, account, market, amount, paid, position, wholeMarket }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					hash,
@@ -1336,6 +1347,7 @@ module.exports = {
 					amount: Number(amount) / 1e18,
 					paid: Number(paid) / 1e18,
 					position: Number(position),
+					wholeMarket,
 				})),
 			);
 		},
