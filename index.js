@@ -1386,14 +1386,21 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
-					properties: ['id', 'account', 'amount', 'timestamp'],
+					properties: [
+						'id',
+						'account',
+						'amount',
+						'timestamp',
+						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, timestamp }) => ({
+				results.map(({ id, account, amount, timestamp, market }) => ({
 					id,
 					account,
 					amount,
 					timestamp,
+					market,
 				})),
 			);
 		},
