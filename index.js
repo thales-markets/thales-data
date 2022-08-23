@@ -36,6 +36,7 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
 	},
 	sportMarkets: {
+		5: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-goerli', // goerli
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
 	},
