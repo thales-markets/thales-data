@@ -1382,6 +1382,7 @@ module.exports = {
 		claimTxes({
 			max = Infinity,
 			account = undefined,
+			market = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			network = 42,
@@ -1393,6 +1394,7 @@ module.exports = {
 					entity: 'claimTxes',
 					selection: {
 						where: {
+							market_: { address: market ? `\\"${market}\\"` : undefined },
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
