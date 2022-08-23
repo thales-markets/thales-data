@@ -1413,8 +1413,8 @@ module.exports = {
 				results.map(({ id, account, amount, timestamp, market }) => ({
 					id,
 					account,
-					amount,
-					timestamp,
+					amount: Number(amount) / 1e18,
+					timestamp: Number(timestamp * 1000),
 					market,
 				})),
 			);
