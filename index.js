@@ -1406,15 +1406,17 @@ module.exports = {
 						'account',
 						'amount',
 						'timestamp',
+						'caller',
 						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, timestamp, market }) => ({
+				results.map(({ id, account, amount, timestamp, caller, market }) => ({
 					id,
 					account,
 					amount: Number(amount) / 1e18,
 					timestamp: Number(timestamp * 1000),
+					caller,
 					market,
 				})),
 			);
