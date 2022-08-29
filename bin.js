@@ -424,4 +424,17 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('sportMarkets.overtimeVouchers')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-a, --address <value>', 'The owner address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, address, network }) => {
+		sportMarkets
+			.overtimeVouchers({ max, address, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

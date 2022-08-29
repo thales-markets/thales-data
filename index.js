@@ -1381,7 +1381,6 @@ module.exports = {
 				})),
 			);
 		},
-
 		claimTxes({
 			max = Infinity,
 			account = undefined,
@@ -1420,6 +1419,28 @@ module.exports = {
 					timestamp: Number(timestamp * 1000),
 					caller,
 					market,
+				})),
+			);
+		},
+		overtimeVouchers({ max = Infinity, address = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'overtimeVouchers',
+					selection: {
+						orderBy: 'id',
+						orderDirection: 'asc',
+						where: {
+							address: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'address'],
+				},
+			}).then(results =>
+				results.map(({ id, address }) => ({
+					id,
+					address,
 				})),
 			);
 		},
