@@ -28,6 +28,7 @@ const graphAPIEndpoints = {
 			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
 			80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
+			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // polygon
 		},
 	},
 
