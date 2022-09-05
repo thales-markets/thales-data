@@ -23,7 +23,7 @@ const graphAPIEndpoints = {
 		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // arbitrum
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 
 		positions: {
 			69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
@@ -31,7 +31,7 @@ const graphAPIEndpoints = {
 			80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
-			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // arbitrum
+			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		},
 	},
 
