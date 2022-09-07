@@ -4,6 +4,18 @@ const pageResults = require('graph-results-pager');
 
 const { hexToAscii, getHashFromId } = require('./utils');
 
+const convertAmount = (amount, networkId, tokenAddress) => {
+	if (networkId == 137) {
+		if (tokenAddress && tokenAddress == '0x2791bca1f2de4661ed88a30c99a7a9449aa84174') return amount / 1e6;
+		if (!tokenAddress) return amount / 1e6;
+	}
+	if (networkId == 42161) {
+		if (tokenAddress && tokenAddress == '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8') return amount / 1e6;
+		if (!tokenAddress) return amount / 1e6;
+	}
+	return amount / 1e18;
+};
+
 const graphAPIEndpoints = {
 	thalesRoyale: {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale', // optimism
@@ -339,14 +351,8 @@ module.exports = {
 						taker,
 						makerToken,
 						takerToken,
-						makerAmount:
-							network === 137 && makerToken === '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
-								? makerAmount / 1e6
-								: makerAmount / 1e18,
-						takerAmount:
-							network === 137 && takerToken === '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
-								? takerAmount / 1e6
-								: takerAmount / 1e18,
+						makerAmount: convertAmount(makerAmount, network, makerToken),
+						takerAmount: convertAmount(takerAmount, network, takerToken),
 						market,
 						orderSide,
 						optionSide,
@@ -461,8 +467,8 @@ module.exports = {
 				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
 					id,
 					trades: Number(trades),
-					totalVolume: network === 137 ? totalVolume / 1e6 : totalVolume / 1e18,
-					totalEarned: network === 137 ? totalEarned / 1e6 : totalEarned / 1e18,
+					totalVolume: convertAmount(totalVolume, network),
+					totalEarned: convertAmount(totalEarned, network),
 					timestamp: Number(timestamp * 1000),
 				})),
 			);
@@ -486,8 +492,8 @@ module.exports = {
 					id,
 					refferer,
 					trader,
-					amount: network === 137 ? amount / 1e6 : amount / 1e18,
-					volume: network === 137 ? volume / 1e6 : volume / 1e18,
+					amount: convertAmount(amount, network),
+					volume: convertAmount(volume, network),
 					timestamp: Number(timestamp * 1000),
 				})),
 			);
@@ -509,8 +515,8 @@ module.exports = {
 				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
 					id,
 					trades: Number(trades),
-					totalVolume: network === 137 ? totalVolume / 1e6 : totalVolume / 1e18,
-					totalEarned: network === 137 ? totalEarned / 1e6 : totalEarned / 1e18,
+					totalVolume: convertAmount(totalVolume, network),
+					totalEarned: convertAmount(totalEarned, network),
 					refferer,
 					timestamp: Number(timestamp * 1000),
 				})),
