@@ -56,7 +56,6 @@ const graphAPIEndpoints = {
 		5: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-goerli', // goerli
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', // optimism goerli,
 	},
 };
 
@@ -1318,6 +1317,8 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -1334,6 +1335,7 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							wholeMarket_: { maturityDate_gte: startPeriod } & { maturityDate_lte: endPeriod },
 						},
 					},
 					properties: [
