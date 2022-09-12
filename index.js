@@ -1264,6 +1264,8 @@ module.exports = {
 						'drawOdds',
 						'homeScore',
 						'awayScore',
+						'isApex',
+						'resultDetails',
 					],
 				},
 			}).then(results =>
@@ -1287,6 +1289,8 @@ module.exports = {
 						drawOdds,
 						homeScore,
 						awayScore,
+						isApex,
+						resultDetails,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1306,6 +1310,8 @@ module.exports = {
 						drawOdds: drawOdds / 1e18,
 						homeScore: Number(homeScore),
 						awayScore: Number(awayScore),
+						isApex,
+						resultDetails,
 					}),
 				),
 			);
