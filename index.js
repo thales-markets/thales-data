@@ -1399,6 +1399,8 @@ module.exports = {
 			market = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
 			network = 42,
 		} = {}) {
 			return pageResults({
@@ -1408,7 +1410,11 @@ module.exports = {
 					entity: 'claimTxes',
 					selection: {
 						where: {
-							market_: { address: market ? `\\"${market}\\"` : undefined },
+							market_: {
+								address: market ? `\\"${market}\\"` : undefined,
+								maturityDate_gte: startPeriod || undefined,
+								maturityDate_lte: endPeriod || undefined,
+							},
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
