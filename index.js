@@ -1341,7 +1341,7 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
-							wholeMarket_: { maturityDate_gt: startPeriod || undefined, maturityDate_lte: endPeriod || undefined },
+							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
 						},
 					},
 					properties: [
