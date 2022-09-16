@@ -1267,6 +1267,7 @@ module.exports = {
 						'isApex',
 						'resultDetails',
 						'isPaused',
+						'leagueRaceName',
 					],
 				},
 			}).then(results =>
@@ -1293,6 +1294,7 @@ module.exports = {
 						isApex,
 						resultDetails,
 						isPaused,
+						leagueRaceName,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1315,6 +1317,7 @@ module.exports = {
 						isApex,
 						resultDetails,
 						isPaused,
+						leagueRaceName,
 					}),
 				),
 			);
