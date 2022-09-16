@@ -1266,6 +1266,7 @@ module.exports = {
 						'awayScore',
 						'isApex',
 						'resultDetails',
+						'isPaused',
 					],
 				},
 			}).then(results =>
@@ -1291,6 +1292,7 @@ module.exports = {
 						awayScore,
 						isApex,
 						resultDetails,
+						isPaused,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1312,6 +1314,7 @@ module.exports = {
 						awayScore: Number(awayScore),
 						isApex,
 						resultDetails,
+						isPaused,
 					}),
 				),
 			);
