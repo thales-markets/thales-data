@@ -1268,6 +1268,8 @@ module.exports = {
 						'resultDetails',
 						'isPaused',
 						'leagueRaceName',
+						'qualifyingStartTime',
+						'arePostQualifyingOddsFetched',
 					],
 				},
 			}).then(results =>
@@ -1295,6 +1297,8 @@ module.exports = {
 						resultDetails,
 						isPaused,
 						leagueRaceName,
+						qualifyingStartTime,
+						arePostQualifyingOddsFetched,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1318,6 +1322,8 @@ module.exports = {
 						resultDetails,
 						isPaused,
 						leagueRaceName,
+						qualifyingStartTime: qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
+						arePostQualifyingOddsFetched,
 					}),
 				),
 			);
