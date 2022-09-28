@@ -275,7 +275,7 @@ module.exports = {
 						type,
 						account,
 						currencyKey: currencyKey ? hexToAscii(currencyKey) : null,
-						side: isRangedMarket ? (side === 0 ? 'out' : 'in') : side === 0 ? 'long' : 'short',
+						side: isRangedMarket ? (side === 0 ? 'in' : 'out') : side === 0 ? 'long' : 'short',
 						isRangedMarket,
 						amount: amount / 1e18,
 						market,
