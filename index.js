@@ -235,6 +235,7 @@ module.exports = {
 			type = undefined,
 			market = undefined,
 			account = undefined,
+			onlyForRangedMarkets = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -249,6 +250,7 @@ module.exports = {
 							type: type ? `\\"${type}\\"` : undefined,
 							market: market ? `\\"${market}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
+							isRangedMarket: onlyForRangedMarkets ? true : undefined,
 						},
 					},
 					properties: [
@@ -258,6 +260,7 @@ module.exports = {
 						'account',
 						'currencyKey',
 						'side',
+						'isRangedMarket',
 						'amount',
 						'market',
 						'fee',
@@ -265,18 +268,21 @@ module.exports = {
 					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, currencyKey, side, amount, market, fee, blockNumber }) => ({
-					hash: getHashFromId(id),
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					currencyKey: currencyKey ? hexToAscii(currencyKey) : null,
-					side: side === 0 ? 'long' : 'short',
-					amount: amount / 1e18,
-					market,
-					fee: fee ? fee / 1e18 : null,
-					blockNumber: Number(blockNumber),
-				})),
+				results.map(
+					({ id, timestamp, type, account, currencyKey, isRangedMarket, side, amount, market, fee, blockNumber }) => ({
+						hash: getHashFromId(id),
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						currencyKey: currencyKey ? hexToAscii(currencyKey) : null,
+						side: isRangedMarket ? (side === 0 ? 'out' : 'in') : side === 0 ? 'long' : 'short',
+						isRangedMarket,
+						amount: amount / 1e18,
+						market,
+						fee: fee ? fee / 1e18 : null,
+						blockNumber: Number(blockNumber),
+					}),
+				),
 			);
 		},
 		trades({
