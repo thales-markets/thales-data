@@ -1278,6 +1278,7 @@ module.exports = {
 						'leagueRaceName',
 						'qualifyingStartTime',
 						'arePostQualifyingOddsFetched',
+						'betType',
 					],
 				},
 			}).then(results =>
@@ -1307,6 +1308,7 @@ module.exports = {
 						leagueRaceName,
 						qualifyingStartTime,
 						arePostQualifyingOddsFetched,
+						betType,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1332,6 +1334,7 @@ module.exports = {
 						leagueRaceName,
 						qualifyingStartTime: qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
 						arePostQualifyingOddsFetched,
+						betType: Number(betType),
 					}),
 				),
 			);
