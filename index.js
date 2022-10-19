@@ -47,6 +47,9 @@ const graphAPIEndpoints = {
 			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
 			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		},
+		rewards: {
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/trade-rewards',
+		},
 	},
 
 	exoticMarkets: {
@@ -367,6 +370,32 @@ module.exports = {
 						blockNumber: Number(blockNumber),
 					}),
 				),
+			);
+		},
+		rewards({ max = Infinity, minTimestamp = undefined, maxTimestamp = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets.rewards[network],
+				max,
+				query: {
+					entity: 'trades',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'account', 'amount', 'type'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, account, amount, type }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					account,
+					amount: amount / 1e18,
+					type,
+				})),
 			);
 		},
 		positionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
