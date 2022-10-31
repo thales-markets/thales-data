@@ -1599,5 +1599,29 @@ module.exports = {
 				),
 			);
 		},
+		usersStats({ max = Infinity, network = 10, address = undefined } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'users',
+					selection: {
+						orderBy: 'id',
+						orderDirection: 'asc',
+						where: {
+							id: address ? `\\"${address}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'pnl', 'volume', 'trades'],
+				},
+			}).then(results =>
+				results.map(({ id, pnl, volume, trades }) => ({
+					id,
+					pnl: Number(pnl) / 1e18,
+					volume: Number(volume) / 1e18,
+					trades,
+				})),
+			);
+		},
 	},
 };
