@@ -422,7 +422,13 @@ module.exports = {
 					id,
 					account,
 					amount,
-					position,
+					position: {
+						...position,
+						market: {
+							...position.market,
+							maturityDate: Number(position.market.timestamp * 1000),
+						},
+					},
 				})),
 			);
 		},
