@@ -1425,7 +1425,7 @@ module.exports = {
 				})),
 			);
 		},
-		positionBalances({ max = Infinity, account = undefined, network = 42 } = {}) {
+		positionBalances({ max = Infinity, account = undefined, network = 42, onlyClaimable = undefined } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
@@ -1434,6 +1434,9 @@ module.exports = {
 					selection: {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
+							position_: {
+								claimable: onlyClaimable == true ? true : undefined,
+							},
 						},
 					},
 					properties: [
