@@ -426,7 +426,7 @@ module.exports = {
 						...position,
 						market: {
 							...position.market,
-							maturityDate: Number(position.market.timestamp * 1000),
+							maturityDate: Number(position.market.maturityDate * 1000),
 						},
 					},
 				})),
