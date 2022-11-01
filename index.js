@@ -422,13 +422,7 @@ module.exports = {
 					id,
 					account,
 					amount,
-					position: {
-						...position,
-						market: {
-							...position.market,
-							maturityDate: Number(position.market.maturityDate * 1000),
-						},
-					},
+					position,
 				})),
 			);
 		},
@@ -1454,7 +1448,17 @@ module.exports = {
 					id,
 					account,
 					amount,
-					position,
+					position: {
+						...position,
+						market: {
+							...position.market,
+							maturityDate: Number(position.market.maturityDate * 1000),
+							homeOdds: position.market.homeOdds / 1e18,
+							awayOdds: position.market.awayOdds / 1e18,
+							drawOdds: position.market.drawOdds / 1e18,
+							timestamp: Number(position.market.timestamp * 1000),
+						},
+					},
 				})),
 			);
 		},
