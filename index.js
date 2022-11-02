@@ -1549,8 +1549,6 @@ module.exports = {
 				query: {
 					entity: 'parlayMarkets',
 					selection: {
-						orderBy: 'id',
-						orderDirection: 'asc',
 						where: {
 							id: address ? `\\"${address}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
@@ -1566,6 +1564,7 @@ module.exports = {
 						'marketQuotes',
 						'account',
 						'totalAmount',
+						'sUSDPaid',
 						'sUSDAfterFees',
 						'totalQuote',
 						'skewImpact',
@@ -1585,6 +1584,7 @@ module.exports = {
 						marketQuotes,
 						account,
 						totalAmount,
+						sUSDPaid,
 						sUSDAfterFees,
 						totalQuote,
 						skewImpact,
@@ -1629,6 +1629,7 @@ module.exports = {
 						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
 						account,
 						totalAmount: Number(totalAmount) / 1e18,
+						sUSDPaid: Number(sUSDPaid) / 1e18,
 						sUSDAfterFees: Number(sUSDAfterFees) / 1e18,
 						totalQuote: Number(totalQuote) / 1e18,
 						skewImpact: Number(skewImpact) / 1e18,
