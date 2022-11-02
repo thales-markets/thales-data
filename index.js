@@ -1665,5 +1665,78 @@ module.exports = {
 				})),
 			);
 		},
+		vaultTransactions({
+			max = Infinity,
+			market = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'vaultTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							market: market ? `\\"${market}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
+						},
+					},
+					properties: [
+						'id',
+						'hash',
+						'timestamp',
+						'market',
+						'amount',
+						'paid',
+						'position',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+					],
+				},
+			}).then(results =>
+				results.map(({ id, hash, timestamp, market, amount, paid, position, wholeMarket }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					hash,
+					market,
+					amount: Number(amount) / 1e18,
+					paid: Number(paid) / 1e18,
+					position: Number(position),
+					wholeMarket,
+				})),
+			);
+		},
+		vaultPnls({ max = Infinity, minTimestamp = undefined, maxTimestamp = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'vaultPnls',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'round', 'pnl'],
+				},
+			}).then(results =>
+				results.map(({ id, timestamp, round, pnl }) => ({
+					id,
+					timestamp,
+					round: Number(round),
+					pnl: Number(pnl) / 1e18,
+				})),
+			);
+		},
 	},
 };
