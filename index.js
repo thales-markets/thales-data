@@ -1560,7 +1560,9 @@ module.exports = {
 					properties: [
 						'id',
 						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+						'sportMarketsFromContract',
 						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'positionsFromContract',
 						'marketQuotes',
 						'account',
 						'totalAmount',
@@ -1580,7 +1582,9 @@ module.exports = {
 					({
 						id,
 						sportMarkets,
+						sportMarketsFromContract,
 						positions,
+						positionsFromContract,
 						marketQuotes,
 						account,
 						totalAmount,
@@ -1625,7 +1629,9 @@ module.exports = {
 								betType: Number(market.betType),
 							};
 						}),
+						sportMarketsFromContract,
 						positions,
+						positionsFromContract,
 						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
 						account,
 						totalAmount: Number(totalAmount) / 1e18,
