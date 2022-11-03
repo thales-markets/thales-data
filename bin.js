@@ -455,13 +455,14 @@ program
 	.command('sportMarkets.vaultTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-M, --market <value>', 'The market address')
+	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, market, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, market, vault, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
-			.vaultTransactions({ max, market, minTimestamp, maxTimestamp, network })
+			.vaultTransactions({ max, market, vault, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -469,13 +470,14 @@ program
 program
 	.command('sportMarkets.vaultPnls')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, vault, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
-			.vaultPnls({ max, minTimestamp, maxTimestamp, network })
+			.vaultPnls({ max, vault, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
