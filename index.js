@@ -1757,5 +1757,31 @@ module.exports = {
 				})),
 			);
 		},
+		zebros({ max = Infinity, account = undefined, network = 1 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'zebros',
+					selection: {
+						orderBy: 'tokenId',
+						orderDirection: 'asc',
+						where: {
+							owner: account ? `\\"${account}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'owner', 'tokenId', 'countryName', 'url', 'country'],
+				},
+			}).then(results =>
+				results.map(({ id, owner, tokenId, countryName, url, country }) => ({
+					id,
+					owner,
+					tokenId,
+					countryName,
+					url,
+					country,
+				})),
+			);
+		},
 	},
 };
