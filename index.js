@@ -1441,14 +1441,16 @@ module.exports = {
 					},
 					properties: [
 						'id',
+						'firstTxHash',
 						'account',
 						'amount',
 						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, position }) => ({
+				results.map(({ id, firstTxHash, account, amount, position }) => ({
 					id,
+					firstTxHash,
 					account,
 					amount,
 					position: {
@@ -1559,6 +1561,7 @@ module.exports = {
 					},
 					properties: [
 						'id',
+						'txHash',
 						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
 						'sportMarketsFromContract',
 						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
@@ -1581,6 +1584,7 @@ module.exports = {
 				results.map(
 					({
 						id,
+						txHash,
 						sportMarkets,
 						sportMarketsFromContract,
 						positions,
@@ -1599,6 +1603,7 @@ module.exports = {
 						won,
 					}) => ({
 						id,
+						txHash,
 						sportMarkets: sportMarkets.map(market => {
 							return {
 								id: market.id,
