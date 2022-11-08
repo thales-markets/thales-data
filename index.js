@@ -1788,5 +1788,127 @@ module.exports = {
 				})),
 			);
 		},
+		referralTransactions({
+			max = Infinity,
+			referrer = undefined,
+			trader = undefined,
+			network = 10,
+			orderBy = undefined,
+			orderDirection = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'referralTransactions',
+					selection: {
+						orderBy: orderBy ? `\\"${orderBy}\\"` : 'id',
+						orderDirection: orderDirection ? `\\"${orderDirection}\\"` : 'asc',
+						where: {
+							referrer_: {
+								id: referrer ? `\\"${referrer}\\"` : undefined,
+							},
+							trader_: {
+								id: trader ? `\\"${trader}\\"` : undefined,
+							},
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: [
+						'id',
+						'referrer {id, trades, timestamp}',
+						'trader {id, trades}',
+						'amount',
+						'volume',
+						'ammType',
+						'timestamp',
+					],
+				},
+			}).then(results =>
+				results.map(({ id, referrer, trader, amount, volume, ammType, timestamp }) => ({
+					id,
+					referrer,
+					trader,
+					amount: Number(amount) / 1e18,
+					volume: Number(volume) / 1e18,
+					ammType,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
+		referrers({
+			max = Infinity,
+			network = 10,
+			orderBy = undefined,
+			orderDirection = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'referrers',
+					selection: {
+						orderBy: orderBy ? `\\"${orderBy}\\"` : 'id',
+						orderDirection: orderDirection ? `\\"${orderDirection}\\"` : 'asc',
+						where: {
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
+					id,
+					trades: Number(trades),
+					totalVolume: Number(totalVolume) / 1e18,
+					totalEarned: Number(totalEarned) / 1e18,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
+		referredTraders({
+			max = Infinity,
+			network = 10,
+			orderBy = undefined,
+			referrer = undefined,
+			orderDirection = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'referredTraders',
+					selection: {
+						orderBy: orderBy ? `\\"${orderBy}\\"` : 'id',
+						orderDirection: orderDirection ? `\\"${orderDirection}\\"` : 'asc',
+						where: {
+							referrer_: {
+								id: referrer ? `\\"${referrer}\\"` : undefined,
+							},
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'trades', 'totalVolume', 'totalAmount', 'referrer {id}', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, trades, totalVolume, totalAmount, referrer, timestamp }) => ({
+					id,
+					trades: Number(trades),
+					totalVolume: Number(totalVolume) / 1e18,
+					totalAmount: Number(totalAmount) / 1e18,
+					referrer,
+					timestamp: Number(timestamp * 1000),
+				})),
+			);
+		},
 	},
 };
