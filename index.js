@@ -1713,10 +1713,11 @@ module.exports = {
 						'paid',
 						'position',
 						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+						'round',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket }) => ({
+				results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					hash,
@@ -1726,6 +1727,7 @@ module.exports = {
 					paid: Number(paid) / 1e18,
 					position: Number(position),
 					wholeMarket,
+					round: Number(round),
 				})),
 			);
 		},
