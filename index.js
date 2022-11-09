@@ -1844,6 +1844,7 @@ module.exports = {
 		referrers({
 			max = Infinity,
 			network = 10,
+			referrer = undefined,
 			orderBy = undefined,
 			orderDirection = undefined,
 			minTimestamp = undefined,
@@ -1858,6 +1859,7 @@ module.exports = {
 						orderBy: orderBy ? `\\"${orderBy}\\"` : 'id',
 						orderDirection: orderDirection ? `\\"${orderDirection}\\"` : 'asc',
 						where: {
+							id: referrer ? `\\"${referrer}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 						},
