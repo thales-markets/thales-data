@@ -1543,6 +1543,8 @@ module.exports = {
 			address = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
 			won = undefined,
 		} = {}) {
 			return pageResults({
@@ -1557,6 +1559,8 @@ module.exports = {
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 							won: won ? `\\"${won}\\"` : undefined,
+							lastGameStarts_gte: startPeriod || undefined,
+							lastGameStarts_lt: endPeriod || undefined,
 						},
 					},
 					properties: [
