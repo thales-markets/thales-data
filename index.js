@@ -1640,6 +1640,8 @@ module.exports = {
 				query: {
 					entity: 'parlayMarkets',
 					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
 						where: {
 							id: address ? `\\"${address}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
