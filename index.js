@@ -943,6 +943,93 @@ module.exports = {
 				})),
 			);
 		},
+		vaultTransactions({
+			max = Infinity,
+			market = undefined,
+			vault = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'vaultTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							market: market ? `\\"${market}\\"` : undefined,
+							vault: vault ? `\\"${vault}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
+						},
+					},
+					properties: [
+						'id',
+						'vault',
+						'hash',
+						'timestamp',
+						'market',
+						'amount',
+						'paid',
+						'position',
+						'wholeMarket { id, customMarket, customOracle, id, timestamp, creator, currencyKey, trikePrice, maturityDate, expiryDate, isOpen, poolSize, longAddress, shortAddress, result finalPrice }',
+						'round',
+					],
+				},
+			}).then(results =>
+				results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					hash,
+					market,
+					vault,
+					amount: Number(amount) / 1e18,
+					paid: Number(paid) / 1e18,
+					position: Number(position),
+					wholeMarket,
+					round: Number(round),
+				})),
+			);
+		},
+		vaultPnls({
+			max = Infinity,
+			vault = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'vaultPnls',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							vault: vault ? `\\"${vault}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'vault', 'timestamp', 'round', 'pnl'],
+				},
+			}).then(results =>
+				results.map(({ id, vault, timestamp, round, pnl }) => ({
+					id,
+					vault,
+					timestamp,
+					round: Number(round),
+					pnl: Number(pnl) / 1e18,
+				})),
+			);
+		},
 	},
 	exoticMarkets: {
 		markets({

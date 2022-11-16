@@ -297,6 +297,37 @@ program
 	});
 
 program
+	.command('binaryOptions.vaultTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-M, --market <value>', 'The market address')
+	.option('-v, --vault <value>', 'The vault address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, market, vault, minTimestamp, maxTimestamp, network }) => {
+		binaryOptions
+			.vaultTransactions({ max, market, vault, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('binaryOptions.vaultPnls')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --vault <value>', 'The vault address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, vault, minTimestamp, maxTimestamp, network }) => {
+		binaryOptions
+			.vaultPnls({ max, vault, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('exoticMarkets.markets')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')
