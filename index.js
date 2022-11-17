@@ -978,7 +978,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, customMarket, customOracle, id, timestamp, creator, currencyKey, trikePrice, maturityDate, expiryDate, isOpen, poolSize, longAddress, shortAddress, result finalPrice }',
+						'wholeMarket { id, customMarket, customOracle, id, timestamp, creator, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, poolSize, longAddress, shortAddress, result finalPrice }',
 						'round',
 					],
 				},
