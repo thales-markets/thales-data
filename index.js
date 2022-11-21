@@ -1032,6 +1032,7 @@ module.exports = {
 		},
 		vaultUserTransactions({
 			max = Infinity,
+			vault = undefined,
 			type = undefined,
 			account = undefined,
 			minTimestamp = undefined,
@@ -1047,6 +1048,7 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
+							vault: vault ? `\\"${vault}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
@@ -1897,6 +1899,7 @@ module.exports = {
 		},
 		vaultUserTransactions({
 			max = Infinity,
+			vault = undefined,
 			type = undefined,
 			account = undefined,
 			minTimestamp = undefined,
@@ -1912,6 +1915,7 @@ module.exports = {
 						orderBy: 'timestamp',
 						orderDirection: 'desc',
 						where: {
+							vault: vault ? `\\"${vault}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,

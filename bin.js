@@ -330,13 +330,14 @@ program
 program
 	.command('binaryOptions.vaultUserTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, type, account, network }) => {
+	.action(async ({ max, vault, type, account, network }) => {
 		binaryOptions
-			.vaultUserTransactions({ max, type, account, network })
+			.vaultUserTransactions({ max, vault, type, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -530,13 +531,14 @@ program
 program
 	.command('sportMarkets.vaultUserTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
 	.option('-n, --network <value>', 'The network', 1)
 
-	.action(async ({ max, type, account, network }) => {
+	.action(async ({ max, vault, type, account, network }) => {
 		sportMarkets
-			.vaultUserTransactions({ max, type, account, network })
+			.vaultUserTransactions({ max, vault, type, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
