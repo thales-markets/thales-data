@@ -1030,6 +1030,44 @@ module.exports = {
 				})),
 			);
 		},
+		vaultUserTransactions({
+			max = Infinity,
+			type = undefined,
+			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'vaultUserTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'vault', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
+				},
+			}).then(results =>
+				results.map(({ id, vault, hash, timestamp, type, account, amount, round }) => ({
+					id,
+					vault,
+					hash,
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount: amount / 1e18,
+					round: Number(round),
+				})),
+			);
+		},
 	},
 	exoticMarkets: {
 		markets({

@@ -328,6 +328,20 @@ program
 	});
 
 program
+	.command('binaryOptions.vaultUserTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, type, account, network }) => {
+		binaryOptions
+			.vaultUserTransactions({ max, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('exoticMarkets.markets')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')
