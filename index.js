@@ -1687,7 +1687,7 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
-							won: won ? `\\"${won}\\"` : undefined,
+							won: won,
 							lastGameStarts_gte: startPeriod || undefined,
 							lastGameStarts_lt: endPeriod || undefined,
 						},
