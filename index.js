@@ -1436,6 +1436,9 @@ module.exports = {
 						'qualifyingStartTime',
 						'arePostQualifyingOddsFetched',
 						'betType',
+						'parentMarket',
+						'spread',
+						'total',
 					],
 				},
 			}).then(results =>
@@ -1466,6 +1469,9 @@ module.exports = {
 						qualifyingStartTime,
 						arePostQualifyingOddsFetched,
 						betType,
+						parentMarket,
+						spread,
+						total,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1492,6 +1498,9 @@ module.exports = {
 						qualifyingStartTime: qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
 						arePostQualifyingOddsFetched,
 						betType: Number(betType),
+						parentMarket,
+						spread: Number(spread) / 1e2,
+						total: Number(total) / 1e2,
 					}),
 				),
 			);
