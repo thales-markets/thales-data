@@ -1514,6 +1514,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
+			parentMarket = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -1530,7 +1531,11 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
-							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
+							wholeMarket_: {
+								maturityDate_gte: startPeriod || undefined,
+								maturityDate_lt: endPeriod || undefined,
+								parentMarket: parentMarket ? `\\"${parentMarket}\\"` : undefined,
+							},
 						},
 					},
 					properties: [
@@ -1543,7 +1548,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 					],
 				},
 			}).then(results =>
@@ -1854,7 +1859,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 						'round',
 					],
 				},
