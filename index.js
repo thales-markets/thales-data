@@ -1572,10 +1572,11 @@ module.exports = {
 						'account',
 						'amount',
 						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'sUSDPaid'
 					],
 				},
 			}).then(results =>
-				results.map(({ id, firstTxHash, account, amount, position }) => ({
+				results.map(({ id, firstTxHash, account, amount, position, sUSDPaid }) => ({
 					id,
 					firstTxHash,
 					account,
@@ -1591,6 +1592,7 @@ module.exports = {
 							timestamp: Number(position.market.timestamp * 1000),
 						},
 					},
+					sUSDPaid: Number(sUSDPaid) / 1e18
 				})),
 			);
 		},
