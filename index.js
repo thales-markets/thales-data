@@ -1499,8 +1499,8 @@ module.exports = {
 						arePostQualifyingOddsFetched,
 						betType: Number(betType),
 						parentMarket,
-						spread: Number(spread) / 1e2,
-						total: Number(total) / 1e2,
+						spread: Number(spread),
+						total: Number(total),
 					}),
 				),
 			);
@@ -1585,7 +1585,7 @@ module.exports = {
 						'firstTxHash',
 						'account',
 						'amount',
-						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }}',
 					],
 				},
 			}).then(results =>
@@ -1641,7 +1641,7 @@ module.exports = {
 						'amount',
 						'timestamp',
 						'caller',
-						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 					],
 				},
 			}).then(results =>
@@ -1709,9 +1709,9 @@ module.exports = {
 					properties: [
 						'id',
 						'txHash',
-						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 						'sportMarketsFromContract',
-						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }}',
 						'positionsFromContract',
 						'marketQuotes',
 						'account',
@@ -1779,6 +1779,9 @@ module.exports = {
 									market.qualifyingStartTime !== null ? Number(market.qualifyingStartTime * 1000) : null,
 								arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
 								betType: Number(market.betType),
+								parentMarket: market.parentMarket,
+								spread: Number(market.spread),
+								total: Number(market.total),
 							};
 						}),
 						sportMarketsFromContract,
