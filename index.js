@@ -1414,6 +1414,7 @@ module.exports = {
 						'id',
 						'timestamp',
 						'address',
+						'gameId',
 						'maturityDate',
 						'tags',
 						'isOpen',
@@ -1447,6 +1448,7 @@ module.exports = {
 						id,
 						timestamp,
 						address,
+						gameId,
 						maturityDate,
 						tags,
 						isOpen,
@@ -1476,6 +1478,7 @@ module.exports = {
 						id,
 						timestamp: Number(timestamp * 1000),
 						address,
+						gameId,
 						maturityDate: Number(maturityDate * 1000),
 						tags,
 						isOpen,
@@ -1586,10 +1589,11 @@ module.exports = {
 						'account',
 						'amount',
 						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }}',
+						'sUSDPaid',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, firstTxHash, account, amount, position }) => ({
+				results.map(({ id, firstTxHash, account, amount, position, sUSDPaid }) => ({
 					id,
 					firstTxHash,
 					account,
@@ -1605,6 +1609,7 @@ module.exports = {
 							timestamp: Number(position.market.timestamp * 1000),
 						},
 					},
+					sUSDPaid: Number(sUSDPaid) / 1e18,
 				})),
 			);
 		},
