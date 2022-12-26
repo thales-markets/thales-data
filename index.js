@@ -1437,6 +1437,9 @@ module.exports = {
 						'qualifyingStartTime',
 						'arePostQualifyingOddsFetched',
 						'betType',
+						'parentMarket',
+						'spread',
+						'total',
 					],
 				},
 			}).then(results =>
@@ -1468,6 +1471,9 @@ module.exports = {
 						qualifyingStartTime,
 						arePostQualifyingOddsFetched,
 						betType,
+						parentMarket,
+						spread,
+						total,
 					}) => ({
 						id,
 						timestamp: Number(timestamp * 1000),
@@ -1495,6 +1501,9 @@ module.exports = {
 						qualifyingStartTime: qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
 						arePostQualifyingOddsFetched,
 						betType: Number(betType),
+						parentMarket,
+						spread: Number(spread),
+						total: Number(total),
 					}),
 				),
 			);
@@ -1508,6 +1517,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
+			parentMarket = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -1524,7 +1534,11 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
-							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
+							wholeMarket_: {
+								maturityDate_gte: startPeriod || undefined,
+								maturityDate_lt: endPeriod || undefined,
+								parentMarket: parentMarket ? `\\"${parentMarket}\\"` : undefined,
+							},
 						},
 					},
 					properties: [
@@ -1537,7 +1551,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 					],
 				},
 			}).then(results =>
@@ -1574,7 +1588,7 @@ module.exports = {
 						'firstTxHash',
 						'account',
 						'amount',
-						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }}',
 						'sUSDPaid',
 					],
 				},
@@ -1632,7 +1646,7 @@ module.exports = {
 						'amount',
 						'timestamp',
 						'caller',
-						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 					],
 				},
 			}).then(results =>
@@ -1700,9 +1714,9 @@ module.exports = {
 					properties: [
 						'id',
 						'txHash',
-						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore}',
+						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 						'sportMarketsFromContract',
-						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }}',
+						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }}',
 						'positionsFromContract',
 						'marketQuotes',
 						'account',
@@ -1770,6 +1784,9 @@ module.exports = {
 									market.qualifyingStartTime !== null ? Number(market.qualifyingStartTime * 1000) : null,
 								arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
 								betType: Number(market.betType),
+								parentMarket: market.parentMarket,
+								spread: Number(market.spread),
+								total: Number(market.total),
 							};
 						}),
 						sportMarketsFromContract,
@@ -1850,7 +1867,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore }',
+						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total }',
 						'round',
 					],
 				},

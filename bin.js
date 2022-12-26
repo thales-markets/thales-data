@@ -461,10 +461,11 @@ program
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 1)
+	.option('-p, --parentMarket <value>', 'The parent market address')
 
-	.action(async ({ max, market, type, account, network }) => {
+	.action(async ({ max, market, type, account, network, parentMarket }) => {
 		sportMarkets
-			.marketTransactions({ max, market, type, account, network })
+			.marketTransactions({ max, market, type, account, network, parentMarket })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
