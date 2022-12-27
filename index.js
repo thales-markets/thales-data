@@ -1621,6 +1621,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
+			parentMarket = undefined,
 			network = 42,
 		} = {}) {
 			return pageResults({
@@ -1634,6 +1635,7 @@ module.exports = {
 								address: market ? `\\"${market}\\"` : undefined,
 								maturityDate_gte: startPeriod || undefined,
 								maturityDate_lte: endPeriod || undefined,
+								parentMarket: parentMarket ? `\\"${parentMarket}\\"` : undefined,
 							},
 							account: account ? `\\"${account}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,

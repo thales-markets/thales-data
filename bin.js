@@ -477,10 +477,10 @@ program
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-n, --network <value>', 'The network', 42)
-
-	.action(async ({ max, account, minTimestamp, maxTimestamp, network }) => {
+	.option('-p, --parentMarket <value>', 'The parent market address')
+	.action(async ({ max, account, minTimestamp, maxTimestamp, network, parentMarket }) => {
 		sportMarkets
-			.claimTx({ max, account, minTimestamp, maxTimestamp, network })
+			.claimTx({ max, account, minTimestamp, maxTimestamp, network, parentMarket })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
