@@ -1498,9 +1498,10 @@ module.exports = {
 						resultDetails,
 						isPaused,
 						leagueRaceName,
-						qualifyingStartTime: qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
+						qualifyingStartTime:
+							qualifyingStartTime && qualifyingStartTime !== null ? Number(qualifyingStartTime * 1000) : null,
 						arePostQualifyingOddsFetched,
-						betType: Number(betType),
+						betType: betType && betType !== null ? Number(betType) : 0,
 						parentMarket,
 						spread: Number(spread),
 						total: Number(total),
@@ -1783,9 +1784,11 @@ module.exports = {
 								isPaused: market.isPaused,
 								leagueRaceName: market.leagueRaceName,
 								qualifyingStartTime:
-									market.qualifyingStartTime !== null ? Number(market.qualifyingStartTime * 1000) : null,
+									market.qualifyingStartTime && market.qualifyingStartTime !== null
+										? Number(market.qualifyingStartTime * 1000)
+										: null,
 								arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
-								betType: Number(market.betType),
+								betType: market.betType && market.betType !== null ? Number(market.betType) : 0,
 								parentMarket: market.parentMarket,
 								spread: Number(market.spread),
 								total: Number(market.total),
