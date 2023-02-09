@@ -1570,8 +1570,8 @@ module.exports = {
 					type,
 					account,
 					market,
-					amount: Number(amount) / 1e18,
-					paid: Number(paid) / 1e18,
+					amount: convertAmount(Number(amount), network),
+					paid: convertAmount(Number(paid), network),
 					position: Number(position),
 					wholeMarket,
 				})),
@@ -1617,7 +1617,7 @@ module.exports = {
 							timestamp: Number(position.market.timestamp * 1000),
 						},
 					},
-					sUSDPaid: Number(sUSDPaid) / 1e18,
+					sUSDPaid: convertAmount(Number(sUSDPaid), network),
 				})),
 			);
 		},
@@ -1663,7 +1663,7 @@ module.exports = {
 				results.map(({ id, account, amount, timestamp, caller, market }) => ({
 					id,
 					account,
-					amount: Number(amount) / 1e18,
+					amount: convertAmount(Number(amount), network),
 					timestamp: Number(timestamp * 1000),
 					caller,
 					market,
