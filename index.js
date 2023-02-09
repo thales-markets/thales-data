@@ -22,7 +22,7 @@ const graphAPIEndpoints = {
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale-kovan', // optimism kovan
 	},
 	token: {
-		10: 'https://subgraph.satsuma-prod.com/c66118a978a1/thales/thales-token/api', // optimism
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-kovan', // optimism kovan
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/token-goerli', // optimism goerli
 	},
@@ -33,7 +33,7 @@ const graphAPIEndpoints = {
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
-		10: 'https://subgraph.satsuma-prod.com/c66118a978a1/thales/thales-markets/api', // optimism
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
 		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
@@ -42,14 +42,14 @@ const graphAPIEndpoints = {
 		positions: {
 			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
 			69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
-			10: 'https://subgraph.satsuma-prod.com/c66118a978a1/thales/thales-markets/api', // optimism
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
 			80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
 			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
 			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		},
 		rewards: {
-			10: 'https://subgraph.satsuma-prod.com/c66118a978a1/thales/trade-rewards/api',
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/trade-rewards',
 		},
 	},
 
@@ -61,7 +61,7 @@ const graphAPIEndpoints = {
 	sportMarkets: {
 		5: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-goerli', // goerli
 		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
-		10: 'https://subgraph.satsuma-prod.com/c66118a978a1/thales/sport-markets-optimism/api', // optimism
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', //  optimism goerli
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/overtime-arbitrum', // arbitrum
 	},
