@@ -1807,9 +1807,9 @@ module.exports = {
 						positionsFromContract,
 						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
 						account,
-						totalAmount: Number(totalAmount) / 1e18,
-						sUSDPaid: Number(sUSDPaid) / 1e18,
-						sUSDAfterFees: Number(sUSDAfterFees) / 1e18,
+						totalAmount: convertAmount(Number(totalAmount), network),
+						sUSDPaid: convertAmount(Number(sUSDPaid), network),
+						sUSDAfterFees: convertAmount(Number(sUSDAfterFees), network),
 						totalQuote: Number(totalQuote) / 1e18,
 						skewImpact: Number(skewImpact) / 1e18,
 						timestamp: Number(timestamp * 1000),
@@ -1839,8 +1839,8 @@ module.exports = {
 			}).then(results =>
 				results.map(({ id, pnl, volume, trades }) => ({
 					id,
-					pnl: Number(pnl) / 1e18,
-					volume: Number(volume) / 1e18,
+					pnl: convertAmount(Number(pnl), network),
+					volume: convertAmount(Number(volume), network),
 					trades,
 				})),
 			);
