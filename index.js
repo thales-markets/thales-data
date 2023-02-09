@@ -1807,7 +1807,7 @@ module.exports = {
 						positionsFromContract,
 						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
 						account,
-						totalAmount: Number(totalAmount),
+						totalAmount: convertAmount(Number(totalAmount), network),
 						sUSDPaid: convertAmount(Number(sUSDPaid), network),
 						sUSDAfterFees: convertAmount(Number(sUSDAfterFees), network),
 						totalQuote: Number(totalQuote) / 1e18,
