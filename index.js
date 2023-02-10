@@ -65,6 +65,10 @@ const graphAPIEndpoints = {
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', //  optimism goerli
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/overtime-arbitrum', // arbitrum
 	},
+	taleOfThales: {
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
+	},
 };
 
 module.exports = {
@@ -576,6 +580,7 @@ module.exports = {
 			max = Infinity,
 			type = undefined,
 			account = undefined,
+			type_in = undefined,
 			network = 1,
 			onlyWithProtocolReward = false,
 			minTimestamp = undefined,
@@ -592,19 +597,21 @@ module.exports = {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
+							type_in: type_in ? type_in : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
 							...(onlyWithProtocolReward && { protocolRewards_not: 0 }),
 						},
 					},
-					properties: ['id', 'timestamp', 'protocolRewards', 'type', 'account', 'amount', 'blockNumber'],
+					properties: ['id', 'timestamp', 'protocolRewards', 'type', 'account', 'amount', 'blockNumber', 'destAccount'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount, blockNumber, protocolRewards }) => ({
+				results.map(({ id, timestamp, type, account, amount, blockNumber, protocolRewards, destAccount }) => ({
 					hash: getHashFromId(id),
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
+					destAccount,
 					amount: amount / 1e18,
 					protocolRewards: protocolRewards / 1e18,
 					blockNumber: Number(blockNumber),
@@ -1078,6 +1085,29 @@ module.exports = {
 					account,
 					amount: amount / 1e18,
 					round: Number(round),
+				})),
+			);
+		},
+		mintTransactions({ max = Infinity, minter = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.taleOfThales[network],
+				max,
+				query: {
+					entity: 'mintTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							minter: minter ? `\\"${minter}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'minter', 'item {id, type}'],
+				},
+			}).then(results =>
+				results.map(({ id, minter, item }) => ({
+					id,
+					minter,
+					item,
 				})),
 			);
 		},
