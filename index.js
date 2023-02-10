@@ -1848,7 +1848,7 @@ module.exports = {
 			}).then(results =>
 				results.map(({ id, pnl, volume, trades }) => ({
 					id,
-					pnl: convertAmount(Number(pnl), network),
+					pnl: Number(pnl) / 1e18,
 					volume: convertAmount(Number(volume), network),
 					trades,
 				})),
