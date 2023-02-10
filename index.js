@@ -375,7 +375,14 @@ module.exports = {
 				),
 			);
 		},
-		rewards({ max = Infinity, minTimestamp = undefined, maxTimestamp = undefined, network = 10 } = {}) {
+		rewards({
+			max = Infinity,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			periodStart = undefined,
+			periodEnd = undefined,
+			network = 10,
+		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.rewards[network],
 				max,
@@ -387,6 +394,8 @@ module.exports = {
 						where: {
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							timestamp_gte: periodStart || undefined,
+							timestamp_lt: periodEnd || undefined,
 						},
 					},
 					properties: ['id', 'timestamp', 'account', 'amount', 'type'],
