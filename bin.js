@@ -553,7 +553,7 @@ program
 	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, liquidityPool, minTimestamp, maxTimestamp, network }) => {
-		binaryOptions
+		sportMarkets
 			.liquidityPoolPnls({ max, liquidityPool, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
@@ -568,7 +568,7 @@ program
 	.option('-n, --network <value>', 'The network', 1)
 
 	.action(async ({ max, liquidityPool, type, account, network }) => {
-		binaryOptions
+		sportMarkets
 			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
