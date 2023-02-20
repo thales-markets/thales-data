@@ -2161,7 +2161,7 @@ module.exports = {
 				})),
 			);
 		},
-		liquidityPoolPnl({
+		liquidityPoolPnls({
 			max = Infinity,
 			liquidityPool = undefined,
 			minTimestamp = undefined,
