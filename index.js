@@ -25,6 +25,7 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
 		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-kovan', // optimism kovan
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/token-goerli', // optimism goerli
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-arbitrum', // arbitrum
 	},
 	thalesMarkets: {
 		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options', // mainnet
