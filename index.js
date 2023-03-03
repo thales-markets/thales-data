@@ -1939,6 +1939,56 @@ module.exports = {
 				})),
 			);
 		},
+		parlayVaultTransactions({
+			max = Infinity,
+			market = undefined,
+			vault = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarkets[network],
+				max,
+				query: {
+					entity: 'parlayVaultTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							market: market ? `\\"${market}\\"` : undefined,
+							vault: vault ? `\\"${vault}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
+						},
+					},
+					properties: [
+						'id',
+						'vault',
+						'hash',
+						'timestamp',
+						'market',
+						'paid',
+						'wholeMarket {id , txHash, sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }, sportMarketsFromContract, positions { id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }}, 	positionsFromContract,marketQuotes,account,totalAmount,sUSDPaid,sUSDAfterFees,totalQuote,skewImpact,timestamp,lastGameStarts,blockNumber,claimed,won}',
+						'round',
+					],
+				},
+			}).then(results =>
+				results.map(({ id, hash, timestamp, market, vault, paid, wholeMarket, round }) => ({
+					id,
+					timestamp: Number(timestamp * 1000),
+					hash,
+					market,
+					vault,
+					paid: Number(paid) / 1e18,
+					wholeMarket,
+					round: Number(round),
+				})),
+			);
+		},
 		vaultPnls({
 			max = Infinity,
 			vault = undefined,
