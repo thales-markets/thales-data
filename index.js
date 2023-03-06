@@ -70,6 +70,9 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
 	},
+	marchMadness: {
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-op-goerli', //  optimism goerli
+	},
 };
 
 module.exports = {
@@ -2338,6 +2341,67 @@ module.exports = {
 					account,
 					amount: amount / 1e18,
 					round: Number(round),
+				})),
+			);
+		},
+		marchMadnessToken({
+			max = Infinity,
+			minter = undefined,
+			network = 420,
+			minCreatedTimestamp = undefined,
+			maxCreatedTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.marchMadness[network],
+				max,
+				query: {
+					entity: 'tokens',
+					selection: {
+						orderBy: 'itemId',
+						orderDirection: 'asc',
+						where: {
+							minter: minter ? `\\"${minter}\\"` : undefined,
+							createdAt_gte: minCreatedTimestamp || undefined,
+							createdAt_lte: maxCreatedTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'createdHash', 'lastUpdateHash', 'minter', 'itemId', 'brackets', 'createdAt', 'updatedAt'],
+				},
+			}).then(results =>
+				results.map(({ id, createdHash, lastUpdateHash, minter, itemId, brackets, createdAt, updatedAt }) => ({
+					id,
+					createdHash,
+					lastUpdateHash,
+					minter,
+					itemId,
+					brackets,
+					createdAt: Number(createdAt * 1000),
+					updatedAt: Number(updatedAt * 1000),
+				})),
+			);
+		},
+		marchMadnessGames({ max = Infinity, network = 420, minTimestamp = undefined, maxTimestamp = undefined } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.marchMadness[network],
+				max,
+				query: {
+					entity: 'games',
+					selection: {
+						orderBy: 'id',
+						orderDirection: 'asc',
+						where: {
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'gameId', 'winnerTeamId', 'timestamp'],
+				},
+			}).then(results =>
+				results.map(({ id, gameId, winnerTeamId, timestamp }) => ({
+					id,
+					gameId,
+					winnerTeamId,
+					timestamp: Number(timestamp * 1000),
 				})),
 			);
 		},
