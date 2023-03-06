@@ -2038,7 +2038,7 @@ module.exports = {
 							lastGameStarts: Number(wholeMarket.lastGameStarts * 1000),
 							blockNumber: wholeMarket.blockNumber,
 							claimed: wholeMarket.claimed,
-							won: wholeMarket,
+							won: wholeMarket.won,
 						};
 					})(wholeMarket),
 					round: Number(round),
