@@ -71,7 +71,9 @@ const graphAPIEndpoints = {
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
 	},
 	marchMadness: {
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-optimism', //  optimism
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-op-goerli', //  optimism goerli
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-arbitrum', // arbitrum
 	},
 };
 
