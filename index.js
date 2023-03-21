@@ -2302,7 +2302,7 @@ module.exports = {
 					liquidityPool,
 					timestamp,
 					round: Number(round),
-					pnl: convertAmount(Number(pnl), network),
+					pnl: Number(pnl) / 1e18,
 				})),
 			);
 		},
