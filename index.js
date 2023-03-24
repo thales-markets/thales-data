@@ -69,6 +69,7 @@ const graphAPIEndpoints = {
 	taleOfThales: {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales-arbitrum', // arbitrum
 	},
 	marchMadness: {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-optimism', //  optimism
@@ -1571,6 +1572,7 @@ module.exports = {
 			startPeriod = undefined,
 			endPeriod = undefined,
 			parentMarket = undefined,
+			leagueTag = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -1591,6 +1593,7 @@ module.exports = {
 								maturityDate_gte: startPeriod || undefined,
 								maturityDate_lt: endPeriod || undefined,
 								parentMarket: parentMarket ? `\\"${parentMarket}\\"` : undefined,
+								tags: leagueTag ? `[\\"${leagueTag}\\"]` : undefined,
 							},
 						},
 					},
