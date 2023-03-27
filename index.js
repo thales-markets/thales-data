@@ -1940,7 +1940,7 @@ module.exports = {
 					market,
 					vault,
 					amount: Number(amount) / 1e18,
-					paid: Number(paid) / 1e18,
+					paid: convertAmount(Number(paid), network),
 					position: Number(position),
 					wholeMarket,
 					round: Number(round),
@@ -2121,7 +2121,7 @@ module.exports = {
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
-					amount: amount / 1e18,
+					amount: convertAmount(Number(amount), network),
 					round: Number(round),
 				})),
 			);
