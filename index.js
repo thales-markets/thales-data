@@ -1095,6 +1095,79 @@ module.exports = {
 				})),
 			);
 		},
+		liquidityPoolPnls({
+			max = Infinity,
+			liquidityPool = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'liquidityPoolPnls',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl'],
+				},
+			}).then(results =>
+				results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
+					id,
+					liquidityPool,
+					timestamp,
+					round: Number(round),
+					pnl: Number(pnl) / 1e18,
+				})),
+			);
+		},
+		liquidityPoolUserTransactions({
+			max = Infinity,
+			liquidityPool = undefined,
+			type = undefined,
+			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 1,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.thalesMarkets[network],
+				max,
+				query: {
+					entity: 'liquidityPoolUserTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
+				},
+			}).then(results =>
+				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
+					id,
+					liquidityPool,
+					hash,
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount: convertAmount(amount, network),
+					round: Number(round),
+				})),
+			);
+		},
 		mintTransactions({ max = Infinity, minter = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.taleOfThales[network],

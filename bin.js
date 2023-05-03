@@ -343,6 +343,36 @@ program
 	});
 
 program
+	.command('binaryOptions.liquidityPoolPnls')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, liquidityPool, minTimestamp, maxTimestamp, network }) => {
+		sportMarkets
+			.liquidityPoolPnls({ max, liquidityPool, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('binaryOptions.liquidityPoolUserTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 1)
+
+	.action(async ({ max, liquidityPool, type, account, network }) => {
+		sportMarkets
+			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('exoticMarkets.markets')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-c, --creator <value>', 'The address of the market creator')
@@ -545,7 +575,7 @@ program
 	});
 
 program
-	.command('binaryOptions.liquidityPoolPnls')
+	.command('sportMarkets.liquidityPoolPnls')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
@@ -560,7 +590,7 @@ program
 	});
 
 program
-	.command('binaryOptions.liquidityPoolUserTransactions')
+	.command('sportMarkets.liquidityPoolUserTransactions')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --type <value>', 'The transaction type')
