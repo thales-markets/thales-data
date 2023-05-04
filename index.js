@@ -175,6 +175,7 @@ module.exports = {
 			rightMarket = undefined,
 			minMaturity = undefined,
 			maxMaturity = undefined,
+			currencyKey = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -186,6 +187,7 @@ module.exports = {
 						orderBy: 'maturityDate',
 						orderDirection: 'desc',
 						where: {
+							currencyKey: currencyKey || undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 							maturityDate_gte: minMaturity || undefined,
