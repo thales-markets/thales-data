@@ -187,7 +187,7 @@ module.exports = {
 						orderBy: 'maturityDate',
 						orderDirection: 'desc',
 						where: {
-							currencyKey: currencyKey || undefined,
+							currencyKey: currencyKey ? `\\"${currencyKey}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 							maturityDate_gte: minMaturity || undefined,
