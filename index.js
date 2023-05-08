@@ -443,7 +443,26 @@ module.exports = {
 						'id',
 						'account',
 						'amount',
-						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}',
+						{
+							name: 'position',
+							properties: [
+								'id',
+								'side',
+								{
+									name: 'market',
+									properties: [
+										'id',
+										'result',
+										'currencyKey',
+										'strikePrice',
+										'maturityDate',
+										'expiryDate',
+										'isOpen',
+										'finalPrice',
+									],
+								},
+							],
+						},
 					],
 				},
 			}).then(results =>
@@ -455,6 +474,7 @@ module.exports = {
 				})),
 			);
 		},
+
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.positions[network],
