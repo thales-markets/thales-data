@@ -434,7 +434,7 @@ module.exports = {
 							account: account ? `\\"${account}\\"` : undefined,
 							position_: {
 								market_: {
-									maturityDate_gte: (maturityDate = undefined),
+									maturityDate_gte: maturityDate || undefined,
 								},
 							},
 						},
