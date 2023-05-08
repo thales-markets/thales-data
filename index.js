@@ -423,7 +423,7 @@ module.exports = {
 				})),
 			);
 		},
-		positionBalances({ max = Infinity, account = undefined, maturityDate = undefined, network = 137 } = {}) {
+		positionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.positions[network],
 				max,
@@ -432,37 +432,13 @@ module.exports = {
 					selection: {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
-							position_: {
-								market_: {
-									maturityDate_gte: maturityDate || undefined,
-								},
-							},
 						},
 					},
 					properties: [
 						'id',
 						'account',
 						'amount',
-						{
-							name: 'position',
-							properties: [
-								'id',
-								'side',
-								{
-									name: 'market',
-									properties: [
-										'id',
-										'result',
-										'currencyKey',
-										'strikePrice',
-										'maturityDate',
-										'expiryDate',
-										'isOpen',
-										'finalPrice',
-									],
-								},
-							],
-						},
+						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}',
 					],
 				},
 			}).then(results =>
@@ -474,7 +450,6 @@ module.exports = {
 				})),
 			);
 		},
-
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.positions[network],
