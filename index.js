@@ -40,6 +40,12 @@ const graphAPIEndpoints = {
 		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 
+		lp: {
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-lp-optimism',
+			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum',
+			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
+		},
+
 		positions: {
 			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
 			69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
@@ -1105,7 +1111,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.thalesMarkets[network],
+				api: graphAPIEndpoints.thalesMarkets.lp[network],
 				max,
 				query: {
 					entity: 'liquidityPoolPnls',
@@ -1140,7 +1146,7 @@ module.exports = {
 			network = 1,
 		} = {}) {
 			return pageResults({
-				api: graphAPIEndpoints.thalesMarkets[network],
+				api: graphAPIEndpoints.thalesMarkets.lp[network],
 				max,
 				query: {
 					entity: 'liquidityPoolUserTransactions',
