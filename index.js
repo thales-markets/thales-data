@@ -444,14 +444,16 @@ module.exports = {
 						'id',
 						'account',
 						'amount',
+						'paid',
 						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, position }) => ({
+				results.map(({ id, account, amount, paid, position }) => ({
 					id,
 					account,
 					amount,
+					paid,
 					position,
 				})),
 			);
@@ -471,14 +473,16 @@ module.exports = {
 						'id',
 						'account',
 						'amount',
+						'paid',
 						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice}}',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, position }) => ({
+				results.map(({ id, account, amount, paid, position }) => ({
 					id,
 					account,
 					amount,
+					paid,
 					position,
 				})),
 			);
