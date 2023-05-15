@@ -1524,6 +1524,7 @@ module.exports = {
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			market = undefined,
+			parentMarket = undefined,
 			network = 42,
 		} = {}) {
 			return pageResults({
@@ -1536,6 +1537,7 @@ module.exports = {
 						orderDirection: 'asc',
 						where: {
 							address: market ? `\\"${market}\\"` : undefined,
+							parentMarket: parentMarket ? `\\"${parentMarket}\\"` : undefined,
 							isOpen: isOpen !== undefined ? isOpen : undefined,
 							isCanceled: isCanceled !== undefined ? isCanceled : undefined,
 							isResolved: isResolved !== undefined ? isResolved : undefined,
