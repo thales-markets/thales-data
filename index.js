@@ -183,7 +183,10 @@ module.exports = {
 			maxMaturity = undefined,
 			currencyKey = undefined,
 			network = 10,
+			marketIds = [],
 		} = {}) {
+			const marketIdsWithQuotes = marketIds.map(marketId => `\\"${marketId}\\"`);
+
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
@@ -202,6 +205,7 @@ module.exports = {
 							rightPrice: rightPrice ? `\\"${rightPrice}\\"` : undefined,
 							leftMarket: leftMarket ? `\\"${leftMarket}\\"` : undefined,
 							rightMarket: rightMarket ? `\\"${rightMarket}\\"` : undefined,
+							id_in: marketIdsWithQuotes.length ? `[${marketIdsWithQuotes}]` : undefined,
 						},
 					},
 					properties: [
