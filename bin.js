@@ -458,6 +458,7 @@ program
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-c, --isCanceled', 'If the market is canceled or not')
 	.option('-r, --isResolved', 'If the market is resolved or not')
+	.option('-p, --isPaused', 'If the market is paused or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-d, --minMaturityDate <value>', 'The oldest maturity date to include, if any')
