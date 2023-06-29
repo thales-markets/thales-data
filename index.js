@@ -2372,6 +2372,7 @@ module.exports = {
 			liquidityPool = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			liquidityPoolType = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -2384,19 +2385,21 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							liquidityPoolType: liquidityPoolType ? `\\"${liquidityPoolType}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
 						},
 					},
-					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl'],
+					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl', 'liquidityPoolType'],
 				},
 			}).then(results =>
-				results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
+				results.map(({ id, liquidityPool, timestamp, round, pnl, liquidityPoolType }) => ({
 					id,
 					liquidityPool,
 					timestamp,
 					round: Number(round),
 					pnl: Number(pnl) / 1e18,
+					liquidityPoolType,
 				})),
 			);
 		},
@@ -2407,6 +2410,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			liquidityPoolType = undefined,
 			network = 1,
 		} = {}) {
 			return pageResults({
@@ -2419,16 +2423,27 @@ module.exports = {
 						orderDirection: 'desc',
 						where: {
 							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							liquidityPoolType: liquidityPoolType ? `\\"${liquidityPoolType}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
 						},
 					},
-					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
+					properties: [
+						'id',
+						'liquidityPool',
+						'hash',
+						'timestamp',
+						'type',
+						'account',
+						'amount',
+						'round',
+						'liquidityPoolType',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
+				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round, liquidityPoolType }) => ({
 					id,
 					liquidityPool,
 					hash,
@@ -2437,6 +2452,7 @@ module.exports = {
 					account,
 					amount: convertAmount(amount, network),
 					round: Number(round),
+					liquidityPoolType,
 				})),
 			);
 		},
