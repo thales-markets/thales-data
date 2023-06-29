@@ -460,6 +460,8 @@ program
 	.option('-r, --isResolved', 'If the market is resolved or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-d, --minMaturityDate <value>', 'The oldest maturity date to include, if any')
+	.option('-D, --maxMaturityDate <value>', 'The youngest maturity date to include, if any')
 	.option('-n, --network <value>', 'The network', 42)
 
 	.action(async ({ max, isOpen, isCanceled, isResolved, minTimestamp, maxTimestamp, network }) => {
