@@ -1527,6 +1527,8 @@ module.exports = {
 			isResolved = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			minMaturityDate = undefined,
+			maxMaturityDate = undefined,
 			market = undefined,
 			parentMarket = undefined,
 			network = 42,
@@ -1547,6 +1549,8 @@ module.exports = {
 							isResolved: isResolved !== undefined ? isResolved : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							maturityDate_gte: minMaturityDate || undefined,
+							maturityDate_lte: maxMaturityDate || undefined,
 						},
 					},
 					properties: [
