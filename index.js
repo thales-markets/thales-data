@@ -675,7 +675,7 @@ module.exports = {
 					canClaimOnBehalf,
 				})),
 			);
-		},		
+		},
 		vaultTransactions({
 			max = Infinity,
 			market = undefined,
@@ -899,7 +899,7 @@ module.exports = {
 				})),
 			);
 		},
-	},	
+	},
 	sportMarkets: {
 		markets({
 			max = Infinity,
