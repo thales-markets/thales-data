@@ -17,70 +17,48 @@ const convertAmount = (amount, networkId, tokenAddress) => {
 };
 
 const graphAPIEndpoints = {
-	thalesRoyale: {
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale', // optimism
-		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-royale-kovan', // optimism kovan
-	},
 	token: {
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
-		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-kovan', // optimism kovan
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/token-goerli', // optimism goerli
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-arbitrum', // arbitrum
 	},
+
 	thalesMarkets: {
-		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-options', // mainnet
-		3: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-ropsten', // ropsten
-		4: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-rinkeby', // rinkeby
-		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan', // kovan
-		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
-		80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 
 		lp: {
-			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-lp-optimism',
-			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum',
 			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
+			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-lp-optimism', // optimism
+			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		},
 
 		positions: {
 			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
-			69: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-kovan-optimism', // optimism kovan
 			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
-			80001: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-mumbai', // polygon mumbai
+			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
-			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		},
+
 		rewards: {
 			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/trade-rewards',
 		},
 	},
 
-	exoticMarkets: {
-		69: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism-kovan', // optimism kovan
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-markets-optimism', // optimism
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/exotic-goerli-optimism', // optimism goerli
-	},
 	sportMarkets: {
-		5: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-goerli', // goerli
-		42: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-kovan', // kovan
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', // optimism goerli
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', //  optimism goerli
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/overtime-arbitrum', // arbitrum
 	},
+
 	taleOfThales: {
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales-arbitrum', // arbitrum
-	},
-	marchMadness: {
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-optimism', //  optimism
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-op-goerli', //  optimism goerli
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-arbitrum', // arbitrum
 	},
 };
 
@@ -641,28 +619,6 @@ module.exports = {
 				})),
 			);
 		},
-
-		ongoingAirdropNewRoots({ max = Infinity, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.token[network],
-				max,
-				query: {
-					entity: 'ongoingAirdropNewRoots',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-					},
-					properties: ['id', 'timestamp', 'root', 'period'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, root, period }) => ({
-					hash: getHashFromId(id),
-					timestamp: Number(timestamp * 1000),
-					root,
-					period,
-				})),
-			);
-		},
 		stakers({ max = Infinity, network = 1 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.token[network],
@@ -719,271 +675,7 @@ module.exports = {
 					canClaimOnBehalf,
 				})),
 			);
-		},
-		thalesRoyaleGames({ max = Infinity, address = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyaleGames',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							address: address ? `\\"${address}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'address', 'season'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, address, season }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					address,
-					season: Number(season),
-				})),
-			);
-		},
-		thalesRoyaleSeasons({ max = Infinity, season = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyaleSeasons',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							season: season ? `\\"${season}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'season'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, season }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-				})),
-			);
-		},
-		thalesRoyaleRounds({ max = Infinity, id = undefined, season = undefined, round = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyaleRounds',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							id: id ? `\\"${id}\\"` : undefined,
-							round: round ? `\\"${round}\\"` : undefined,
-							season: season ? `\\"${season}\\"` : undefined,
-						},
-					},
-					properties: [
-						'id',
-						'timestamp',
-						'season',
-						'round',
-						'result',
-						'strikePrice',
-						'finalPrice',
-						'totalPlayersPerRoundPerSeason',
-						'eliminatedPerRoundPerSeason',
-					],
-				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						season,
-						round,
-						result,
-						strikePrice,
-						finalPrice,
-						totalPlayersPerRoundPerSeason,
-						eliminatedPerRoundPerSeason,
-					}) => ({
-						id,
-						timestamp: Number(timestamp * 1000),
-						season: Number(season),
-						round: Number(round),
-						result: result ? Number(result) : null,
-						strikePrice: strikePrice ? strikePrice / 1e18 : null,
-						finalPrice: finalPrice ? finalPrice / 1e18 : null,
-						totalPlayersPerRoundPerSeason: Number(totalPlayersPerRoundPerSeason),
-						eliminatedPerRoundPerSeason: Number(eliminatedPerRoundPerSeason),
-					}),
-				),
-			);
-		},
-		thalesRoyalePlayers({ max = Infinity, id = undefined, address = undefined, season = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyalePlayers',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							id: id ? `\\"${id}\\"` : undefined,
-							address: address ? `\\"${address}\\"` : undefined,
-							season: season ? `\\"${season}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'address', 'timestamp', 'season', 'isAlive', 'deathRound', 'number', 'defaultPosition'],
-				},
-			}).then(results =>
-				results.map(({ id, address, timestamp, season, isAlive, deathRound, number, defaultPosition }) => ({
-					id,
-					address,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-					isAlive,
-					deathRound: Number(deathRound),
-					number: Number(number),
-					defaultPosition: Number(defaultPosition),
-				})),
-			);
-		},
-		thalesRoyalePassportPlayers({
-			max = Infinity,
-			id = undefined,
-			owner = undefined,
-			season = undefined,
-			network = 1,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyalePassportPlayers',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							id: id ? `\\"${id}\\"` : undefined,
-							owner: owner ? `\\"${owner}\\"` : undefined,
-							season: season ? `\\"${season}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'owner', 'timestamp', 'season', 'isAlive', 'deathRound', 'number', 'defaultPositions'],
-				},
-			}).then(results =>
-				results.map(({ id, owner, timestamp, season, isAlive, deathRound, number, defaultPositions }) => ({
-					id,
-					owner,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-					isAlive,
-					deathRound: Number(deathRound),
-					number: Number(number),
-					defaultPositions,
-				})),
-			);
-		},
-		thalesRoyalePositions({
-			max = Infinity,
-			id = undefined,
-			season = undefined,
-			player = undefined,
-			round = undefined,
-			position = undefined,
-			network = 1,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyalePositions',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							id: id ? `\\"${id}\\"` : undefined,
-							season: season ? `\\"${season}\\"` : undefined,
-							player: player ? `\\"${player}\\"` : undefined,
-							round: round ? `\\"${round}\\"` : undefined,
-							position: position ? `\\"${position}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'season', 'player', 'round', 'position'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, player, round, position }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-					player,
-					round: Number(round),
-					position: Number(position),
-				})),
-			);
-		},
-		thalesRoyalePassportPositions({
-			max = Infinity,
-			id = undefined,
-			season = undefined,
-			tokenPlayer = undefined,
-			round = undefined,
-			position = undefined,
-			network = 1,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyalePassportPositions',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							id: id ? `\\"${id}\\"` : undefined,
-							season: season ? `\\"${season}\\"` : undefined,
-							tokenPlayer: tokenPlayer ? `\\"${tokenPlayer}\\"` : undefined,
-							round: round ? `\\"${round}\\"` : undefined,
-							position: position ? `\\"${position}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'season', 'tokenPlayer', 'round', 'position'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, tokenPlayer, round, position }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					season: Number(season),
-					tokenPlayer: Number(tokenPlayer),
-					round: Number(round),
-					position: Number(position),
-				})),
-			);
-		},
-		thalesRoyalePasses({ max = Infinity, address = undefined, network = 1 } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesRoyale[network],
-				max,
-				query: {
-					entity: 'thalesRoyalePasses',
-					selection: {
-						orderBy: 'id',
-						orderDirection: 'asc',
-						where: {
-							address: address ? `\\"${address}\\"` : undefined,
-						},
-					},
-					properties: ['id', 'address'],
-				},
-			}).then(results =>
-				results.map(({ id, address }) => ({
-					id,
-					address,
-				})),
-			);
-		},
+		},		
 		vaultTransactions({
 			max = Infinity,
 			market = undefined,
@@ -1207,318 +899,7 @@ module.exports = {
 				})),
 			);
 		},
-	},
-	exoticMarkets: {
-		markets({
-			max = Infinity,
-			creator = undefined,
-			isOpen = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 69,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.exoticMarkets[network],
-				max,
-				query: {
-					entity: 'markets',
-					selection: {
-						orderBy: 'endOfPositioning',
-						orderDirection: 'desc',
-						where: {
-							creator: creator ? `\\"${creator}\\"` : undefined,
-							isOpen: isOpen !== undefined ? isOpen : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: [
-						'id',
-						'timestamp',
-						'creator',
-						'creationTime',
-						'resolver',
-						'resolvedTime',
-						'address',
-						'question',
-						'dataSource',
-						'endOfPositioning',
-						'ticketPrice',
-						'isWithdrawalAllowed',
-						'positions',
-						'tags',
-						'isTicketType',
-						'isOpen',
-						'numberOfDisputes',
-						'numberOfOpenDisputes',
-						'marketClosedForDisputes',
-						'isResolved',
-						'isCancelled',
-						'winningPosition',
-						'backstopTimeout',
-						'isPaused',
-						'isDisputed',
-						'disputeClosedTime',
-						'poolSize',
-						'numberOfParticipants',
-						'noWinners',
-						'cancelledByCreator',
-					],
-				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						creator,
-						creationTime,
-						resolver,
-						resolvedTime,
-						address,
-						question,
-						dataSource,
-						endOfPositioning,
-						ticketPrice,
-						isWithdrawalAllowed,
-						positions,
-						tags,
-						isTicketType,
-						isOpen,
-						numberOfDisputes,
-						numberOfOpenDisputes,
-						marketClosedForDisputes,
-						isResolved,
-						isCancelled,
-						winningPosition,
-						backstopTimeout,
-						isPaused,
-						isDisputed,
-						disputeClosedTime,
-						poolSize,
-						numberOfParticipants,
-						noWinners,
-						cancelledByCreator,
-					}) => ({
-						id,
-						timestamp: Number(timestamp * 1000),
-						creator,
-						creationTime: Number(creationTime * 1000),
-						resolver,
-						resolvedTime: Number(resolvedTime * 1000),
-						address,
-						question,
-						dataSource,
-						endOfPositioning: Number(endOfPositioning * 1000),
-						ticketPrice: ticketPrice / 1e18,
-						isWithdrawalAllowed,
-						positions,
-						tags,
-						isTicketType,
-						isOpen,
-						numberOfDisputes: Number(numberOfDisputes),
-						numberOfOpenDisputes: Number(numberOfOpenDisputes),
-						marketClosedForDisputes,
-						isResolved,
-						isCancelled,
-						winningPosition: Number(winningPosition),
-						backstopTimeout: Number(backstopTimeout * 1000),
-						isPaused,
-						isDisputed,
-						disputeClosedTime: Number(disputeClosedTime * 1000),
-						poolSize: poolSize / 1e18,
-						numberOfParticipants: Number(numberOfParticipants),
-						noWinners,
-						cancelledByCreator,
-					}),
-				),
-			);
-		},
-		disputes({
-			max = Infinity,
-			disputer = undefined,
-			market = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 69,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.exoticMarkets[network],
-				max,
-				query: {
-					entity: 'disputes',
-					selection: {
-						orderBy: 'creationDate',
-						orderDirection: 'asc',
-						where: {
-							disputer: disputer ? `\\"${disputer}\\"` : undefined,
-							market: market ? `\\"${market}\\"` : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: [
-						'id',
-						'timestamp',
-						'creationDate',
-						'disputeNumber',
-						'market',
-						'disputer',
-						'reasonForDispute',
-						'isInPositioningPhase',
-						'disputeCode',
-					],
-				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						creationDate,
-						disputeNumber,
-						market,
-						disputer,
-						reasonForDispute,
-						isInPositioningPhase,
-						disputeCode,
-					}) => ({
-						id,
-						timestamp: Number(timestamp * 1000),
-						creationDate: Number(creationDate * 1000),
-						disputeNumber: Number(disputeNumber),
-						market,
-						disputer,
-						reasonForDispute,
-						isInPositioningPhase,
-						disputeCode: Number(disputeCode),
-					}),
-				),
-			);
-		},
-		disputeVotes({
-			max = Infinity,
-			market = undefined,
-			dispute = undefined,
-			voter = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 69,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.exoticMarkets[network],
-				max,
-				query: {
-					entity: 'disputeVotes',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							market: market ? `\\"${market}\\"` : undefined,
-							dispute: dispute ? `\\"${dispute}\\"` : undefined,
-							voter: voter ? `\\"${voter}\\"` : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'market', 'dispute', 'voter', 'vote', 'position'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, market, dispute, voter, vote, position }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					market,
-					dispute: Number(dispute),
-					voter,
-					vote: Number(vote),
-					position: Number(position),
-				})),
-			);
-		},
-		positions({
-			max = Infinity,
-			market = undefined,
-			account = undefined,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			network = 69,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.exoticMarkets[network],
-				max,
-				query: {
-					entity: 'positions',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							market: market ? `\\"${market}\\"` : undefined,
-							account: account ? `\\"${account}\\"` : undefined,
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'market', 'account', 'position', 'positions', 'isWithdrawn', 'isClaimed'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, market, account, position, positions, isWithdrawn, isClaimed }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					market,
-					account,
-					position: Number(position),
-					positions,
-					isWithdrawn,
-					isClaimed,
-				})),
-			);
-		},
-		marketTransactions({
-			max = Infinity,
-			market = undefined,
-			type = undefined,
-			account = undefined,
-			network = 1,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.exoticMarkets[network],
-				max,
-				query: {
-					entity: 'marketTransactions',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							market: market ? `\\"${market}\\"` : undefined,
-							type: type ? `\\"${type}\\"` : undefined,
-							account: account ? `\\"${account}\\"` : undefined,
-						},
-					},
-					properties: [
-						'hash',
-						'timestamp',
-						'blockNumber',
-						'type',
-						'market',
-						'account',
-						'amount',
-						'position',
-						'positions',
-					],
-				},
-			}).then(results =>
-				results.map(({ hash, timestamp, blockNumber, type, market, account, amount, position, positions }) => ({
-					hash,
-					timestamp: Number(timestamp * 1000),
-					blockNumber: Number(blockNumber),
-					type,
-					market,
-					account,
-					amount: amount / 1e18,
-					position: Number(position),
-					positions,
-				})),
-			);
-		},
-	},
+	},	
 	sportMarkets: {
 		markets({
 			max = Infinity,
@@ -2459,67 +1840,6 @@ module.exports = {
 					amount: convertAmount(amount, network),
 					round: Number(round),
 					liquidityPoolType,
-				})),
-			);
-		},
-		marchMadnessToken({
-			max = Infinity,
-			minter = undefined,
-			network = 420,
-			minCreatedTimestamp = undefined,
-			maxCreatedTimestamp = undefined,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.marchMadness[network],
-				max,
-				query: {
-					entity: 'tokens',
-					selection: {
-						orderBy: 'itemId',
-						orderDirection: 'asc',
-						where: {
-							minter: minter ? `\\"${minter}\\"` : undefined,
-							createdAt_gte: minCreatedTimestamp || undefined,
-							createdAt_lte: maxCreatedTimestamp || undefined,
-						},
-					},
-					properties: ['id', 'createdHash', 'lastUpdateHash', 'minter', 'itemId', 'brackets', 'createdAt', 'updatedAt'],
-				},
-			}).then(results =>
-				results.map(({ id, createdHash, lastUpdateHash, minter, itemId, brackets, createdAt, updatedAt }) => ({
-					id,
-					createdHash,
-					lastUpdateHash,
-					minter,
-					itemId,
-					brackets,
-					createdAt: Number(createdAt * 1000),
-					updatedAt: Number(updatedAt * 1000),
-				})),
-			);
-		},
-		marchMadnessGames({ max = Infinity, network = 420, minTimestamp = undefined, maxTimestamp = undefined } = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.marchMadness[network],
-				max,
-				query: {
-					entity: 'games',
-					selection: {
-						orderBy: 'id',
-						orderDirection: 'asc',
-						where: {
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-						},
-					},
-					properties: ['id', 'gameId', 'winnerTeamId', 'timestamp'],
-				},
-			}).then(results =>
-				results.map(({ id, gameId, winnerTeamId, timestamp }) => ({
-					id,
-					gameId,
-					winnerTeamId,
-					timestamp: Number(timestamp * 1000),
 				})),
 			);
 		},
