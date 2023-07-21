@@ -36,9 +36,9 @@ The below all return a Promise that resolves with the requested results.
 1. `binaryOptions.vaultPnls({ liquidityPool })` Get all round PNLs for the `liquidityPool`.
 2. `binaryOptions.liquidityPoolUserTransactions({ liquidityPool })` Get all user transactions for the `liquidityPool`.
 
-#### Markets
-
 ### Overtime
+
+#### Markets
 
 1. `sportMarkets.markets` Get all sports markets created.
 2. `sportMarkets.positionBalances({ account })` Get balances of positions for the `account`.
