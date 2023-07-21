@@ -10,14 +10,51 @@ This is a collection of utilities to query Thales data from Ethereum. This data 
 
 The below all return a Promise that resolves with the requested results.
 
-1. `binaryOptions.markets` Get all the binary options markets created.
-2. `binaryOptions.optionTransactions` Get all the transactions made to the binary options markets.
-3. `binaryOptions.trades({ makerToken, takerToken })` Get all trades between `makerToken` and `takerToken`.
-4. `binaryOptions.tokenTransactions({ account })` Get all the transactions made with THALES token from the `account`.
-5. `binaryOptions.thalesRoyaleSeasons` Get all addresses of Thales Royale seasons.
-6. `binaryOptions.thalesRoyalePlayers` Get all players signed up for Thales Royale games.
-7. `binaryOptions.thalesRoyalePositions` Get all positions selected by players of Thales Royale games.
-8. `binaryOptions.thalesRoyalePasses` Get all Royale Passes per player of Thales Royale games.
+### Thales
+
+#### Markets
+
+1. `binaryOptions.markets` Get all positional markets created.
+2. `binaryOptions.optionTransactions` Get all transactions made to the positional markets.
+3. `binaryOptions.trades` Get all trades made to the positional markets.
+4. `binaryOptions.positionBalances({ account })` Get balances of positions for the `account`.
+5. `binaryOptions.rangedPositionBalances({ account })` Get balances of ranged positions for the `account`.
+
+#### Token
+
+1. `binaryOptions.tokenTransactions({ account })` Get all the transactions made with THALES token from the `account`.
+2. `binaryOptions.stakers` Get all THALES stakers.
+
+#### Vaults
+
+1. `binaryOptions.vaultTransactions({ vault })` Get all the transactions made by the `vault`.
+2. `binaryOptions.vaultPnls({ vault })` Get all round PNLs for the `vault`.
+3. `binaryOptions.vaultUserTransactions({ vault })` Get all user transactions for the `vault`.
+
+#### Liquidity Pool
+
+1. `binaryOptions.vaultPnls({ liquidityPool })` Get all round PNLs for the `liquidityPool`.
+2. `binaryOptions.liquidityPoolUserTransactions({ liquidityPool })` Get all user transactions for the `liquidityPool`.
+
+#### Markets
+
+### Overtime
+
+1. `sportMarkets.markets` Get all sports markets created.
+2. `sportMarkets.positionBalances({ account })` Get balances of positions for the `account`.
+3. `sportMarkets.marketTransactions` Get all transactions made to the sports markets.
+4. `sportMarkets.overtimeVouchers({ account })` Get all Overtime vouchers for the `account`.
+
+#### Vaults
+
+1. `sportMarkets.vaultTransactions({ vault })` Get all the transactions made by the `vault`.
+2. `sportMarkets.vaultPnls({ vault })` Get all round PNLs for the `vault`.
+3. `sportMarkets.vaultUserTransactions({ vault })` Get all user transactions for the `vault`.
+
+#### Liquidity Pool
+
+1. `sportMarkets.vaultPnls({ liquidityPool })` Get all round PNLs for the `liquidityPool`.
+2. `sportMarkets.liquidityPoolUserTransactions({ liquidityPool })` Get all user transactions for the `liquidityPool`.
 
 ## Use this as a node or webpack dependency
 
