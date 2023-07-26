@@ -1123,7 +1123,7 @@ module.exports = {
 						'firstTxHash',
 						'account',
 						'amount',
-						'position {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }}',
+						'position {id, side, claimable, market { id, timestamp, address, gameId, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, isPaused, betType, parentMarket, spread, total, doubleChanceMarketType }}',
 						'sUSDPaid',
 					],
 				},
@@ -1137,11 +1137,20 @@ module.exports = {
 						...position,
 						market: {
 							...position.market,
+							timestamp: Number(position.market.timestamp * 1000),
 							maturityDate: Number(position.market.maturityDate * 1000),
+							finalResult: Number(position.market.finalResult),
 							homeOdds: position.market.homeOdds / 1e18,
 							awayOdds: position.market.awayOdds / 1e18,
 							drawOdds: position.market.drawOdds / 1e18,
-							timestamp: Number(position.market.timestamp * 1000),
+							homeScore: Number(position.market.homeScore),
+							awayScore: Number(position.market.awayScore),
+							betType:
+								position.market.betType !== undefined && position.market.betType !== null
+									? Number(position.market.betType)
+									: 0,
+							spread: Number(position.market.spread),
+							total: Number(position.market.total),
 						},
 					},
 					sUSDPaid: convertAmount(Number(sUSDPaid), network),
