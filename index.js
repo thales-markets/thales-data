@@ -1086,7 +1086,7 @@ module.exports = {
 						'amount',
 						'paid',
 						'position',
-						'wholeMarket { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }',
+						'wholeMarket { id, timestamp, address, gameId, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, isPaused, betType, parentMarket, spread, total, doubleChanceMarketType }',
 					],
 				},
 			}).then(results =>
@@ -1100,7 +1100,20 @@ module.exports = {
 					amount: Number(amount) / 1e18,
 					paid: convertAmount(Number(paid), network),
 					position: Number(position),
-					wholeMarket,
+					wholeMarket: {
+						...wholeMarket,
+						maturityDate: Number(wholeMarket.maturityDate * 1000),
+						finalResult: Number(wholeMarket.finalResult),
+						homeOdds: wholeMarket.homeOdds / 1e18,
+						awayOdds: wholeMarket.awayOdds / 1e18,
+						drawOdds: wholeMarket.drawOdds / 1e18,
+						homeScore: Number(wholeMarket.homeScore),
+						awayScore: Number(wholeMarket.awayScore),
+						betType:
+							wholeMarket.betType !== undefined && wholeMarket.betType !== null ? Number(wholeMarket.betType) : 0,
+						spread: Number(wholeMarket.spread),
+						total: Number(wholeMarket.total),
+					},
 				})),
 			);
 		},
