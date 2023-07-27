@@ -1260,7 +1260,7 @@ module.exports = {
 					properties: [
 						'id',
 						'txHash',
-						'sportMarkets {id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }',
+						'sportMarkets { id, timestamp, address, gameId, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, isPaused, betType, parentMarket, spread, total, doubleChanceMarketType }',
 						'sportMarketsFromContract',
 						'positions {id, side, claimable, market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType }}',
 						'positionsFromContract',
@@ -1307,6 +1307,7 @@ module.exports = {
 								id: market.id,
 								timestamp: Number(market.timestamp * 1000),
 								address: market.address,
+								gameId: market.gameId,
 								maturityDate: Number(market.maturityDate * 1000),
 								tags: market.tags,
 								isOpen: market.isOpen,
