@@ -29,7 +29,7 @@ program
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
@@ -44,7 +44,7 @@ program
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-M, --market <value>', 'The market address')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, type, market, account, network }) => {
 		binaryOptions
@@ -60,7 +60,7 @@ program
 	.option('-v, --takerToken <value>', 'The address of the taker token')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, makerToken, takerToken, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
@@ -75,7 +75,7 @@ program
 	.option('-w, --account <value>', 'The address of the wallet')
 	.option('-v, --amount <value>', 'Amount of position in wallet')
 	.option('-t, --position <value>', 'Position in question')
-	.option('-n, --network <value>', 'The network', 137)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, account, network }) => {
 		binaryOptions
@@ -90,7 +90,7 @@ program
 	.option('-w, --account <value>', 'The address of the wallet')
 	.option('-v, --amount <value>', 'Amount of position in wallet')
 	.option('-t, --position <value>', 'Position in question')
-	.option('-n, --network <value>', 'The network', 137)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, account, network }) => {
 		binaryOptions
@@ -104,7 +104,7 @@ program
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, type, account, network }) => {
 		binaryOptions
@@ -118,7 +118,7 @@ program
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, type, account, network }) => {
 		binaryOptions
@@ -144,7 +144,7 @@ program
 program
 	.command('binaryOptions.stakers')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, network }) => {
 		binaryOptions
@@ -157,7 +157,7 @@ program
 	.command('binaryOptions.canClaimOnBehalfItems')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-s, --sender <value>', 'The sender address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, sender, network }) => {
 		binaryOptions
@@ -173,7 +173,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, market, vault, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
@@ -188,7 +188,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, vault, minTimestamp, maxTimestamp, network }) => {
 		binaryOptions
@@ -203,7 +203,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, vault, type, account, network }) => {
 		binaryOptions
@@ -218,7 +218,7 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, liquidityPool, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
@@ -233,7 +233,7 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, liquidityPool, type, account, network }) => {
 		sportMarkets
@@ -253,7 +253,7 @@ program
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
 	.option('-d, --minMaturityDate <value>', 'The oldest maturity date to include, if any')
 	.option('-D, --maxMaturityDate <value>', 'The youngest maturity date to include, if any')
-	.option('-n, --network <value>', 'The network', 42)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, isOpen, isCanceled, isResolved, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
@@ -266,11 +266,13 @@ program
 	.command('sportMarkets.positionBalances')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --account <value>', 'The address of the wallet')
-	.option('-n, --network <value>', 'The network', 42)
+	.option('-c, --isClaimable <value>', 'If the position is claimable or not')
+	.option('-C, --isClaimed <value>', 'If the position is claimed or not')
+	.option('-n, --network <value>', 'The network', 10)
 
-	.action(async ({ max, account, network }) => {
+	.action(async ({ max, account, isClaimable, isClaimed, network }) => {
 		sportMarkets
-			.positionBalances({ max, account, network })
+			.positionBalances({ max, account, isClaimable, isClaimed, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -283,7 +285,7 @@ program
 	.option('-a, --account <value>', 'The account address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 	.option('-p, --parentMarket <value>', 'The parent market address')
 
 	.action(async ({ max, market, type, account, network, parentMarket }) => {
@@ -299,7 +301,7 @@ program
 	.option('-a, --account <value>', 'The address of the wallet')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 42)
+	.option('-n, --network <value>', 'The network', 10)
 	.option('-p, --parentMarket <value>', 'The parent market address')
 	.action(async ({ max, account, minTimestamp, maxTimestamp, network, parentMarket }) => {
 		sportMarkets
@@ -312,7 +314,7 @@ program
 	.command('sportMarkets.overtimeVouchers')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-a, --address <value>', 'The owner address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, address, network }) => {
 		sportMarkets
@@ -328,7 +330,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, market, vault, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
@@ -343,7 +345,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, vault, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
@@ -358,7 +360,7 @@ program
 	.option('-v, --vault <value>', 'The vault address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, vault, type, account, network }) => {
 		sportMarkets
@@ -373,7 +375,7 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, liquidityPool, minTimestamp, maxTimestamp, network }) => {
 		sportMarkets
@@ -388,7 +390,7 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
-	.option('-n, --network <value>', 'The network', 1)
+	.option('-n, --network <value>', 'The network', 10)
 
 	.action(async ({ max, liquidityPool, type, account, network }) => {
 		sportMarkets

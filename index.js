@@ -75,7 +75,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			minMaturity = undefined,
 			maxMaturity = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -246,7 +246,7 @@ module.exports = {
 			market = undefined,
 			account = undefined,
 			onlyForRangedMarkets = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -304,7 +304,7 @@ module.exports = {
 			maker = undefined,
 			taker = undefined,
 			market = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -412,7 +412,7 @@ module.exports = {
 				})),
 			);
 		},
-		positionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
+		positionBalances({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.positions[network],
 				max,
@@ -441,7 +441,7 @@ module.exports = {
 				})),
 			);
 		},
-		rangedPositionBalances({ max = Infinity, account = undefined, network = 137 } = {}) {
+		rangedPositionBalances({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.positions[network],
 				max,
@@ -474,7 +474,7 @@ module.exports = {
 			max = Infinity,
 			type = undefined,
 			account = undefined,
-			network = 1,
+			network = 10,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 		} = {}) {
@@ -505,7 +505,7 @@ module.exports = {
 				})),
 			);
 		},
-		referrers({ max = Infinity, address = undefined, network = 137 } = {}) {
+		referrers({ max = Infinity, address = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
@@ -528,7 +528,7 @@ module.exports = {
 				})),
 			);
 		},
-		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 137 } = {}) {
+		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
@@ -553,7 +553,7 @@ module.exports = {
 				})),
 			);
 		},
-		referredTraders({ max = Infinity, referrer = undefined, network = 137 } = {}) {
+		referredTraders({ max = Infinity, referrer = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
 				max,
@@ -583,7 +583,7 @@ module.exports = {
 			type = undefined,
 			account = undefined,
 			type_in = undefined,
-			network = 1,
+			network = 10,
 			onlyWithProtocolReward = false,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
@@ -620,7 +620,7 @@ module.exports = {
 				})),
 			);
 		},
-		stakers({ max = Infinity, network = 1 } = {}) {
+		stakers({ max = Infinity, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.token[network],
 				max,
@@ -646,7 +646,7 @@ module.exports = {
 		canClaimOnBehalfItems({
 			max = Infinity,
 			sender = undefined,
-			network = 1,
+			network = 10,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 		} = {}) {
@@ -685,7 +685,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -736,7 +736,7 @@ module.exports = {
 			vault = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -771,7 +771,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets[network],
@@ -809,7 +809,7 @@ module.exports = {
 			liquidityPool = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.lp[network],
@@ -844,7 +844,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.thalesMarkets.lp[network],
@@ -914,7 +914,7 @@ module.exports = {
 			maxMaturityDate = undefined,
 			market = undefined,
 			parentMarket = undefined,
-			network = 42,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1052,7 +1052,7 @@ module.exports = {
 			endPeriod = undefined,
 			parentMarket = undefined,
 			leagueTag = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1117,7 +1117,13 @@ module.exports = {
 				})),
 			);
 		},
-		positionBalances({ max = Infinity, account = undefined, network = 42, onlyClaimable = undefined } = {}) {
+		positionBalances({
+			max = Infinity,
+			account = undefined,
+			isClaimable = undefined,
+			isClaimed = undefined,
+			network = 10,
+		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
@@ -1126,8 +1132,9 @@ module.exports = {
 					selection: {
 						where: {
 							account: account ? `\\"${account}\\"` : undefined,
+							claimed: isClaimed !== undefined ? isClaimed : undefined,
 							position_: {
-								claimable: onlyClaimable == true ? true : undefined,
+								claimable: isClaimable !== undefined ? isClaimable : undefined,
 							},
 						},
 					},
@@ -1138,10 +1145,11 @@ module.exports = {
 						'amount',
 						'position {id, side, claimable, market { id, timestamp, address, gameId, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, isPaused, betType, parentMarket, spread, total, doubleChanceMarketType }}',
 						'sUSDPaid',
+						'claimed',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, firstTxHash, account, amount, position, sUSDPaid }) => ({
+				results.map(({ id, firstTxHash, account, amount, position, sUSDPaid, claimed }) => ({
 					id,
 					firstTxHash,
 					account,
@@ -1167,6 +1175,7 @@ module.exports = {
 						},
 					},
 					sUSDPaid: convertAmount(Number(sUSDPaid), network),
+					claimed,
 				})),
 			);
 		},
@@ -1179,7 +1188,7 @@ module.exports = {
 			startPeriod = undefined,
 			endPeriod = undefined,
 			parentMarket = undefined,
-			network = 42,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1219,7 +1228,7 @@ module.exports = {
 				})),
 			);
 		},
-		overtimeVouchers({ max = Infinity, address = undefined, network = 1 } = {}) {
+		overtimeVouchers({ max = Infinity, address = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
@@ -1403,7 +1412,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1457,7 +1466,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1560,7 +1569,7 @@ module.exports = {
 			vault = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1595,7 +1604,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1628,7 +1637,7 @@ module.exports = {
 				})),
 			);
 		},
-		zebros({ max = Infinity, account = undefined, network = 1 } = {}) {
+		zebros({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
 				max,
@@ -1784,7 +1793,7 @@ module.exports = {
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			liquidityPoolType = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1822,7 +1831,7 @@ module.exports = {
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			liquidityPoolType = undefined,
-			network = 1,
+			network = 10,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
