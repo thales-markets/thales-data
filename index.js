@@ -30,11 +30,13 @@ const graphAPIEndpoints = {
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
+		8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 
 		lp: {
 			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
 			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-lp-optimism', // optimism
 			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
+			8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 		},
 
 		positions: {
@@ -43,6 +45,7 @@ const graphAPIEndpoints = {
 			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
 			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
 			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
+			8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 		},
 
 		rewards: {
