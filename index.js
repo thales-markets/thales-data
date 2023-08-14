@@ -1135,8 +1135,8 @@ module.exports = {
 							wholeMarket.betType !== undefined && wholeMarket.betType !== null ? Number(wholeMarket.betType) : 0,
 						spread: Number(wholeMarket.spread),
 						total: Number(wholeMarket.total),
-						playerId,
-						playerName,
+						playerId: wholeMarket.playerId,
+						playerName: wholeMarket.playerName,
 						playerPropsLine:
 							wholeMarket.playerPropsLine !== undefined && wholeMarket.playerPropsLine !== null
 								? Number(wholeMarket.playerPropsLine)
@@ -1145,7 +1145,7 @@ module.exports = {
 							wholeMarket.playerPropsType !== undefined && wholeMarket.playerPropsType !== null
 								? Number(wholeMarket.playerPropsType)
 								: 0,
-						playerPropsOutcome,
+						playerPropsOutcome: wholeMarket.playerPropsOutcome,
 						playerPropsScore:
 							wholeMarket.playerPropsScore !== undefined && wholeMarket.playerPropsScore !== null
 								? Number(wholeMarket.playerPropsScore)
@@ -1209,8 +1209,8 @@ module.exports = {
 									: 0,
 							spread: Number(position.market.spread),
 							total: Number(position.market.total),
-							playerId,
-							playerName,
+							playerId: position.market.playerId,
+							playerName: position.market.playerName,
 							playerPropsLine:
 								position.market.playerPropsLine !== undefined && position.market.playerPropsLine !== null
 									? Number(position.market.playerPropsLine)
@@ -1219,7 +1219,7 @@ module.exports = {
 								position.market.playerPropsType !== undefined && position.market.playerPropsType !== null
 									? Number(position.market.playerPropsType)
 									: 0,
-							playerPropsOutcome,
+							playerPropsOutcome: position.market.playerPropsOutcome,
 							playerPropsScore:
 								position.market.playerPropsScore !== undefined && position.market.playerPropsScore !== null
 									? Number(position.market.playerPropsScore)
@@ -1411,8 +1411,8 @@ module.exports = {
 								spread: Number(market.spread),
 								total: Number(market.total),
 								doubleChanceMarketType: market.doubleChanceMarketType,
-								playerId,
-								playerName,
+								playerId: market.playerId,
+								playerName: market.playerName,
 								playerPropsLine:
 									market.playerPropsLine !== undefined && market.playerPropsLine !== null
 										? Number(market.playerPropsLine)
@@ -1421,7 +1421,7 @@ module.exports = {
 									market.playerPropsType !== undefined && market.playerPropsType !== null
 										? Number(market.playerPropsType)
 										: 0,
-								playerPropsOutcome,
+								playerPropsOutcome: market.playerPropsOutcome,
 								playerPropsScore:
 									market.playerPropsScore !== undefined && market.playerPropsScore !== null
 										? Number(market.playerPropsScore)
@@ -1608,8 +1608,8 @@ module.exports = {
 									spread: Number(market.spread),
 									total: Number(market.total),
 									doubleChanceMarketType: market.doubleChanceMarketType,
-									playerId,
-									playerName,
+									playerId: market.playerId,
+									playerName: market.playerName,
 									playerPropsLine:
 										market.playerPropsLine !== undefined && market.playerPropsLine !== null
 											? Number(market.playerPropsLine)
@@ -1618,7 +1618,7 @@ module.exports = {
 										market.playerPropsType !== undefined && market.playerPropsType !== null
 											? Number(market.playerPropsType)
 											: 0,
-									playerPropsOutcome,
+									playerPropsOutcome: market.playerPropsOutcome,
 									playerPropsScore:
 										market.playerPropsScore !== undefined && market.playerPropsScore !== null
 											? Number(market.playerPropsScore)
