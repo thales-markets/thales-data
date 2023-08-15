@@ -14,7 +14,7 @@ const convertAmount = (amount, networkId, tokenAddress) => {
 		if (!tokenAddress) return amount / 1e6;
 	}
 	if (networkId == 8453) {
-		if (tokenAddress && tokenAddress == '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA') return amount / 1e6;
+		if (tokenAddress && tokenAddress == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca') return amount / 1e6;
 		if (!tokenAddress) return amount / 1e6;
 	}
 	return amount / 1e18;
