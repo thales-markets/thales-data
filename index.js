@@ -1058,7 +1058,8 @@ module.exports = {
 						doubleChanceMarketType,
 						playerId,
 						playerName,
-						playerPropsLine: playerPropsLine !== undefined && playerPropsLine !== null ? Number(playerPropsLine) : 0,
+						playerPropsLine:
+							playerPropsLine !== undefined && playerPropsLine !== null ? Number(playerPropsLine) / 100 : 0,
 						playerPropsType: playerPropsType !== undefined && playerPropsType !== null ? Number(playerPropsType) : 0,
 						playerPropsOutcome,
 						playerPropsScore:
@@ -1143,7 +1144,7 @@ module.exports = {
 						playerName: wholeMarket.playerName,
 						playerPropsLine:
 							wholeMarket.playerPropsLine !== undefined && wholeMarket.playerPropsLine !== null
-								? Number(wholeMarket.playerPropsLine)
+								? Number(wholeMarket.playerPropsLine) / 100
 								: 0,
 						playerPropsType:
 							wholeMarket.playerPropsType !== undefined && wholeMarket.playerPropsType !== null
@@ -1217,7 +1218,7 @@ module.exports = {
 							playerName: position.market.playerName,
 							playerPropsLine:
 								position.market.playerPropsLine !== undefined && position.market.playerPropsLine !== null
-									? Number(position.market.playerPropsLine)
+									? Number(position.market.playerPropsLine) / 100
 									: 0,
 							playerPropsType:
 								position.market.playerPropsType !== undefined && position.market.playerPropsType !== null
@@ -1419,7 +1420,7 @@ module.exports = {
 								playerName: market.playerName,
 								playerPropsLine:
 									market.playerPropsLine !== undefined && market.playerPropsLine !== null
-										? Number(market.playerPropsLine)
+										? Number(market.playerPropsLine) / 100
 										: 0,
 								playerPropsType:
 									market.playerPropsType !== undefined && market.playerPropsType !== null
@@ -1616,7 +1617,7 @@ module.exports = {
 									playerName: market.playerName,
 									playerPropsLine:
 										market.playerPropsLine !== undefined && market.playerPropsLine !== null
-											? Number(market.playerPropsLine)
+											? Number(market.playerPropsLine) / 100
 											: 0,
 									playerPropsType:
 										market.playerPropsType !== undefined && market.playerPropsType !== null
