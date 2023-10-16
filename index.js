@@ -2,7 +2,7 @@
 
 const pageResults = require('graph-results-pager');
 
-const { hexToAscii, getHashFromId } = require('./utils');
+const { hexToAscii, getHashFromId, sportMarketTypeFormatting } = require('./utils');
 
 const convertAmount = (amount, networkId, tokenAddress) => {
 	if (networkId == 137) {
@@ -1131,32 +1131,7 @@ module.exports = {
 					position: Number(position),
 					wholeMarket: {
 						...wholeMarket,
-						maturityDate: Number(wholeMarket.maturityDate * 1000),
-						finalResult: Number(wholeMarket.finalResult),
-						homeOdds: wholeMarket.homeOdds / 1e18,
-						awayOdds: wholeMarket.awayOdds / 1e18,
-						drawOdds: wholeMarket.drawOdds / 1e18,
-						homeScore: Number(wholeMarket.homeScore),
-						awayScore: Number(wholeMarket.awayScore),
-						betType:
-							wholeMarket.betType !== undefined && wholeMarket.betType !== null ? Number(wholeMarket.betType) : 0,
-						spread: Number(wholeMarket.spread),
-						total: Number(wholeMarket.total),
-						playerId: wholeMarket.playerId,
-						playerName: wholeMarket.playerName,
-						playerPropsLine:
-							wholeMarket.playerPropsLine !== undefined && wholeMarket.playerPropsLine !== null
-								? Number(wholeMarket.playerPropsLine) / 100
-								: 0,
-						playerPropsType:
-							wholeMarket.playerPropsType !== undefined && wholeMarket.playerPropsType !== null
-								? Number(wholeMarket.playerPropsType)
-								: 0,
-						playerPropsOutcome: wholeMarket.playerPropsOutcome,
-						playerPropsScore:
-							wholeMarket.playerPropsScore !== undefined && wholeMarket.playerPropsScore !== null
-								? Number(wholeMarket.playerPropsScore)
-								: 0,
+						...sportMarketTypeFormatting(wholeMarket),
 					},
 				})),
 			);
@@ -1202,35 +1177,7 @@ module.exports = {
 						...position,
 						market: {
 							...position.market,
-							timestamp: Number(position.market.timestamp * 1000),
-							maturityDate: Number(position.market.maturityDate * 1000),
-							finalResult: Number(position.market.finalResult),
-							homeOdds: position.market.homeOdds / 1e18,
-							awayOdds: position.market.awayOdds / 1e18,
-							drawOdds: position.market.drawOdds / 1e18,
-							homeScore: Number(position.market.homeScore),
-							awayScore: Number(position.market.awayScore),
-							betType:
-								position.market.betType !== undefined && position.market.betType !== null
-									? Number(position.market.betType)
-									: 0,
-							spread: Number(position.market.spread),
-							total: Number(position.market.total),
-							playerId: position.market.playerId,
-							playerName: position.market.playerName,
-							playerPropsLine:
-								position.market.playerPropsLine !== undefined && position.market.playerPropsLine !== null
-									? Number(position.market.playerPropsLine) / 100
-									: 0,
-							playerPropsType:
-								position.market.playerPropsType !== undefined && position.market.playerPropsType !== null
-									? Number(position.market.playerPropsType)
-									: 0,
-							playerPropsOutcome: position.market.playerPropsOutcome,
-							playerPropsScore:
-								position.market.playerPropsScore !== undefined && position.market.playerPropsScore !== null
-									? Number(position.market.playerPropsScore)
-									: 0,
+							...sportMarketTypeFormatting(position.market),
 						},
 					},
 					sUSDPaid: convertAmount(Number(sUSDPaid), network),
@@ -1285,31 +1232,7 @@ module.exports = {
 					caller,
 					market: {
 						...market,
-						maturityDate: Number(market.maturityDate * 1000),
-						finalResult: Number(market.finalResult),
-						homeOdds: market.homeOdds / 1e18,
-						awayOdds: market.awayOdds / 1e18,
-						drawOdds: market.drawOdds / 1e18,
-						homeScore: Number(market.homeScore),
-						awayScore: Number(market.awayScore),
-						betType: market.betType !== undefined && market.betType !== null ? Number(market.betType) : 0,
-						spread: Number(market.spread),
-						total: Number(market.total),
-						playerId: market.playerId,
-						playerName: market.playerName,
-						playerPropsLine:
-							market.playerPropsLine !== undefined && market.playerPropsLine !== null
-								? Number(market.playerPropsLine) / 100
-								: 0,
-						playerPropsType:
-							market.playerPropsType !== undefined && market.playerPropsType !== null
-								? Number(market.playerPropsType)
-								: 0,
-						playerPropsOutcome: market.playerPropsOutcome,
-						playerPropsScore:
-							market.playerPropsScore !== undefined && market.playerPropsScore !== null
-								? Number(market.playerPropsScore)
-								: 0,
+						...sportMarketTypeFormatting(market),
 					},
 				})),
 			);
@@ -1411,59 +1334,16 @@ module.exports = {
 						id,
 						txHash,
 						sportMarkets: sportMarkets.map(market => {
-							return {
-								id: market.id,
-								timestamp: Number(market.timestamp * 1000),
-								address: market.address,
-								gameId: market.gameId,
-								maturityDate: Number(market.maturityDate * 1000),
-								tags: market.tags,
-								isOpen: market.isOpen,
-								isResolved: market.isResolved,
-								isCanceled: market.isCanceled,
-								finalResult: Number(market.finalResult),
-								poolSize: market.poolSize / 1e18,
-								homeTeam: market.homeTeam,
-								awayTeam: market.awayTeam,
-								numberOfParticipants: Number(market.numberOfParticipants),
-								homeOdds: market.homeOdds / 1e18,
-								awayOdds: market.awayOdds / 1e18,
-								drawOdds: market.drawOdds / 1e18,
-								homeScore: Number(market.homeScore),
-								awayScore: Number(market.awayScore),
-								isApex: market.isApex,
-								resultDetails: market.resultDetails,
-								isPaused: market.isPaused,
-								leagueRaceName: market.leagueRaceName,
-								qualifyingStartTime:
-									market.qualifyingStartTime !== undefined && market.qualifyingStartTime !== null
-										? Number(market.qualifyingStartTime * 1000)
-										: null,
-								arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
-								betType: market.betType !== undefined && market.betType !== null ? Number(market.betType) : 0,
-								parentMarket: market.parentMarket,
-								spread: Number(market.spread),
-								total: Number(market.total),
-								doubleChanceMarketType: market.doubleChanceMarketType,
-								playerId: market.playerId,
-								playerName: market.playerName,
-								playerPropsLine:
-									market.playerPropsLine !== undefined && market.playerPropsLine !== null
-										? Number(market.playerPropsLine) / 100
-										: 0,
-								playerPropsType:
-									market.playerPropsType !== undefined && market.playerPropsType !== null
-										? Number(market.playerPropsType)
-										: 0,
-								playerPropsOutcome: market.playerPropsOutcome,
-								playerPropsScore:
-									market.playerPropsScore !== undefined && market.playerPropsScore !== null
-										? Number(market.playerPropsScore)
-										: 0,
-							};
+							return sportMarketTypeFormatting(market);
 						}),
 						sportMarketsFromContract,
-						positions,
+						positions: positions.map(position => {
+							const market = position.market;
+							return {
+								...position,
+								market: sportMarketTypeFormatting(market),
+							};
+						}),
 						positionsFromContract,
 						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
 						account,
