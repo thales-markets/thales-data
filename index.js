@@ -1283,7 +1283,34 @@ module.exports = {
 					amount: Number(amount) / 1e18,
 					timestamp: Number(timestamp * 1000),
 					caller,
-					market,
+					market: {
+						...market,
+						maturityDate: Number(market.maturityDate * 1000),
+						finalResult: Number(market.finalResult),
+						homeOdds: market.homeOdds / 1e18,
+						awayOdds: market.awayOdds / 1e18,
+						drawOdds: market.drawOdds / 1e18,
+						homeScore: Number(market.homeScore),
+						awayScore: Number(market.awayScore),
+						betType: market.betType !== undefined && market.betType !== null ? Number(market.betType) : 0,
+						spread: Number(market.spread),
+						total: Number(market.total),
+						playerId: market.playerId,
+						playerName: market.playerName,
+						playerPropsLine:
+							market.playerPropsLine !== undefined && market.playerPropsLine !== null
+								? Number(market.playerPropsLine) / 100
+								: 0,
+						playerPropsType:
+							market.playerPropsType !== undefined && market.playerPropsType !== null
+								? Number(market.playerPropsType)
+								: 0,
+						playerPropsOutcome: market.playerPropsOutcome,
+						playerPropsScore:
+							market.playerPropsScore !== undefined && market.playerPropsScore !== null
+								? Number(market.playerPropsScore)
+								: 0,
+					},
 				})),
 			);
 		},
