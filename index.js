@@ -1269,6 +1269,7 @@ module.exports = {
 			startPeriod = undefined,
 			endPeriod = undefined,
 			won = undefined,
+			sportMarketsAddresses = undefined,
 		} = {}) {
 			return pageResults({
 				api: graphAPIEndpoints.sportMarkets[network],
@@ -1286,6 +1287,11 @@ module.exports = {
 							won: won,
 							lastGameStarts_gte: startPeriod || undefined,
 							lastGameStarts_lt: endPeriod || undefined,
+							sportMarkets_: sportMarketsAddresses
+								? {
+										address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
+								  }
+								: undefined,
 						},
 					},
 					properties: [
