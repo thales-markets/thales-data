@@ -614,19 +614,32 @@ module.exports = {
 							...(onlyWithProtocolReward && { protocolRewards_not: 0 }),
 						},
 					},
-					properties: ['id', 'timestamp', 'protocolRewards', 'type', 'account', 'amount', 'blockNumber', 'destAccount'],
+					properties: [
+						'id',
+						'timestamp',
+						'protocolRewards',
+						'type',
+						'account',
+						'amount',
+						'blockNumber',
+						'destAccount',
+						'feeRewards',
+					],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount, blockNumber, protocolRewards, destAccount }) => ({
-					hash: getHashFromId(id),
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					destAccount,
-					amount: amount / 1e18,
-					protocolRewards: protocolRewards / 1e18,
-					blockNumber: Number(blockNumber),
-				})),
+				results.map(
+					({ id, timestamp, type, account, amount, blockNumber, protocolRewards, destAccount, feeRewards }) => ({
+						hash: getHashFromId(id),
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						destAccount,
+						amount: amount / 1e18,
+						feeRewards: convertAmount(Number(feeRewards), network),
+						protocolRewards: protocolRewards / 1e18,
+						blockNumber: Number(blockNumber),
+					}),
+				),
 			);
 		},
 		stakers({ max = Infinity, network = 10 } = {}) {
