@@ -399,4 +399,30 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('binaryOptions.stakings')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-p, --period <value>', 'The period')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, period }) => {
+		binaryOptions
+			.stakings({ max, period })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('binaryOptions.stakingClaims')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-p, --period <value>', 'The period')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, period }) => {
+		binaryOptions
+			.stakingClaims({ max, period })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

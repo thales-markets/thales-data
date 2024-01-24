@@ -922,6 +922,76 @@ module.exports = {
 				})),
 			);
 		},
+		stakings({ max = Infinity, period = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.token[network],
+				max,
+				query: {
+					entity: 'stakings',
+					selection: {
+						orderBy: 'period',
+						orderDirection: 'desc',
+						where: {
+							period: period ? `\\"${period}\\"` : undefined,
+						},
+					},
+					properties: ['id', 'period'],
+				},
+			}).then(results =>
+				results.map(({ id, period }) => ({
+					id,
+					period: Number(period),
+				})),
+			);
+		},
+		stakingClaims({ max = Infinity, period = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.token[network],
+				max,
+				query: {
+					entity: 'stakingClaims',
+					selection: {
+						orderBy: 'period',
+						orderDirection: 'desc',
+						where: {
+							period: period ? `\\"${period}\\"` : undefined,
+						},
+					},
+					properties: [
+						'id',
+						'period',
+						'baseThalesClaimed',
+						'extraThalesClaimed',
+						'feesClaimed',
+						'baseRewards',
+						'extraRewards',
+						'feesRewards ',
+					],
+				},
+			}).then(results =>
+				results.map(
+					({
+						id,
+						period,
+						baseThalesClaimed,
+						extraThalesClaimed,
+						feesClaimed,
+						baseRewards,
+						extraRewards,
+						feesRewards,
+					}) => ({
+						id,
+						period: Number(period),
+						baseThalesClaimed: baseThalesClaimed / 1e18,
+						extraThalesClaimed: extraThalesClaimed / 1e18,
+						feesClaimed: convertAmount(Number(feesClaimed), network),
+						baseRewards: baseRewards / 1e18,
+						extraRewards: extraRewards / 1e18,
+						feesRewards: convertAmount(Number(feesRewards), network),
+					}),
+				),
+			);
+		},
 	},
 	sportMarkets: {
 		markets({
@@ -1302,7 +1372,7 @@ module.exports = {
 							lastGameStarts_lt: endPeriod || undefined,
 							sportMarkets_: sportMarketsAddresses
 								? {
-										address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
+									address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
 								  }
 								: undefined,
 						},
