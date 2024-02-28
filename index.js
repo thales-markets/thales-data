@@ -70,6 +70,12 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales-arbitrum', // arbitrum
 	},
+
+	marchMadness: {
+		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-optimism', //  optimism
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-op-goerli', //  optimism goerli
+		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/march-madness-arbitrum', // arbitrum
+	},
 };
 
 module.exports = {
@@ -1372,7 +1378,7 @@ module.exports = {
 							lastGameStarts_lt: endPeriod || undefined,
 							sportMarkets_: sportMarketsAddresses
 								? {
-									address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
+										address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
 								  }
 								: undefined,
 						},
@@ -1958,6 +1964,42 @@ module.exports = {
 					amount: convertAmount(amount, network),
 					round: Number(round),
 					liquidityPoolType,
+				})),
+			);
+		},
+		marchMadnessToken({
+			max = Infinity,
+			minter = undefined,
+			network = 420,
+			minCreatedTimestamp = undefined,
+			maxCreatedTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.marchMadness[network],
+				max,
+				query: {
+					entity: 'tokens',
+					selection: {
+						orderBy: 'itemId',
+						orderDirection: 'asc',
+						where: {
+							minter: minter ? `\\"${minter}\\"` : undefined,
+							createdAt_gte: minCreatedTimestamp || undefined,
+							createdAt_lte: maxCreatedTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'createdHash', 'lastUpdateHash', 'minter', 'itemId', 'brackets', 'createdAt', 'updatedAt'],
+				},
+			}).then(results =>
+				results.map(({ id, createdHash, lastUpdateHash, minter, itemId, brackets, createdAt, updatedAt }) => ({
+					id,
+					createdHash,
+					lastUpdateHash,
+					minter,
+					itemId,
+					brackets,
+					createdAt: Number(createdAt * 1000),
+					updatedAt: Number(updatedAt * 1000),
 				})),
 			);
 		},
