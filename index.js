@@ -63,6 +63,7 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/overtime-arbitrum', // arbitrum
 		8453: 'https://api.studio.thegraph.com/query/11948/overtime-base/version/latest', // base
+		11155420: 'https://api.studio.thegraph.com/query/11948/sport-markets-optimism-sepolia/version/latest', // optimism sepolia
 	},
 
 	taleOfThales: {
