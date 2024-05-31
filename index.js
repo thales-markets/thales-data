@@ -708,6 +708,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
+			round = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -723,6 +724,7 @@ module.exports = {
 							vault: vault ? `\\"${vault}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							round: round ? round : undefined,
 							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
 						},
 					},
@@ -867,6 +869,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			round = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -880,6 +883,7 @@ module.exports = {
 						where: {
 							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
+							round: round ? round : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
@@ -1483,6 +1487,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			startPeriod = undefined,
 			endPeriod = undefined,
+			round = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -1498,6 +1503,7 @@ module.exports = {
 							vault: vault ? `\\"${vault}\\"` : undefined,
 							timestamp_gte: minTimestamp || undefined,
 							timestamp_lte: maxTimestamp || undefined,
+							round: round || undefined,
 							wholeMarket_: { maturityDate_gte: startPeriod || undefined, maturityDate_lt: endPeriod || undefined },
 						},
 					},
@@ -1916,6 +1922,7 @@ module.exports = {
 			account = undefined,
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
+			round = undefined,
 			liquidityPoolType = undefined,
 			network = 10,
 		} = {}) {
@@ -1932,6 +1939,7 @@ module.exports = {
 							liquidityPoolType: liquidityPoolType ? `\\"${liquidityPoolType}\\"` : undefined,
 							account: account ? `\\"${account}\\"` : undefined,
 							type: type ? `\\"${type}\\"` : undefined,
+							round: round ? round : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
 						},
