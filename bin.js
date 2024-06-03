@@ -3,7 +3,7 @@
 const program = require('commander');
 const stringify = require('csv-stringify');
 
-const { binaryOptions, sportMarkets } = require('.');
+const { binaryOptions, sportMarkets, sportMarketsV2 } = require('.');
 
 const logResults = ({ json, csv } = {}) => results => {
 	if (json) {
@@ -421,6 +421,36 @@ program
 	.action(async ({ max, period }) => {
 		binaryOptions
 			.stakingClaims({ max, period })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('sportMarketsV2.liquidityPoolPnls')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, liquidityPool, minTimestamp, maxTimestamp, network }) => {
+		sportMarketsV2
+			.liquidityPoolPnls({ max, liquidityPool, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('sportMarketsV2.liquidityPoolUserTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
+	.option('-t, --type <value>', 'The transaction type')
+	.option('-a, --account <value>', 'The account address')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, liquidityPool, type, account, network }) => {
+		sportMarketsV2
+			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

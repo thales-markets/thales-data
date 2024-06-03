@@ -71,6 +71,10 @@ const graphAPIEndpoints = {
 		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
 		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales-arbitrum', // arbitrum
 	},
+
+	sportMarketsV2: {
+		10: 'https://gateway-arbitrum.network.thegraph.com/api/ee35409837e6206bbb88686b2559f0b5/subgraphs/id/DSxiPB7bWCBU4Aw1gsqSPJ72Usk4STbiWQSnQRn9YGD4', // optimism
+	},
 };
 
 module.exports = {
@@ -1967,6 +1971,83 @@ module.exports = {
 					amount: convertAmount(amount, network),
 					round: Number(round),
 					liquidityPoolType,
+				})),
+			);
+		},
+	},
+	sportMarketsV2: {
+		liquidityPoolPnls({
+			max = Infinity,
+			liquidityPool = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 10,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarketsV2[network],
+				max,
+				query: {
+					entity: 'liquidityPoolPnls',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl'],
+				},
+			}).then(results =>
+				results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
+					id,
+					liquidityPool,
+					timestamp,
+					round: Number(round),
+					pnl: Number(pnl) / 1e18,
+				})),
+			);
+		},
+		liquidityPoolUserTransactions({
+			max = Infinity,
+			liquidityPool = undefined,
+			type = undefined,
+			account = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			round = undefined,
+			network = 10,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarketsV2[network],
+				max,
+				query: {
+					entity: 'liquidityPoolUserTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							liquidityPool: liquidityPool ? `\\"${liquidityPool}\\"` : undefined,
+							account: account ? `\\"${account}\\"` : undefined,
+							type: type ? `\\"${type}\\"` : undefined,
+							round: round ? round : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
+				},
+			}).then(results =>
+				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
+					id,
+					liquidityPool,
+					hash,
+					timestamp: Number(timestamp * 1000),
+					type,
+					account,
+					amount,
+					round: Number(round),
 				})),
 			);
 		},
