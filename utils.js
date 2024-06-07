@@ -69,6 +69,10 @@ const sportMarketTypeFormatting = market => {
 	};
 };
 
+const getGraphStudioAPIUrl = (graphId, apiKey) => {
+	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/subgraphs/id/${graphId}`;
+};
+
 module.exports = {
 	ZERO_ADDRESS,
 	hexToAscii,
@@ -77,4 +81,5 @@ module.exports = {
 	formatGQLArray,
 	formatGQLString,
 	sportMarketTypeFormatting,
+	getGraphStudioAPIUrl,
 };
