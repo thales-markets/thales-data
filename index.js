@@ -3,6 +3,9 @@
 const pageResults = require('graph-results-pager');
 
 const { hexToAscii, getHashFromId, sportMarketTypeFormatting } = require('./utils');
+const { API_KEYS, SUBGRAPH_IDS } = require('./constants');
+
+const { getGraphStudioAPIUrl } = require('./utils');
 
 const convertAmount = (amount, networkId, tokenAddress) => {
 	if (networkId == 137) {
@@ -60,8 +63,8 @@ const graphAPIEndpoints = {
 
 	sportMarkets: {
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism-goerli', // optimism goerli
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/sport-markets-optimism', // optimism
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/overtime-arbitrum', // arbitrum
+		10: getGraphStudioAPIUrl(SUBGRAPH_IDS.SportsMarkets[10], API_KEYS.Overtime), // optimism
+		42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.SportsMarkets[42161], API_KEYS.Overtime), // arbitrum
 		8453: 'https://api.studio.thegraph.com/query/11948/overtime-base/version/latest', // base
 		11155420: 'https://api.studio.thegraph.com/query/11948/sport-markets-optimism-sepolia/version/latest', // optimism sepolia
 	},
