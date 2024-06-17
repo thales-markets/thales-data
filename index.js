@@ -2,7 +2,7 @@
 
 const pageResults = require('graph-results-pager');
 
-const { hexToAscii, getHashFromId, sportMarketTypeFormatting } = require('./utils');
+const { hexToAscii, getHashFromId, sportMarketTypeFormatting, getGraphStudioV2APIUrl } = require('./utils');
 const { API_KEYS, SUBGRAPH_IDS } = require('./constants');
 
 const { getGraphStudioAPIUrl } = require('./utils');
@@ -80,7 +80,7 @@ const graphAPIEndpoints = {
 	},
 
 	sportMarketsV2: {
-		10: 'https://gateway-arbitrum.network.thegraph.com/api/ee35409837e6206bbb88686b2559f0b5/deployments/id/QmfYaVdSSekUeK6expfm47tP8adg3NNdEGnVExqswsSwaB', // optimism
+		10: getGraphStudioV2APIUrl('QmfYaVdSSekUeK6expfm47tP8adg3NNdEGnVExqswsSwaB', 'ee35409837e6206bbb88686b2559f0b5'), // optimism
 	},
 };
 
