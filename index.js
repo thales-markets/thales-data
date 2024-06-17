@@ -80,7 +80,7 @@ const graphAPIEndpoints = {
 	},
 
 	sportMarketsV2: {
-		10: 'https://gateway-arbitrum.network.thegraph.com/api/ee35409837e6206bbb88686b2559f0b5/subgraphs/id/DSxiPB7bWCBU4Aw1gsqSPJ72Usk4STbiWQSnQRn9YGD4', // optimism
+		10: 'https://gateway-arbitrum.network.thegraph.com/api/ee35409837e6206bbb88686b2559f0b5/deployments/id/QmfYaVdSSekUeK6expfm47tP8adg3NNdEGnVExqswsSwaB', // optimism
 	},
 };
 
