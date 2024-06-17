@@ -20,6 +20,10 @@ const convertAmount = (amount, networkId, tokenAddress) => {
 		if (tokenAddress && tokenAddress == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca') return amount / 1e6;
 		if (!tokenAddress) return amount / 1e6;
 	}
+	if (networkId == 10) {
+		if (tokenAddress && tokenAddress == '0x0fe1044fc8c05482102db14368fe88791e9b8698') return amount / 1e6;
+		return amount / 1e18;
+	}
 	return amount / 1e18;
 };
 
@@ -1979,6 +1983,92 @@ module.exports = {
 		},
 	},
 	sportMarketsV2: {
+		tickets({
+			max = Infinity,
+			network = 10,
+			owner = undefined,
+			address = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			startPeriod = undefined,
+			endPeriod = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarketsV2[network],
+				max,
+				query: {
+					entity: 'tickets',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							id: address ? `\\"${address}\\"` : undefined,
+							owner: owner ? `\\"${owner}\\"` : undefined,
+							timestamp_gte: minTimestamp || undefined,
+							timestamp_lte: maxTimestamp || undefined,
+							lastGameStarts_gte: startPeriod || undefined,
+							lastGameStarts_lt: endPeriod || undefined,
+						},
+					},
+					properties: [
+						'id',
+						'txHash',
+						'timestamp',
+						'markets { id, gameId, sportId, typeId, maturity, status, line, playerId, position, odd }',
+						'lastGameStarts',
+						'owner',
+						'buyInAmount',
+						'payout',
+						'isLive',
+						'totalQuote',
+						'fees',
+						'collateral',
+					],
+				},
+			}).then(results =>
+				results.map(
+					({
+						id,
+						txHash,
+						timestamp,
+						markets,
+						lastGameStarts,
+						owner,
+						buyInAmount,
+						payout,
+						isLive,
+						totalQuote,
+						fees,
+						collateral,
+					}) => ({
+						id,
+						txHash,
+						timestamp: Number(timestamp * 1000),
+						sportMarkets: markets.map(market => {
+							return {
+								id: market.id,
+								gameId: market.gameId,
+								typeId: Number(market.typeId),
+								maturity: Number(market.maturity * 1000),
+								status: Number(market.status),
+								line: Number(market.line) / 100,
+								playerId: Number(market.playerId),
+								position: Number(market.position),
+								odd: market.odd / 1e18,
+							};
+						}),
+						lastGameStarts: Number(lastGameStarts * 1000),
+						owner,
+						buyInAmount: convertAmount(Number(buyInAmount), network, collateral),
+						payout: convertAmount(Number(payout), network, collateral),
+						isLive,
+						totalQuote: Number(totalQuote) / 1e18,
+						fees: convertAmount(Number(fees), network, collateral),
+						collateral,
+					}),
+				),
+			);
+		},
 		liquidityPoolPnls({
 			max = Infinity,
 			liquidityPool = undefined,

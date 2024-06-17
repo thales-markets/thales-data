@@ -426,6 +426,24 @@ program
 	});
 
 program
+	.command('sportMarketsV2.tickets')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-o, --owner <value>', 'The ticket owner')
+	.option('-a, --address <value>', 'The ticket address')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-p, --startPeriod <value>', 'The oldest period to include, if any')
+	.option('-P, --endPeriod <value>', 'The youngest period to include, if any')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, owner, address, minTimestamp, maxTimestamp, startPeriod, endPeriod, network }) => {
+		sportMarketsV2
+			.tickets({ max, owner, address, minTimestamp, maxTimestamp, startPeriod, endPeriod, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
 	.command('sportMarketsV2.liquidityPoolPnls')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
