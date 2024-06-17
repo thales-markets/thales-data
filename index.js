@@ -29,39 +29,39 @@ const convertAmount = (amount, networkId, tokenAddress) => {
 
 const graphAPIEndpoints = {
 	token: {
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/token-goerli', // optimism goerli
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token', // optimism
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-arbitrum', // arbitrum
-		1: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-token-mainnet', // mainnet
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/token-goerli', // optimism goerli deprecated
+		10: getGraphStudioAPIUrl(SUBGRAPH_IDS.Token[10], API_KEYS.Token), // optimism
+		42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.Token[42161], API_KEYS.Token), // arbitrum
+		1: getGraphStudioAPIUrl(SUBGRAPH_IDS.Token[1], API_KEYS.Token), // mainnet
 		8453: 'https://api.studio.thegraph.com/query/11948/thales-token-base/version/latest', // base
 	},
 
 	thalesMarkets: {
-		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
-		137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
-		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
+		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli deprecated
+		10: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[10], API_KEYS.DigitalOptions), // optimism
+		42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
+		137: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[137], API_KEYS.DigitalOptions), // polygon
+		56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc deprecated
 		8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 
 		lp: {
-			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
-			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-lp-optimism', // optimism
-			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
+			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli deprecated
+			10: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptionsLP[10], API_KEYS.DigitalOptions), // optimism
+			42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
 			8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 		},
 
 		positions: {
-			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli
-			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets', // optimism
-			42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-arbitrum', // arbitrum
-			137: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-polygon', // polygon
-			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc
+			420: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-markets-goerli-ovm', // optimism goerli deprecated
+			10: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[10], API_KEYS.DigitalOptions), // optimism
+			42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
+			137: getGraphStudioAPIUrl(SUBGRAPH_IDS.DigitalOptions[137], API_KEYS.DigitalOptions), // polygon
+			56: 'https://api.thegraph.com/subgraphs/name/thales-markets/thales-bsc', // bsc deprecated
 			8453: 'https://api.studio.thegraph.com/query/11948/thales-markets-base/version/latest', // base
 		},
 
 		rewards: {
-			10: 'https://api.thegraph.com/subgraphs/name/thales-markets/trade-rewards',
+			10: getGraphStudioAPIUrl(SUBGRAPH_IDS.TradeRewards[10], API_KEYS.DigitalOptions),
 		},
 	},
 
@@ -75,8 +75,8 @@ const graphAPIEndpoints = {
 
 	taleOfThales: {
 		420: 'https://api.thegraph.com/subgraphs/name/thales-markets/tot-op-goerli', // optimism goerli
-		10: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales', // optimism
-		42161: 'https://api.thegraph.com/subgraphs/name/thales-markets/tale-of-thales-arbitrum', // arbitrum
+		10: getGraphStudioAPIUrl(SUBGRAPH_IDS.TaleOfThales[10], API_KEYS.TaleOfThales), // optimism
+		42161: getGraphStudioAPIUrl(SUBGRAPH_IDS.TaleOfThales[42161], API_KEYS.TaleOfThales), // arbitrum
 	},
 
 	sportMarketsV2: {
