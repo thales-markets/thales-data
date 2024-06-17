@@ -80,7 +80,7 @@ const graphAPIEndpoints = {
 	},
 
 	sportMarketsV2: {
-		10: getGraphStudioV2APIUrl('QmfYaVdSSekUeK6expfm47tP8adg3NNdEGnVExqswsSwaB', 'ee35409837e6206bbb88686b2559f0b5'), // optimism
+		10: getGraphStudioV2APIUrl('QmfSiTBoZbVKKKuqgwjxx1ZZfpa9UtVJ4vGu2k6aqt2wCF', 'ee35409837e6206bbb88686b2559f0b5'), // optimism
 	},
 };
 
