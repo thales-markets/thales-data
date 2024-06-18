@@ -21,7 +21,7 @@ const convertAmount = (amount, networkId, tokenAddress) => {
 		if (!tokenAddress) return amount / 1e6;
 	}
 	if (networkId == 10) {
-		if (tokenAddress && tokenAddress == '0x0fe1044fc8c05482102db14368fe88791e9b8698') return amount / 1e6;
+		if (tokenAddress && tokenAddress == '0x0b2c639c533813f4aa9d7837caf62653d097ff85') return amount / 1e6;
 		return amount / 1e18;
 	}
 	return amount / 1e18;
@@ -2044,7 +2044,7 @@ module.exports = {
 						id,
 						txHash,
 						timestamp: Number(timestamp * 1000),
-						sportMarkets: markets.map(market => {
+						markets: markets.map(market => {
 							return {
 								id: market.id,
 								gameId: market.gameId,
