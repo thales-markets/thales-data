@@ -73,6 +73,10 @@ const getGraphStudioAPIUrl = (graphId, apiKey) => {
 	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/subgraphs/id/${graphId}`;
 };
 
+const getGraphStudioLatestDeploymentUrl = (deploymentId, apiKey) => {
+	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/deployments/id/${deploymentId}`;
+};
+
 const getGraphStudioV2APIUrl = (deploymentId, apiKey) => {
 	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/deployments/id/${deploymentId}`;
 };
@@ -86,5 +90,6 @@ module.exports = {
 	formatGQLString,
 	sportMarketTypeFormatting,
 	getGraphStudioAPIUrl,
+	getGraphStudioLatestDeploymentUrl,
 	getGraphStudioV2APIUrl,
 };
