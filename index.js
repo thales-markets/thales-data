@@ -81,6 +81,7 @@ const graphAPIEndpoints = {
 
 	sportMarketsV2: {
 		10: getGraphStudioV2APIUrl('QmfSiTBoZbVKKKuqgwjxx1ZZfpa9UtVJ4vGu2k6aqt2wCF', 'ee35409837e6206bbb88686b2559f0b5'), // optimism
+		42161: getGraphStudioV2APIUrl('QmcuiCKfqaKb5N27UJKNyStsYjfaDztAKUfg87QYtv2p1w', 'ee35409837e6206bbb88686b2559f0b5'), // arbitrum
 	},
 };
 
