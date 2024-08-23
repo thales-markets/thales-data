@@ -4,6 +4,8 @@ const API_KEYS = {
 	Token: 'b90964141e2756d681dc067178c54c64',
 	MarchMadness: '81a502cf3a469b268e220c38e78a6823',
 	TaleOfThales: '82b5389190f8d70d135cc771692c542f',
+	Base: 'ee35409837e6206bbb88686b2559f0b5',
+	OvertimeV2: 'ee35409837e6206bbb88686b2559f0b5',
 };
 
 const SUBGRAPH_IDS = {
@@ -62,14 +64,14 @@ const LAST_DEPLOYMENT_IDS = {
 	Token: {
 		10: 'QmaU8Jq6PEWfXkoUB9NkbNAy3fVx42QQMrPTZ3aF9WroSF',
 		42161: 'QmavMBnEpQf7JKeK3kBu6FxXooCneynEUVMd5nvuw3fnQD',
-		8453: '',
+		8453: 'QmNdpnRBiJR5T4NdYKuBD1E2NYPZwV4emiG4zyYahBGfHA',
 		1: 'QmTFBtGHtbXgU9FEnzNuz56HKNu5kX6d9zFFzMLWp4t5Zz',
 		137: '',
 	},
 	DigitalOptions: {
 		10: 'QmUgLVEawrUuV8M6xxauDPf1W7nW7VMn6Yf7KtjbSDg46K',
 		42161: 'QmZqty5SxWqHkXznX3VBQ2oPUT3uzWmWdVznTPNLKpKxEf',
-		8453: '',
+		8453: 'QmQRj8CnyKYT1dHVuXDVLQFLLHXik4GUfoemjRSnmsJvs9',
 		1: '',
 		137: 'QmSz5FuLoLsrkLdvmmsvaChy6jbgei6aQxAcBXMURy5k66',
 	},
@@ -83,7 +85,7 @@ const LAST_DEPLOYMENT_IDS = {
 	SportsMarkets: {
 		10: 'QmVTmfjNXA5ZM9uZy75eNgGHjX45tmgDfnSYjm5EQjLbJN',
 		42161: 'QmXEs6E47dLKNpFpUTkY5MDfoDmLU2WiCn7n6HjmfWNsyx',
-		8453: '',
+		8453: 'QmRrECmBU89D7SZJU54M5qKBFFfRRSQWPPpiKM288fSebs',
 		1: '',
 		137: '',
 	},
@@ -104,6 +106,13 @@ const LAST_DEPLOYMENT_IDS = {
 	TradeRewards: {
 		10: 'QmVykqjYvVG8mrsgWWyZ9ugUu1v8gQvgZdbhYfHNyfoVGM',
 		42161: '',
+		8453: '',
+		1: '',
+		137: '',
+	},
+	SportsMarketsV2: {
+		10: 'QmfSiTBoZbVKKKuqgwjxx1ZZfpa9UtVJ4vGu2k6aqt2wCF',
+		42161: 'QmcuiCKfqaKb5N27UJKNyStsYjfaDztAKUfg87QYtv2p1w',
 		8453: '',
 		1: '',
 		137: '',

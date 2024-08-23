@@ -77,10 +77,6 @@ const getGraphStudioLatestDeploymentUrl = (deploymentId, apiKey) => {
 	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/deployments/id/${deploymentId}`;
 };
 
-const getGraphStudioV2APIUrl = (deploymentId, apiKey) => {
-	return `https://gateway-arbitrum.network.thegraph.com/api/${apiKey}/deployments/id/${deploymentId}`;
-};
-
 module.exports = {
 	ZERO_ADDRESS,
 	hexToAscii,
@@ -91,5 +87,4 @@ module.exports = {
 	sportMarketTypeFormatting,
 	getGraphStudioAPIUrl,
 	getGraphStudioLatestDeploymentUrl,
-	getGraphStudioV2APIUrl,
 };
