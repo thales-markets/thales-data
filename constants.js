@@ -1,11 +1,11 @@
 const API_KEYS = {
-	DigitalOptions: '02c406389fab68b2da28248ebb707777',
-	Overtime: '26c1cbf423ad6542ba906dae598f7b7e',
-	Token: 'b90964141e2756d681dc067178c54c64',
-	MarchMadness: '81a502cf3a469b268e220c38e78a6823',
-	TaleOfThales: '82b5389190f8d70d135cc771692c542f',
-	Base: 'ee35409837e6206bbb88686b2559f0b5',
-	OvertimeV2: 'ee35409837e6206bbb88686b2559f0b5',
+	DigitalOptions: 'a6068becfe82e6542c05ec1385be2942',
+	Overtime: 'd19a6a80c2d5a004e62041171d5f4c64',
+	Token: '8f8a910e03ea428c12311ab51f54e693',
+	MarchMadness: '9ab2d34bfd0ca23bf69102403c4631f3',
+	TaleOfThales: '2c6305efe0806f0160e111f5f03e600d',
+	Base: '9e4d7057d40ebc4a5a3b672cd67d2994',
+	OvertimeV2: '9e4d7057d40ebc4a5a3b672cd67d2994',
 };
 
 const SUBGRAPH_IDS = {
