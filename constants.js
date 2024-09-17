@@ -4,7 +4,6 @@ const API_KEYS = {
 	Token: '8f8a910e03ea428c12311ab51f54e693',
 	MarchMadness: '9ab2d34bfd0ca23bf69102403c4631f3',
 	TaleOfThales: '2c6305efe0806f0160e111f5f03e600d',
-	Base: '9e4d7057d40ebc4a5a3b672cd67d2994',
 	OvertimeV2: '9e4d7057d40ebc4a5a3b672cd67d2994',
 };
 

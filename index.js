@@ -32,26 +32,26 @@ const graphAPIEndpoints = {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.Token[10], API_KEYS.Token), // optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.Token[42161], API_KEYS.Token), // arbitrum
 		1: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.Token[1], API_KEYS.Token), // mainnet
-		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.Token[8453], API_KEYS.Base), // base
+		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.Token[8453], API_KEYS.Token), // base
 	},
 
 	thalesMarkets: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[10], API_KEYS.DigitalOptions), // optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
 		137: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[137], API_KEYS.DigitalOptions), // polygon
-		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.Base), // base
+		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.DigitalOptions), // base
 
 		lp: {
 			10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptionsLP[10], API_KEYS.DigitalOptions), // optimism
 			42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
-			8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.Base), // base
+			8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.DigitalOptions), // base
 		},
 
 		positions: {
 			10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[10], API_KEYS.DigitalOptions), // optimism
 			42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
 			137: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[137], API_KEYS.DigitalOptions), // polygon
-			8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.Base), // base
+			8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.DigitalOptions), // base
 		},
 
 		rewards: {
@@ -62,7 +62,7 @@ const graphAPIEndpoints = {
 	sportMarkets: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarkets[10], API_KEYS.Overtime), // optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarkets[42161], API_KEYS.Overtime), // arbitrum
-		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarkets[8453], API_KEYS.Base), // base
+		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarkets[8453], API_KEYS.Overtime), // base
 	},
 
 	taleOfThales: {
