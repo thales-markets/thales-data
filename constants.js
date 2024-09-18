@@ -61,8 +61,8 @@ const SUBGRAPH_IDS = {
 
 const LAST_DEPLOYMENT_IDS = {
 	Token: {
-		10: 'QmaU8Jq6PEWfXkoUB9NkbNAy3fVx42QQMrPTZ3aF9WroSF',
-		42161: 'QmavMBnEpQf7JKeK3kBu6FxXooCneynEUVMd5nvuw3fnQD',
+		10: 'QmUma8S2voyADChDiSHqtNKHbL5Z55B8PDrcxMH7MbmYEy',
+		42161: 'QmSFwUzrf1rBQovQ13kDuTrD1cQmP9fKEynUgziowspihj',
 		8453: 'QmNdpnRBiJR5T4NdYKuBD1E2NYPZwV4emiG4zyYahBGfHA',
 		1: 'QmTFBtGHtbXgU9FEnzNuz56HKNu5kX6d9zFFzMLWp4t5Zz',
 		137: '',
