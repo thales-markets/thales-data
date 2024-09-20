@@ -11,14 +11,14 @@ const SUBGRAPH_IDS = {
 	Token: {
 		10: '2WQ9TKJt96NUxuS2DbR7B4aAwcU9CMiaBH7fwZZfjpn1',
 		42161: 'GRHJHjVRzHrQoN86VyjXMDTDiw9pHNB9NqQJxQmnZcwb',
-		8453: '',
+		8453: '3cwvVz7HwAJD76gfmjfu8A92e9cELN9TEvY6rkdxyjaY',
 		1: '6fFZCSzLX6XNbfBpTgo19fTeP3A3EjG2rmpmwEkXpkke',
 		137: '',
 	},
 	DigitalOptions: {
 		10: 'GADfDRePpbqyjK2Y3JkQTBPBVQj98imhgKo7oRWW7RqQ',
 		42161: 'FZH9ySiLCdqKrwefaospe6seSqV1ZoW4FvPQUGP7MFob',
-		8453: '',
+		8453: 'EK55ptWg45X5Zbq2uF2cMCgEVkhXzHw5tiHaNc6CDsET',
 		1: '',
 		137: 'G7wi71W3PdtYYidKy5pEmJvJ1Xpop25ogynstRjPdyPG',
 	},
@@ -32,7 +32,7 @@ const SUBGRAPH_IDS = {
 	SportsMarkets: {
 		10: 'GNVg7vqPeoaqDARvssvwCUaLfizACsrmeFFCpZd4VBDq',
 		42161: 'DFNKpS95y26V3kuTa9MtD2J3ws65QF6RPP7RFLRjaHFx',
-		8453: '',
+		8453: '8QTYZrM43ewCWjWN9XGv6oboR6FPHm8cuPoZiWtRSHsk',
 		1: '',
 		137: '',
 	},
@@ -53,6 +53,13 @@ const SUBGRAPH_IDS = {
 	TradeRewards: {
 		10: '6XZzT3mWKP2aenQK2x4DGFzfHt1deDGycC8squJ9C5fL',
 		42161: '',
+		8453: '',
+		1: '',
+		137: '',
+	},
+	SportsMarketsV2: {
+		10: 'DSxiPB7bWCBU4Aw1gsqSPJ72Usk4STbiWQSnQRn9YGD4',
+		42161: 'BRtus5QB7fZzKBAtMEm4KyhJyGCKWPoGGiMiQzqdFmfv',
 		8453: '',
 		1: '',
 		137: '',
