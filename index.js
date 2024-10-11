@@ -127,6 +127,7 @@ module.exports = {
 						'shortAddress',
 						'result',
 						'finalPrice',
+						'managerAddress',
 					],
 				},
 			}).then(results =>
@@ -147,6 +148,7 @@ module.exports = {
 						shortAddress,
 						result,
 						finalPrice,
+						managerAddress,
 					}) => ({
 						customMarket,
 						customOracle,
@@ -163,6 +165,7 @@ module.exports = {
 						shortAddress,
 						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
 						finalPrice: finalPrice / 1e18,
+						managerAddress,
 					}),
 				),
 			);
@@ -219,6 +222,7 @@ module.exports = {
 						'isOpen',
 						'result',
 						'finalPrice',
+						'managerAddress',
 					],
 				},
 			}).then(results =>
@@ -238,6 +242,7 @@ module.exports = {
 						isOpen,
 						result,
 						finalPrice,
+						managerAddress,
 					}) => ({
 						address: id,
 						timestamp: Number(timestamp * 1000),
@@ -253,6 +258,7 @@ module.exports = {
 						isOpen,
 						result: result !== null ? (result === 0 ? 'in' : 'out') : null,
 						finalPrice: finalPrice / 1e18,
+						managerAddress,
 					}),
 				),
 			);
@@ -292,11 +298,25 @@ module.exports = {
 						'market',
 						'fee',
 						'blockNumber',
+						'managerAddress',
 					],
 				},
 			}).then(results =>
 				results.map(
-					({ id, timestamp, type, account, currencyKey, isRangedMarket, side, amount, market, fee, blockNumber }) => ({
+					({
+						id,
+						timestamp,
+						type,
+						account,
+						currencyKey,
+						isRangedMarket,
+						side,
+						amount,
+						market,
+						fee,
+						blockNumber,
+						managerAddress,
+					}) => ({
 						hash: getHashFromId(id),
 						timestamp: Number(timestamp * 1000),
 						type,
@@ -308,6 +328,7 @@ module.exports = {
 						market,
 						fee: fee ? fee / 1e18 : null,
 						blockNumber: Number(blockNumber),
+						managerAddress,
 					}),
 				),
 			);
@@ -356,6 +377,7 @@ module.exports = {
 						'orderSide',
 						'optionSide',
 						'blockNumber',
+						'ammAddress',
 					],
 				},
 			}).then(results =>
@@ -375,6 +397,7 @@ module.exports = {
 						orderSide,
 						optionSide,
 						blockNumber,
+						ammAddress,
 					}) => ({
 						id,
 						transactionHash,
@@ -390,6 +413,7 @@ module.exports = {
 						orderSide,
 						optionSide,
 						blockNumber: Number(blockNumber),
+						ammAddress,
 					}),
 				),
 			);
@@ -410,16 +434,18 @@ module.exports = {
 						'account',
 						'amount',
 						'paid',
-						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice }}',
+						'position {id, side, market { id, result, currencyKey, strikePrice, maturityDate, expiryDate, isOpen, finalPrice, managerAddress }, managerAddress}',
+						'managerAddress',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, paid, position }) => ({
+				results.map(({ id, account, amount, paid, position, managerAddress }) => ({
 					id,
 					account,
 					amount,
 					paid,
 					position,
+					managerAddress,
 				})),
 			);
 		},
@@ -439,16 +465,18 @@ module.exports = {
 						'account',
 						'amount',
 						'paid',
-						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice}}',
+						'position {id, side, market { id, timestamp, currencyKey, maturityDate, expiryDate, leftPrice, rightPrice, inAddress, outAddress, isOpen, result, finalPrice, managerAddress}, managerAddress}',
+						'managerAddress',
 					],
 				},
 			}).then(results =>
-				results.map(({ id, account, amount, paid, position }) => ({
+				results.map(({ id, account, amount, paid, position, managerAddress }) => ({
 					id,
 					account,
 					amount,
 					paid,
 					position,
+					managerAddress,
 				})),
 			);
 		},
@@ -475,15 +503,16 @@ module.exports = {
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
 						},
 					},
-					properties: ['id', 'timestamp', 'type', 'account', 'amount'],
+					properties: ['id', 'timestamp', 'type', 'account', 'amount', 'ammAddress'],
 				},
 			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount }) => ({
+				results.map(({ id, timestamp, type, account, amount, ammAddress }) => ({
 					id,
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
 					amount: amount / 1e18,
+					ammAddress,
 				})),
 			);
 		},

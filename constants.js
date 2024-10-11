@@ -75,7 +75,7 @@ const LAST_DEPLOYMENT_IDS = {
 		137: '',
 	},
 	DigitalOptions: {
-		10: 'QmUgLVEawrUuV8M6xxauDPf1W7nW7VMn6Yf7KtjbSDg46K',
+		10: 'QmahfsRc8sMY1W53Qq3NoKh5TpCewFuwPkfwoQPJC3B7F7',
 		42161: 'QmctjL39winw3G1WetmVhwHYwctXgp1LYK8GYEExSNQSzA',
 		8453: 'QmTAnoQoWMwQGskiYbaYRAHPQNi7Qoq1r2aUS11t2D8kpp',
 		1: '',
