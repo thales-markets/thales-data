@@ -7,21 +7,29 @@ const { API_KEYS, LAST_DEPLOYMENT_IDS } = require('./constants');
 
 const { getGraphStudioLatestDeploymentUrl } = require('./utils');
 
-const convertAmount = (amount, networkId, tokenAddress) => {
+const convertAmount = (amount, networkId, address) => {
 	if (networkId == 137) {
-		if (tokenAddress && tokenAddress == '0x2791bca1f2de4661ed88a30c99a7a9449aa84174') return amount / 1e6;
-		if (!tokenAddress) return amount / 1e6;
+		if (address && address == '0x2791bca1f2de4661ed88a30c99a7a9449aa84174') return amount / 1e6;
+		if (!address) return amount / 1e6;
 	}
 	if (networkId == 42161) {
-		if (tokenAddress && tokenAddress == '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8') return amount / 1e6;
-		if (!tokenAddress) return amount / 1e6;
+		if (address && address == '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8') return amount / 1e6;
+		if (!address) return amount / 1e6;
 	}
 	if (networkId == 8453) {
-		if (tokenAddress && tokenAddress == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca') return amount / 1e6;
-		if (!tokenAddress) return amount / 1e6;
+		if (address && address == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca') return amount / 1e6;
+		if (!address) return amount / 1e6;
 	}
 	if (networkId == 10) {
-		if (tokenAddress && tokenAddress == '0x0b2c639c533813f4aa9d7837caf62653d097ff85') return amount / 1e6;
+		if (
+			address &&
+			(address == '0x0b2c639c533813f4aa9d7837caf62653d097ff85' ||
+				address == '0x7f9e03e40d8b95419c7bdf30d256d08f2ec11dba' ||
+				address == '0x9ce94cdf8ecd57cec0835767528dc88628891dd9' ||
+				address == '0xed59dca9c272fbc0ca4637f32ab32cbdb62e856b' ||
+				address == '0x47da40be6b617d0199adf1ec3550f3875b246124')
+		)
+			return amount / 1e6;
 		return amount / 1e18;
 	}
 	return amount / 1e18;
@@ -52,10 +60,6 @@ const graphAPIEndpoints = {
 			42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[42161], API_KEYS.DigitalOptions), // arbitrum
 			137: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[137], API_KEYS.DigitalOptions), // polygon
 			8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.DigitalOptions[8453], API_KEYS.DigitalOptions), // base
-		},
-
-		rewards: {
-			10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.TradeRewards[10], API_KEYS.DigitalOptions),
 		},
 	},
 
@@ -388,41 +392,6 @@ module.exports = {
 						blockNumber: Number(blockNumber),
 					}),
 				),
-			);
-		},
-		rewards({
-			max = Infinity,
-			minTimestamp = undefined,
-			maxTimestamp = undefined,
-			periodStart = undefined,
-			periodEnd = undefined,
-			network = 10,
-		} = {}) {
-			return pageResults({
-				api: graphAPIEndpoints.thalesMarkets.rewards[network],
-				max,
-				query: {
-					entity: 'trades',
-					selection: {
-						orderBy: 'timestamp',
-						orderDirection: 'desc',
-						where: {
-							timestamp_gte: minTimestamp || undefined,
-							timestamp_lte: maxTimestamp || undefined,
-							timestamp_gt: periodStart || undefined,
-							timestamp_lt: periodEnd || undefined,
-						},
-					},
-					properties: ['id', 'timestamp', 'account', 'amount', 'type'],
-				},
-			}).then(results =>
-				results.map(({ id, timestamp, account, amount, type }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					account,
-					amount: amount / 1e18,
-					type,
-				})),
 			);
 		},
 		positionBalances({ max = Infinity, account = undefined, network = 10 } = {}) {
@@ -902,7 +871,7 @@ module.exports = {
 					timestamp: Number(timestamp * 1000),
 					type,
 					account,
-					amount: convertAmount(amount, network),
+					amount: convertAmount(amount, network, liquidityPool),
 					round: Number(round),
 				})),
 			);
@@ -1379,9 +1348,7 @@ module.exports = {
 							lastGameStarts_gte: startPeriod || undefined,
 							lastGameStarts_lt: endPeriod || undefined,
 							sportMarkets_: sportMarketsAddresses
-								? {
-										address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]`,
-								  }
+								? { address_in: `[${sportMarketsAddresses.map(address => `\\"${address}\\"`).toString()}]` }
 								: undefined,
 						},
 					},

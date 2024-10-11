@@ -128,20 +128,6 @@ program
 	});
 
 program
-	.command('binaryOptions.rewards')
-	.option('-m, --max <value>', 'Maximum number of results', Infinity)
-	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
-	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
-	.option('-n, --network <value>', 'The network', 10)
-
-	.action(async ({ max, minTimestamp, maxTimestamp, network }) => {
-		binaryOptions
-			.rewards({ max, minTimestamp, maxTimestamp, network })
-			.then(logResults())
-			.then(showResultCount({ max }));
-	});
-
-program
 	.command('binaryOptions.stakers')
 	.option('-m, --max <value>', 'Maximum number of results', Infinity)
 	.option('-n, --network <value>', 'The network', 10)

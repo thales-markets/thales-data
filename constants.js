@@ -76,13 +76,13 @@ const LAST_DEPLOYMENT_IDS = {
 	},
 	DigitalOptions: {
 		10: 'QmUgLVEawrUuV8M6xxauDPf1W7nW7VMn6Yf7KtjbSDg46K',
-		42161: 'QmZqty5SxWqHkXznX3VBQ2oPUT3uzWmWdVznTPNLKpKxEf',
-		8453: 'QmQRj8CnyKYT1dHVuXDVLQFLLHXik4GUfoemjRSnmsJvs9',
+		42161: 'QmctjL39winw3G1WetmVhwHYwctXgp1LYK8GYEExSNQSzA',
+		8453: 'QmTAnoQoWMwQGskiYbaYRAHPQNi7Qoq1r2aUS11t2D8kpp',
 		1: '',
-		137: 'QmSz5FuLoLsrkLdvmmsvaChy6jbgei6aQxAcBXMURy5k66',
+		137: 'QmarczrQUEpWMA73sGRgaQCCAzZ6EJnwntQUfgbdsVcjqy',
 	},
 	DigitalOptionsLP: {
-		10: 'QmVPvbgX78CSidKtKmUc7CzEomoyh8JJDUreh1878m48c4',
+		10: 'QmXhBxrvRGrq1538YmuLjCyJNdAop74iF1jpbKpXve3AxG',
 		42161: '',
 		8453: '',
 		1: '',
@@ -105,13 +105,6 @@ const LAST_DEPLOYMENT_IDS = {
 	TaleOfThales: {
 		10: 'QmUWHqAcH5FutcVBmGJYFfquu98CXrVSPLjWRbveV1GnDG',
 		42161: 'Qmc17HAy8QZWSz3agp2xVw3FneavNuP7Z5ZNXtJNMdypA1',
-		8453: '',
-		1: '',
-		137: '',
-	},
-	TradeRewards: {
-		10: 'QmVykqjYvVG8mrsgWWyZ9ugUu1v8gQvgZdbhYfHNyfoVGM',
-		42161: '',
 		8453: '',
 		1: '',
 		137: '',
