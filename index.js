@@ -92,6 +92,7 @@ module.exports = {
 			maxTimestamp = undefined,
 			minMaturity = undefined,
 			maxMaturity = undefined,
+			manager = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -109,6 +110,7 @@ module.exports = {
 							timestamp_lte: maxTimestamp || undefined,
 							maturityDate_gte: minMaturity || undefined,
 							maturityDate_lte: maxMaturity || undefined,
+							managerAddress: manager ? `\\"${manager}\\"` : undefined,
 						},
 					},
 					properties: [

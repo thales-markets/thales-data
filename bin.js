@@ -29,11 +29,12 @@ program
 	.option('-o, --isOpen', 'If the market is open or not')
 	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
 	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-M, --manager <value>', 'The address of the market manager')
 	.option('-n, --network <value>', 'The network', 10)
 
-	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp, network }) => {
+	.action(async ({ max, creator, isOpen, minTimestamp, maxTimestamp, manager, network }) => {
 		binaryOptions
-			.markets({ max, creator, isOpen, minTimestamp, maxTimestamp, network })
+			.markets({ max, creator, isOpen, minTimestamp, maxTimestamp, manager, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
