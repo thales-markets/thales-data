@@ -183,6 +183,7 @@ module.exports = {
 			minMaturity = undefined,
 			maxMaturity = undefined,
 			currencyKey = undefined,
+			manager = undefined,
 			network = 10,
 			marketIds = [],
 		} = {}) {
@@ -207,6 +208,7 @@ module.exports = {
 							leftMarket: leftMarket ? `\\"${leftMarket}\\"` : undefined,
 							rightMarket: rightMarket ? `\\"${rightMarket}\\"` : undefined,
 							id_in: marketIdsWithQuotes.length ? `[${marketIdsWithQuotes}]` : undefined,
+							managerAddress: manager ? `\\"${manager}\\"` : undefined,
 						},
 					},
 					properties: [
