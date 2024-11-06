@@ -13,7 +13,12 @@ const convertAmount = (amount, networkId, address) => {
 		if (!address) return amount / 1e6;
 	}
 	if (networkId == 42161) {
-		if (address && address == '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8') return amount / 1e6;
+		if (
+			address &&
+			(address == '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8' ||
+				address == '0xea4c2343fd3c239c23dd37dd3ee51aec84544735')
+		)
+			return amount / 1e6;
 		if (!address) return amount / 1e6;
 	}
 	if (networkId == 8453) {
