@@ -137,45 +137,50 @@ module.exports = {
 						'managerAddress',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						customMarket,
-						customOracle,
-						id,
-						timestamp,
-						creator,
-						currencyKey,
-						strikePrice,
-						maturityDate,
-						expiryDate,
-						isOpen,
-						poolSize,
-						longAddress,
-						shortAddress,
-						result,
-						finalPrice,
-						managerAddress,
-					}) => ({
-						customMarket,
-						customOracle,
-						address: id,
-						timestamp: Number(timestamp * 1000),
-						creator,
-						currencyKey: hexToAscii(currencyKey),
-						strikePrice: strikePrice / 1e18,
-						maturityDate: Number(maturityDate) * 1000,
-						expiryDate: Number(expiryDate) * 1000,
-						isOpen,
-						poolSize: poolSize / 1e18,
-						longAddress,
-						shortAddress,
-						result: result !== null ? (result === 0 ? 'long' : 'short') : null,
-						finalPrice: finalPrice / 1e18,
-						managerAddress,
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							customMarket,
+							customOracle,
+							id,
+							timestamp,
+							creator,
+							currencyKey,
+							strikePrice,
+							maturityDate,
+							expiryDate,
+							isOpen,
+							poolSize,
+							longAddress,
+							shortAddress,
+							result,
+							finalPrice,
+							managerAddress,
+						}) => ({
+							customMarket,
+							customOracle,
+							address: id,
+							timestamp: Number(timestamp * 1000),
+							creator,
+							currencyKey: hexToAscii(currencyKey),
+							strikePrice: strikePrice / 1e18,
+							maturityDate: Number(maturityDate) * 1000,
+							expiryDate: Number(expiryDate) * 1000,
+							isOpen,
+							poolSize: poolSize / 1e18,
+							longAddress,
+							shortAddress,
+							result: result !== null ? (result === 0 ? 'long' : 'short') : null,
+							finalPrice: finalPrice / 1e18,
+							managerAddress,
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.markets', error);
+					throw error;
+				});
 		},
 		rangedMarkets({
 			max = Infinity,
@@ -234,43 +239,48 @@ module.exports = {
 						'managerAddress',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						currencyKey,
-						maturityDate,
-						expiryDate,
-						leftPrice,
-						rightPrice,
-						inAddress,
-						outAddress,
-						leftMarket,
-						rightMarket,
-						isOpen,
-						result,
-						finalPrice,
-						managerAddress,
-					}) => ({
-						address: id,
-						timestamp: Number(timestamp * 1000),
-						currencyKey: hexToAscii(currencyKey),
-						maturityDate: Number(maturityDate) * 1000,
-						expiryDate: Number(expiryDate) * 1000,
-						leftPrice: leftPrice / 1e18,
-						rightPrice: rightPrice / 1e18,
-						inAddress,
-						outAddress,
-						leftMarket,
-						rightMarket,
-						isOpen,
-						result: result !== null ? (result === 0 ? 'in' : 'out') : null,
-						finalPrice: finalPrice / 1e18,
-						managerAddress,
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							timestamp,
+							currencyKey,
+							maturityDate,
+							expiryDate,
+							leftPrice,
+							rightPrice,
+							inAddress,
+							outAddress,
+							leftMarket,
+							rightMarket,
+							isOpen,
+							result,
+							finalPrice,
+							managerAddress,
+						}) => ({
+							address: id,
+							timestamp: Number(timestamp * 1000),
+							currencyKey: hexToAscii(currencyKey),
+							maturityDate: Number(maturityDate) * 1000,
+							expiryDate: Number(expiryDate) * 1000,
+							leftPrice: leftPrice / 1e18,
+							rightPrice: rightPrice / 1e18,
+							inAddress,
+							outAddress,
+							leftMarket,
+							rightMarket,
+							isOpen,
+							result: result !== null ? (result === 0 ? 'in' : 'out') : null,
+							finalPrice: finalPrice / 1e18,
+							managerAddress,
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.rangedMarkets', error);
+					throw error;
+				});
 		},
 		optionTransactions({
 			max = Infinity,
@@ -310,37 +320,42 @@ module.exports = {
 						'managerAddress',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						type,
-						account,
-						currencyKey,
-						isRangedMarket,
-						side,
-						amount,
-						market,
-						fee,
-						blockNumber,
-						managerAddress,
-					}) => ({
-						hash: getHashFromId(id),
-						timestamp: Number(timestamp * 1000),
-						type,
-						account,
-						currencyKey: currencyKey ? hexToAscii(currencyKey) : null,
-						side: isRangedMarket ? (side === 0 ? 'in' : 'out') : side === 0 ? 'long' : 'short',
-						isRangedMarket,
-						amount: amount / 1e18,
-						market,
-						fee: fee ? fee / 1e18 : null,
-						blockNumber: Number(blockNumber),
-						managerAddress,
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							timestamp,
+							type,
+							account,
+							currencyKey,
+							isRangedMarket,
+							side,
+							amount,
+							market,
+							fee,
+							blockNumber,
+							managerAddress,
+						}) => ({
+							hash: getHashFromId(id),
+							timestamp: Number(timestamp * 1000),
+							type,
+							account,
+							currencyKey: currencyKey ? hexToAscii(currencyKey) : null,
+							side: isRangedMarket ? (side === 0 ? 'in' : 'out') : side === 0 ? 'long' : 'short',
+							isRangedMarket,
+							amount: amount / 1e18,
+							market,
+							fee: fee ? fee / 1e18 : null,
+							blockNumber: Number(blockNumber),
+							managerAddress,
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.optionTransactions', error);
+					throw error;
+				});
 		},
 		trades({
 			max = Infinity,
@@ -389,43 +404,48 @@ module.exports = {
 						'ammAddress',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						transactionHash,
-						timestamp,
-						orderHash,
-						maker,
-						taker,
-						makerToken,
-						takerToken,
-						makerAmount,
-						takerAmount,
-						market,
-						orderSide,
-						optionSide,
-						blockNumber,
-						ammAddress,
-					}) => ({
-						id,
-						transactionHash,
-						timestamp: Number(timestamp * 1000),
-						orderHash,
-						maker,
-						taker,
-						makerToken,
-						takerToken,
-						makerAmount: convertAmount(makerAmount, network, makerToken),
-						takerAmount: convertAmount(takerAmount, network, takerToken),
-						market,
-						orderSide,
-						optionSide,
-						blockNumber: Number(blockNumber),
-						ammAddress,
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							transactionHash,
+							timestamp,
+							orderHash,
+							maker,
+							taker,
+							makerToken,
+							takerToken,
+							makerAmount,
+							takerAmount,
+							market,
+							orderSide,
+							optionSide,
+							blockNumber,
+							ammAddress,
+						}) => ({
+							id,
+							transactionHash,
+							timestamp: Number(timestamp * 1000),
+							orderHash,
+							maker,
+							taker,
+							makerToken,
+							takerToken,
+							makerAmount: convertAmount(makerAmount, network, makerToken),
+							takerAmount: convertAmount(takerAmount, network, takerToken),
+							market,
+							orderSide,
+							optionSide,
+							blockNumber: Number(blockNumber),
+							ammAddress,
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.trades', error);
+					throw error;
+				});
 		},
 		positionBalances({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -447,16 +467,21 @@ module.exports = {
 						'managerAddress',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, account, amount, paid, position, managerAddress }) => ({
-					id,
-					account,
-					amount,
-					paid,
-					position,
-					managerAddress,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, account, amount, paid, position, managerAddress }) => ({
+						id,
+						account,
+						amount,
+						paid,
+						position,
+						managerAddress,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.positionBalances', error);
+					throw error;
+				});
 		},
 		rangedPositionBalances({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -478,16 +503,21 @@ module.exports = {
 						'managerAddress',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, account, amount, paid, position, managerAddress }) => ({
-					id,
-					account,
-					amount,
-					paid,
-					position,
-					managerAddress,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, account, amount, paid, position, managerAddress }) => ({
+						id,
+						account,
+						amount,
+						paid,
+						position,
+						managerAddress,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.rangedPositionBalances', error);
+					throw error;
+				});
 		},
 		accountBuyVolumes({
 			max = Infinity,
@@ -514,16 +544,21 @@ module.exports = {
 					},
 					properties: ['id', 'timestamp', 'type', 'account', 'amount', 'ammAddress'],
 				},
-			}).then(results =>
-				results.map(({ id, timestamp, type, account, amount, ammAddress }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: amount / 1e18,
-					ammAddress,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, timestamp, type, account, amount, ammAddress }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount: amount / 1e18,
+						ammAddress,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.accountBuyVolumes', error);
+					throw error;
+				});
 		},
 		referrers({ max = Infinity, address = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -538,15 +573,20 @@ module.exports = {
 					},
 					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
 				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: convertAmount(totalVolume, network),
-					totalEarned: convertAmount(totalEarned, network),
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
+						id,
+						trades: Number(trades),
+						totalVolume: convertAmount(totalVolume, network),
+						totalEarned: convertAmount(totalEarned, network),
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.referrers', error);
+					throw error;
+				});
 		},
 		referralTransfers({ max = Infinity, trader = undefined, referrer = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -562,16 +602,21 @@ module.exports = {
 					},
 					properties: ['id', 'refferer', 'trader', 'amount', 'volume', 'timestamp'],
 				},
-			}).then(results =>
-				results.map(({ id, refferer, trader, amount, volume, timestamp }) => ({
-					id,
-					refferer,
-					trader,
-					amount: convertAmount(amount, network),
-					volume: convertAmount(volume, network),
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, refferer, trader, amount, volume, timestamp }) => ({
+						id,
+						refferer,
+						trader,
+						amount: convertAmount(amount, network),
+						volume: convertAmount(volume, network),
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.referralTransfers', error);
+					throw error;
+				});
 		},
 		referredTraders({ max = Infinity, referrer = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -586,16 +631,21 @@ module.exports = {
 					},
 					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'refferer { id }', 'timestamp'],
 				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: convertAmount(totalVolume, network),
-					totalEarned: convertAmount(totalEarned, network),
-					refferer,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, trades, totalVolume, totalEarned, refferer, timestamp }) => ({
+						id,
+						trades: Number(trades),
+						totalVolume: convertAmount(totalVolume, network),
+						totalEarned: convertAmount(totalEarned, network),
+						refferer,
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.referredTraders', error);
+					throw error;
+				});
 		},
 
 		tokenTransactions({
@@ -637,21 +687,26 @@ module.exports = {
 						'feeRewards',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({ id, timestamp, type, account, amount, blockNumber, protocolRewards, destAccount, feeRewards }) => ({
-						hash: getHashFromId(id),
-						timestamp: Number(timestamp * 1000),
-						type,
-						account,
-						destAccount,
-						amount: amount / 1e18,
-						feeRewards: convertAmount(Number(feeRewards), network),
-						protocolRewards: protocolRewards / 1e18,
-						blockNumber: Number(blockNumber),
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({ id, timestamp, type, account, amount, blockNumber, protocolRewards, destAccount, feeRewards }) => ({
+							hash: getHashFromId(id),
+							timestamp: Number(timestamp * 1000),
+							type,
+							account,
+							destAccount,
+							amount: amount / 1e18,
+							feeRewards: convertAmount(Number(feeRewards), network),
+							protocolRewards: protocolRewards / 1e18,
+							blockNumber: Number(blockNumber),
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.tokenTransactions', error);
+					throw error;
+				});
 		},
 		stakers({ max = Infinity, network = 10 } = {}) {
 			return pageResults({
@@ -665,16 +720,21 @@ module.exports = {
 					},
 					properties: ['id', 'timestamp', 'stakedAmount', 'escrowedAmount', 'totalStakedAmount', 'unstakingAmount'],
 				},
-			}).then(results =>
-				results.map(({ id, timestamp, stakedAmount, escrowedAmount, totalStakedAmount, unstakingAmount }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					stakedAmount: stakedAmount / 1e18,
-					escrowedAmount: escrowedAmount / 1e18,
-					totalStakedAmount: totalStakedAmount / 1e18,
-					unstakingAmount: unstakingAmount / 1e18,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, timestamp, stakedAmount, escrowedAmount, totalStakedAmount, unstakingAmount }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						stakedAmount: stakedAmount / 1e18,
+						escrowedAmount: escrowedAmount / 1e18,
+						totalStakedAmount: totalStakedAmount / 1e18,
+						unstakingAmount: unstakingAmount / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.stakers', error);
+					throw error;
+				});
 		},
 		canClaimOnBehalfItems({
 			max = Infinity,
@@ -699,16 +759,21 @@ module.exports = {
 					},
 					properties: ['id', 'transactionHash', 'timestamp', 'sender', 'account', 'canClaimOnBehalf'],
 				},
-			}).then(results =>
-				results.map(({ id, transactionHash, timestamp, sender, account, canClaimOnBehalf }) => ({
-					id,
-					hash: transactionHash,
-					timestamp: Number(timestamp * 1000),
-					sender,
-					account,
-					canClaimOnBehalf,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, transactionHash, timestamp, sender, account, canClaimOnBehalf }) => ({
+						id,
+						hash: transactionHash,
+						timestamp: Number(timestamp * 1000),
+						sender,
+						account,
+						canClaimOnBehalf,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.canClaimOnBehalfItems', error);
+					throw error;
+				});
 		},
 		vaultTransactions({
 			max = Infinity,
@@ -751,20 +816,25 @@ module.exports = {
 						'round',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					hash,
-					market,
-					vault,
-					amount: Number(amount) / 1e18,
-					paid: convertAmount(Number(paid), network),
-					position: Number(position),
-					wholeMarket,
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						hash,
+						market,
+						vault,
+						amount: Number(amount) / 1e18,
+						paid: convertAmount(Number(paid), network),
+						position: Number(position),
+						wholeMarket,
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.vaultTransactions', error);
+					throw error;
+				});
 		},
 		vaultPnls({
 			max = Infinity,
@@ -789,15 +859,20 @@ module.exports = {
 					},
 					properties: ['id', 'vault', 'timestamp', 'round', 'pnl'],
 				},
-			}).then(results =>
-				results.map(({ id, vault, timestamp, round, pnl }) => ({
-					id,
-					vault,
-					timestamp,
-					round: Number(round),
-					pnl: Number(pnl) / 1e18,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, vault, timestamp, round, pnl }) => ({
+						id,
+						vault,
+						timestamp,
+						round: Number(round),
+						pnl: Number(pnl) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.vaultPnls', error);
+					throw error;
+				});
 		},
 		vaultUserTransactions({
 			max = Infinity,
@@ -826,18 +901,23 @@ module.exports = {
 					},
 					properties: ['id', 'vault', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
 				},
-			}).then(results =>
-				results.map(({ id, vault, hash, timestamp, type, account, amount, round }) => ({
-					id,
-					vault,
-					hash,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: convertAmount(Number(amount), network),
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, vault, hash, timestamp, type, account, amount, round }) => ({
+						id,
+						vault,
+						hash,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount: convertAmount(Number(amount), network),
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.vaultUserTransactions', error);
+					throw error;
+				});
 		},
 		liquidityPoolPnls({
 			max = Infinity,
@@ -862,15 +942,20 @@ module.exports = {
 					},
 					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl'],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
-					id,
-					liquidityPool,
-					timestamp,
-					round: Number(round),
-					pnl: Number(pnl) / 1e18,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
+						id,
+						liquidityPool,
+						timestamp,
+						round: Number(round),
+						pnl: Number(pnl) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.liquidityPoolPnls', error);
+					throw error;
+				});
 		},
 		liquidityPoolUserTransactions({
 			max = Infinity,
@@ -901,18 +986,23 @@ module.exports = {
 					},
 					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
-					id,
-					liquidityPool,
-					hash,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: convertAmount(amount, network, liquidityPool),
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
+						id,
+						liquidityPool,
+						hash,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount: convertAmount(amount, network, liquidityPool),
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.liquidityPoolUserTransactions', error);
+					throw error;
+				});
 		},
 		mintTransactions({ max = Infinity, minter = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -929,13 +1019,18 @@ module.exports = {
 					},
 					properties: ['id', 'minter', 'item {id, type}'],
 				},
-			}).then(results =>
-				results.map(({ id, minter, item }) => ({
-					id,
-					minter,
-					item,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, minter, item }) => ({
+						id,
+						minter,
+						item,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.mintTransactions', error);
+					throw error;
+				});
 		},
 		stakings({ max = Infinity, period = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -952,12 +1047,17 @@ module.exports = {
 					},
 					properties: ['id', 'period'],
 				},
-			}).then(results =>
-				results.map(({ id, period }) => ({
-					id,
-					period: Number(period),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, period }) => ({
+						id,
+						period: Number(period),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.stakings', error);
+					throw error;
+				});
 		},
 		stakingClaims({ max = Infinity, period = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -983,29 +1083,34 @@ module.exports = {
 						'feesRewards ',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						period,
-						baseThalesClaimed,
-						extraThalesClaimed,
-						feesClaimed,
-						baseRewards,
-						extraRewards,
-						feesRewards,
-					}) => ({
-						id,
-						period: Number(period),
-						baseThalesClaimed: baseThalesClaimed / 1e18,
-						extraThalesClaimed: extraThalesClaimed / 1e18,
-						feesClaimed: convertAmount(Number(feesClaimed), network),
-						baseRewards: baseRewards / 1e18,
-						extraRewards: extraRewards / 1e18,
-						feesRewards: convertAmount(Number(feesRewards), network),
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							period,
+							baseThalesClaimed,
+							extraThalesClaimed,
+							feesClaimed,
+							baseRewards,
+							extraRewards,
+							feesRewards,
+						}) => ({
+							id,
+							period: Number(period),
+							baseThalesClaimed: baseThalesClaimed / 1e18,
+							extraThalesClaimed: extraThalesClaimed / 1e18,
+							feesClaimed: convertAmount(Number(feesClaimed), network),
+							baseRewards: baseRewards / 1e18,
+							extraRewards: extraRewards / 1e18,
+							feesRewards: convertAmount(Number(feesRewards), network),
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data binaryOptions.stakingClaims', error);
+					throw error;
+				});
 		},
 	},
 	sportMarkets: {
@@ -1083,90 +1188,95 @@ module.exports = {
 						'playerPropsScore ',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						timestamp,
-						address,
-						gameId,
-						maturityDate,
-						tags,
-						isOpen,
-						isResolved,
-						isCanceled,
-						finalResult,
-						poolSize,
-						numberOfParticipants,
-						homeTeam,
-						awayTeam,
-						homeOdds,
-						awayOdds,
-						drawOdds,
-						homeScore,
-						awayScore,
-						isApex,
-						resultDetails,
-						isPaused,
-						leagueRaceName,
-						qualifyingStartTime,
-						arePostQualifyingOddsFetched,
-						betType,
-						parentMarket,
-						spread,
-						total,
-						doubleChanceMarketType,
-						playerId,
-						playerName,
-						playerPropsLine,
-						playerPropsType,
-						playerPropsOutcome,
-						playerPropsScore,
-					}) => ({
-						id,
-						timestamp: Number(timestamp * 1000),
-						address,
-						gameId,
-						maturityDate: Number(maturityDate * 1000),
-						tags,
-						isOpen,
-						isResolved,
-						isCanceled,
-						finalResult: Number(finalResult),
-						poolSize: poolSize / 1e18,
-						homeTeam,
-						awayTeam,
-						numberOfParticipants: Number(numberOfParticipants),
-						homeOdds: homeOdds / 1e18,
-						awayOdds: awayOdds / 1e18,
-						drawOdds: drawOdds / 1e18,
-						homeScore: Number(homeScore),
-						awayScore: Number(awayScore),
-						isApex,
-						resultDetails,
-						isPaused,
-						leagueRaceName,
-						qualifyingStartTime:
-							qualifyingStartTime !== undefined && qualifyingStartTime !== null
-								? Number(qualifyingStartTime * 1000)
-								: null,
-						arePostQualifyingOddsFetched,
-						betType: betType !== undefined && betType !== null ? Number(betType) : 0,
-						parentMarket,
-						spread: Number(spread),
-						total: Number(total),
-						doubleChanceMarketType,
-						playerId,
-						playerName,
-						playerPropsLine:
-							playerPropsLine !== undefined && playerPropsLine !== null ? Number(playerPropsLine) / 100 : 0,
-						playerPropsType: playerPropsType !== undefined && playerPropsType !== null ? Number(playerPropsType) : 0,
-						playerPropsOutcome,
-						playerPropsScore:
-							playerPropsScore !== undefined && playerPropsScore !== null ? Number(playerPropsScore) : 0,
-					}),
-				),
-			);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							timestamp,
+							address,
+							gameId,
+							maturityDate,
+							tags,
+							isOpen,
+							isResolved,
+							isCanceled,
+							finalResult,
+							poolSize,
+							numberOfParticipants,
+							homeTeam,
+							awayTeam,
+							homeOdds,
+							awayOdds,
+							drawOdds,
+							homeScore,
+							awayScore,
+							isApex,
+							resultDetails,
+							isPaused,
+							leagueRaceName,
+							qualifyingStartTime,
+							arePostQualifyingOddsFetched,
+							betType,
+							parentMarket,
+							spread,
+							total,
+							doubleChanceMarketType,
+							playerId,
+							playerName,
+							playerPropsLine,
+							playerPropsType,
+							playerPropsOutcome,
+							playerPropsScore,
+						}) => ({
+							id,
+							timestamp: Number(timestamp * 1000),
+							address,
+							gameId,
+							maturityDate: Number(maturityDate * 1000),
+							tags,
+							isOpen,
+							isResolved,
+							isCanceled,
+							finalResult: Number(finalResult),
+							poolSize: poolSize / 1e18,
+							homeTeam,
+							awayTeam,
+							numberOfParticipants: Number(numberOfParticipants),
+							homeOdds: homeOdds / 1e18,
+							awayOdds: awayOdds / 1e18,
+							drawOdds: drawOdds / 1e18,
+							homeScore: Number(homeScore),
+							awayScore: Number(awayScore),
+							isApex,
+							resultDetails,
+							isPaused,
+							leagueRaceName,
+							qualifyingStartTime:
+								qualifyingStartTime !== undefined && qualifyingStartTime !== null
+									? Number(qualifyingStartTime * 1000)
+									: null,
+							arePostQualifyingOddsFetched,
+							betType: betType !== undefined && betType !== null ? Number(betType) : 0,
+							parentMarket,
+							spread: Number(spread),
+							total: Number(total),
+							doubleChanceMarketType,
+							playerId,
+							playerName,
+							playerPropsLine:
+								playerPropsLine !== undefined && playerPropsLine !== null ? Number(playerPropsLine) / 100 : 0,
+							playerPropsType: playerPropsType !== undefined && playerPropsType !== null ? Number(playerPropsType) : 0,
+							playerPropsOutcome,
+							playerPropsScore:
+								playerPropsScore !== undefined && playerPropsScore !== null ? Number(playerPropsScore) : 0,
+						}),
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.markets', error);
+					throw error;
+				});
 		},
 		marketTransactions({
 			max = Infinity,
@@ -1216,23 +1326,28 @@ module.exports = {
 						'wholeMarket { id, timestamp, address, gameId, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, isPaused, betType, parentMarket, spread, total, doubleChanceMarketType, playerId, playerName, playerPropsLine, playerPropsType, playerPropsOutcome, playerPropsScore }',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, hash, timestamp, type, account, market, amount, paid, position, wholeMarket }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					hash,
-					type,
-					account,
-					market,
-					amount: Number(amount) / 1e18,
-					paid: convertAmount(Number(paid), network),
-					position: Number(position),
-					wholeMarket: {
-						...wholeMarket,
-						...sportMarketTypeFormatting(wholeMarket),
-					},
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, hash, timestamp, type, account, market, amount, paid, position, wholeMarket }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						hash,
+						type,
+						account,
+						market,
+						amount: Number(amount) / 1e18,
+						paid: convertAmount(Number(paid), network),
+						position: Number(position),
+						wholeMarket: {
+							...wholeMarket,
+							...sportMarketTypeFormatting(wholeMarket),
+						},
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.marketTransactions', error);
+					throw error;
+				});
 		},
 		positionBalances({
 			max = Infinity,
@@ -1265,23 +1380,28 @@ module.exports = {
 						'claimed',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, firstTxHash, account, amount, position, sUSDPaid, claimed }) => ({
-					id,
-					firstTxHash,
-					account,
-					amount,
-					position: {
-						...position,
-						market: {
-							...position.market,
-							...sportMarketTypeFormatting(position.market),
+			})
+				.then(results =>
+					results.map(({ id, firstTxHash, account, amount, position, sUSDPaid, claimed }) => ({
+						id,
+						firstTxHash,
+						account,
+						amount,
+						position: {
+							...position,
+							market: {
+								...position.market,
+								...sportMarketTypeFormatting(position.market),
+							},
 						},
-					},
-					sUSDPaid: convertAmount(Number(sUSDPaid), network),
-					claimed,
-				})),
-			);
+						sUSDPaid: convertAmount(Number(sUSDPaid), network),
+						claimed,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.positionBalances', error);
+					throw error;
+				});
 		},
 		claimTxes({
 			max = Infinity,
@@ -1321,19 +1441,24 @@ module.exports = {
 						'market { id, timestamp, address, maturityDate, tags, isOpen, isResolved, isCanceled, finalResult, poolSize, numberOfParticipants, homeTeam, awayTeam, homeOdds, awayOdds, drawOdds, homeScore, awayScore, parentMarket, betType, spread, total, doubleChanceMarketType, playerId, playerName, playerPropsLine, playerPropsType, playerPropsOutcome, playerPropsScore }',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, account, amount, timestamp, caller, market }) => ({
-					id,
-					account,
-					amount: Number(amount) / 1e18,
-					timestamp: Number(timestamp * 1000),
-					caller,
-					market: {
-						...market,
-						...sportMarketTypeFormatting(market),
-					},
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, account, amount, timestamp, caller, market }) => ({
+						id,
+						account,
+						amount: Number(amount) / 1e18,
+						timestamp: Number(timestamp * 1000),
+						caller,
+						market: {
+							...market,
+							...sportMarketTypeFormatting(market),
+						},
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.claimTxes', error);
+					throw error;
+				});
 		},
 		overtimeVouchers({ max = Infinity, address = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -1350,12 +1475,17 @@ module.exports = {
 					},
 					properties: ['id', 'address'],
 				},
-			}).then(results =>
-				results.map(({ id, address }) => ({
-					id,
-					address,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, address }) => ({
+						id,
+						address,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.overtimeVouchers', error);
+					throw error;
+				});
 		},
 		parlayMarkets({
 			max = Infinity,
@@ -1411,57 +1541,62 @@ module.exports = {
 						'won',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						txHash,
-						sportMarkets,
-						sportMarketsFromContract,
-						positions,
-						positionsFromContract,
-						marketQuotes,
-						account,
-						totalAmount,
-						sUSDPaid,
-						sUSDAfterFees,
-						totalQuote,
-						skewImpact,
-						timestamp,
-						lastGameStarts,
-						blockNumber,
-						claimed,
-						won,
-					}) => ({
-						id,
-						txHash,
-						sportMarkets: sportMarkets.map(market => {
-							return sportMarketTypeFormatting(market);
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							txHash,
+							sportMarkets,
+							sportMarketsFromContract,
+							positions,
+							positionsFromContract,
+							marketQuotes,
+							account,
+							totalAmount,
+							sUSDPaid,
+							sUSDAfterFees,
+							totalQuote,
+							skewImpact,
+							timestamp,
+							lastGameStarts,
+							blockNumber,
+							claimed,
+							won,
+						}) => ({
+							id,
+							txHash,
+							sportMarkets: sportMarkets.map(market => {
+								return sportMarketTypeFormatting(market);
+							}),
+							sportMarketsFromContract,
+							positions: positions.map(position => {
+								const market = position.market;
+								return {
+									...position,
+									market: sportMarketTypeFormatting(market),
+								};
+							}),
+							positionsFromContract,
+							marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
+							account,
+							totalAmount: Number(totalAmount) / 1e18,
+							sUSDPaid: convertAmount(Number(sUSDPaid), network),
+							sUSDAfterFees: convertAmount(Number(sUSDAfterFees), network),
+							totalQuote: Number(totalQuote) / 1e18,
+							skewImpact: Number(skewImpact) / 1e18,
+							timestamp: Number(timestamp * 1000),
+							lastGameStarts: Number(lastGameStarts * 1000),
+							blockNumber,
+							claimed,
+							won,
 						}),
-						sportMarketsFromContract,
-						positions: positions.map(position => {
-							const market = position.market;
-							return {
-								...position,
-								market: sportMarketTypeFormatting(market),
-							};
-						}),
-						positionsFromContract,
-						marketQuotes: marketQuotes ? marketQuotes.map(item => Number(item) / 1e18) : null,
-						account,
-						totalAmount: Number(totalAmount) / 1e18,
-						sUSDPaid: convertAmount(Number(sUSDPaid), network),
-						sUSDAfterFees: convertAmount(Number(sUSDAfterFees), network),
-						totalQuote: Number(totalQuote) / 1e18,
-						skewImpact: Number(skewImpact) / 1e18,
-						timestamp: Number(timestamp * 1000),
-						lastGameStarts: Number(lastGameStarts * 1000),
-						blockNumber,
-						claimed,
-						won,
-					}),
-				),
-			);
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.parlayMarkets', error);
+					throw error;
+				});
 		},
 		usersStats({ max = Infinity, network = 10, address = undefined } = {}) {
 			return pageResults({
@@ -1478,14 +1613,19 @@ module.exports = {
 					},
 					properties: ['id', 'pnl', 'volume', 'trades'],
 				},
-			}).then(results =>
-				results.map(({ id, pnl, volume, trades }) => ({
-					id,
-					pnl: Number(pnl) / 1e18,
-					volume: convertAmount(Number(volume), network),
-					trades,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, pnl, volume, trades }) => ({
+						id,
+						pnl: Number(pnl) / 1e18,
+						volume: convertAmount(Number(volume), network),
+						trades,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.usersStats', error);
+					throw error;
+				});
 		},
 		vaultTransactions({
 			max = Infinity,
@@ -1528,20 +1668,25 @@ module.exports = {
 						'round',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					hash,
-					market,
-					vault,
-					amount: Number(amount) / 1e18,
-					paid: convertAmount(Number(paid), network),
-					position: Number(position),
-					wholeMarket,
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, hash, timestamp, market, vault, amount, paid, position, wholeMarket, round }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						hash,
+						market,
+						vault,
+						amount: Number(amount) / 1e18,
+						paid: convertAmount(Number(paid), network),
+						position: Number(position),
+						wholeMarket,
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.vaultTransactions', error);
+					throw error;
+				});
 		},
 		parlayVaultTransactions({
 			max = Infinity,
@@ -1580,89 +1725,96 @@ module.exports = {
 						'round',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, hash, timestamp, market, vault, paid, wholeMarket, round }) => ({
-					id,
-					timestamp: Number(timestamp * 1000),
-					hash,
-					market,
-					vault,
-					paid: convertAmount(Number(paid), network),
-					wholeMarket: (wholeMarket => {
-						return {
-							id: wholeMarket.id,
-							txHash: wholeMarket.txHash,
-							sportMarkets: wholeMarket.sportMarkets.map(market => {
-								return {
-									id: market.id,
-									timestamp: Number(market.timestamp * 1000),
-									address: market.address,
-									maturityDate: Number(market.maturityDate * 1000),
-									tags: market.tags,
-									isOpen: market.isOpen,
-									isResolved: market.isResolved,
-									isCanceled: market.isCanceled,
-									finalResult: Number(market.finalResult),
-									poolSize: market.poolSize / 1e18,
-									homeTeam: market.homeTeam,
-									awayTeam: market.awayTeam,
-									numberOfParticipants: Number(market.numberOfParticipants),
-									homeOdds: market.homeOdds / 1e18,
-									awayOdds: market.awayOdds / 1e18,
-									drawOdds: market.drawOdds / 1e18,
-									homeScore: Number(market.homeScore),
-									awayScore: Number(market.awayScore),
-									isApex: market.isApex,
-									resultDetails: market.resultDetails,
-									isPaused: market.isPaused,
-									leagueRaceName: market.leagueRaceName,
-									qualifyingStartTime:
-										market.qualifyingStartTime !== undefined && market.qualifyingStartTime !== null
-											? Number(market.qualifyingStartTime * 1000)
-											: null,
-									arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
-									betType: market.betType !== undefined && market.betType !== null ? Number(market.betType) : 0,
-									parentMarket: market.parentMarket,
-									spread: Number(market.spread),
-									total: Number(market.total),
-									doubleChanceMarketType: market.doubleChanceMarketType,
-									playerId: market.playerId,
-									playerName: market.playerName,
-									playerPropsLine:
-										market.playerPropsLine !== undefined && market.playerPropsLine !== null
-											? Number(market.playerPropsLine) / 100
-											: 0,
-									playerPropsType:
-										market.playerPropsType !== undefined && market.playerPropsType !== null
-											? Number(market.playerPropsType)
-											: 0,
-									playerPropsOutcome: market.playerPropsOutcome,
-									playerPropsScore:
-										market.playerPropsScore !== undefined && market.playerPropsScore !== null
-											? Number(market.playerPropsScore)
-											: 0,
-								};
-							}),
-							sportMarketsFromContract: wholeMarket.sportMarketsFromContract,
-							positions: wholeMarket.positions,
-							positionsFromContract: wholeMarket.positionsFromContract,
-							marketQuotes: wholeMarket.marketQuotes ? wholeMarket.marketQuotes.map(item => Number(item) / 1e18) : null,
-							account: wholeMarket.account,
-							totalAmount: Number(wholeMarket.totalAmount) / 1e18,
-							sUSDPaid: convertAmount(Number(wholeMarket.sUSDPaid), network),
-							sUSDAfterFees: convertAmount(Number(wholeMarket.sUSDAfterFees), network),
-							totalQuote: Number(wholeMarket.totalQuote) / 1e18,
-							skewImpact: Number(wholeMarket.skewImpact) / 1e18,
-							timestamp: Number(wholeMarket.timestamp * 1000),
-							lastGameStarts: Number(wholeMarket.lastGameStarts * 1000),
-							blockNumber: wholeMarket.blockNumber,
-							claimed: wholeMarket.claimed,
-							won: wholeMarket.won,
-						};
-					})(wholeMarket),
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, hash, timestamp, market, vault, paid, wholeMarket, round }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						hash,
+						market,
+						vault,
+						paid: convertAmount(Number(paid), network),
+						wholeMarket: (wholeMarket => {
+							return {
+								id: wholeMarket.id,
+								txHash: wholeMarket.txHash,
+								sportMarkets: wholeMarket.sportMarkets.map(market => {
+									return {
+										id: market.id,
+										timestamp: Number(market.timestamp * 1000),
+										address: market.address,
+										maturityDate: Number(market.maturityDate * 1000),
+										tags: market.tags,
+										isOpen: market.isOpen,
+										isResolved: market.isResolved,
+										isCanceled: market.isCanceled,
+										finalResult: Number(market.finalResult),
+										poolSize: market.poolSize / 1e18,
+										homeTeam: market.homeTeam,
+										awayTeam: market.awayTeam,
+										numberOfParticipants: Number(market.numberOfParticipants),
+										homeOdds: market.homeOdds / 1e18,
+										awayOdds: market.awayOdds / 1e18,
+										drawOdds: market.drawOdds / 1e18,
+										homeScore: Number(market.homeScore),
+										awayScore: Number(market.awayScore),
+										isApex: market.isApex,
+										resultDetails: market.resultDetails,
+										isPaused: market.isPaused,
+										leagueRaceName: market.leagueRaceName,
+										qualifyingStartTime:
+											market.qualifyingStartTime !== undefined && market.qualifyingStartTime !== null
+												? Number(market.qualifyingStartTime * 1000)
+												: null,
+										arePostQualifyingOddsFetched: market.arePostQualifyingOddsFetched,
+										betType: market.betType !== undefined && market.betType !== null ? Number(market.betType) : 0,
+										parentMarket: market.parentMarket,
+										spread: Number(market.spread),
+										total: Number(market.total),
+										doubleChanceMarketType: market.doubleChanceMarketType,
+										playerId: market.playerId,
+										playerName: market.playerName,
+										playerPropsLine:
+											market.playerPropsLine !== undefined && market.playerPropsLine !== null
+												? Number(market.playerPropsLine) / 100
+												: 0,
+										playerPropsType:
+											market.playerPropsType !== undefined && market.playerPropsType !== null
+												? Number(market.playerPropsType)
+												: 0,
+										playerPropsOutcome: market.playerPropsOutcome,
+										playerPropsScore:
+											market.playerPropsScore !== undefined && market.playerPropsScore !== null
+												? Number(market.playerPropsScore)
+												: 0,
+									};
+								}),
+								sportMarketsFromContract: wholeMarket.sportMarketsFromContract,
+								positions: wholeMarket.positions,
+								positionsFromContract: wholeMarket.positionsFromContract,
+								marketQuotes: wholeMarket.marketQuotes
+									? wholeMarket.marketQuotes.map(item => Number(item) / 1e18)
+									: null,
+								account: wholeMarket.account,
+								totalAmount: Number(wholeMarket.totalAmount) / 1e18,
+								sUSDPaid: convertAmount(Number(wholeMarket.sUSDPaid), network),
+								sUSDAfterFees: convertAmount(Number(wholeMarket.sUSDAfterFees), network),
+								totalQuote: Number(wholeMarket.totalQuote) / 1e18,
+								skewImpact: Number(wholeMarket.skewImpact) / 1e18,
+								timestamp: Number(wholeMarket.timestamp * 1000),
+								lastGameStarts: Number(wholeMarket.lastGameStarts * 1000),
+								blockNumber: wholeMarket.blockNumber,
+								claimed: wholeMarket.claimed,
+								won: wholeMarket.won,
+							};
+						})(wholeMarket),
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.parlayVaultTransactions', error);
+					throw error;
+				});
 		},
 		vaultPnls({
 			max = Infinity,
@@ -1687,15 +1839,20 @@ module.exports = {
 					},
 					properties: ['id', 'vault', 'timestamp', 'round', 'pnl'],
 				},
-			}).then(results =>
-				results.map(({ id, vault, timestamp, round, pnl }) => ({
-					id,
-					vault,
-					timestamp,
-					round: Number(round),
-					pnl: Number(pnl) / 1e18,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, vault, timestamp, round, pnl }) => ({
+						id,
+						vault,
+						timestamp,
+						round: Number(round),
+						pnl: Number(pnl) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.vaultPnls', error);
+					throw error;
+				});
 		},
 		vaultUserTransactions({
 			max = Infinity,
@@ -1724,18 +1881,23 @@ module.exports = {
 					},
 					properties: ['id', 'vault', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
 				},
-			}).then(results =>
-				results.map(({ id, vault, hash, timestamp, type, account, amount, round }) => ({
-					id,
-					vault,
-					hash,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: convertAmount(Number(amount), network),
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, vault, hash, timestamp, type, account, amount, round }) => ({
+						id,
+						vault,
+						hash,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount: convertAmount(Number(amount), network),
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.vaultUserTransactions', error);
+					throw error;
+				});
 		},
 		zebros({ max = Infinity, account = undefined, network = 10 } = {}) {
 			return pageResults({
@@ -1752,16 +1914,21 @@ module.exports = {
 					},
 					properties: ['id', 'owner', 'tokenId', 'countryName', 'url', 'country'],
 				},
-			}).then(results =>
-				results.map(({ id, owner, tokenId, countryName, url, country }) => ({
-					id,
-					owner,
-					tokenId,
-					countryName,
-					url,
-					country,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, owner, tokenId, countryName, url, country }) => ({
+						id,
+						owner,
+						tokenId,
+						countryName,
+						url,
+						country,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.zebros', error);
+					throw error;
+				});
 		},
 		referralTransactions({
 			max = Infinity,
@@ -1802,17 +1969,22 @@ module.exports = {
 						'timestamp',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, referrer, trader, amount, volume, ammType, timestamp }) => ({
-					id,
-					referrer,
-					trader,
-					amount: convertAmount(Number(amount), network),
-					volume: convertAmount(Number(volume), network),
-					ammType,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, referrer, trader, amount, volume, ammType, timestamp }) => ({
+						id,
+						referrer,
+						trader,
+						amount: convertAmount(Number(amount), network),
+						volume: convertAmount(Number(volume), network),
+						ammType,
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.referralTransactions', error);
+					throw error;
+				});
 		},
 		referrers({
 			max = Infinity,
@@ -1839,15 +2011,20 @@ module.exports = {
 					},
 					properties: ['id', 'trades', 'totalVolume', 'totalEarned', 'timestamp'],
 				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: convertAmount(Number(totalVolume), network),
-					totalEarned: convertAmount(Number(totalEarned), network),
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, trades, totalVolume, totalEarned, timestamp }) => ({
+						id,
+						trades: Number(trades),
+						totalVolume: convertAmount(Number(totalVolume), network),
+						totalEarned: convertAmount(Number(totalEarned), network),
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.referrers', error);
+					throw error;
+				});
 		},
 		referredTraders({
 			max = Infinity,
@@ -1876,16 +2053,21 @@ module.exports = {
 					},
 					properties: ['id', 'trades', 'totalVolume', 'totalAmount', 'referrer {id}', 'timestamp'],
 				},
-			}).then(results =>
-				results.map(({ id, trades, totalVolume, totalAmount, referrer, timestamp }) => ({
-					id,
-					trades: Number(trades),
-					totalVolume: convertAmount(Number(totalVolume), network),
-					totalAmount: convertAmount(Number(totalAmount), network),
-					referrer,
-					timestamp: Number(timestamp * 1000),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, trades, totalVolume, totalAmount, referrer, timestamp }) => ({
+						id,
+						trades: Number(trades),
+						totalVolume: convertAmount(Number(totalVolume), network),
+						totalAmount: convertAmount(Number(totalAmount), network),
+						referrer,
+						timestamp: Number(timestamp * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.referredTraders', error);
+					throw error;
+				});
 		},
 		liquidityPoolPnls({
 			max = Infinity,
@@ -1912,16 +2094,21 @@ module.exports = {
 					},
 					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl', 'liquidityPoolType'],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, timestamp, round, pnl, liquidityPoolType }) => ({
-					id,
-					liquidityPool,
-					timestamp,
-					round: Number(round),
-					pnl: Number(pnl) / 1e18,
-					liquidityPoolType,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, timestamp, round, pnl, liquidityPoolType }) => ({
+						id,
+						liquidityPool,
+						timestamp,
+						round: Number(round),
+						pnl: Number(pnl) / 1e18,
+						liquidityPoolType,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.liquidityPoolPnls', error);
+					throw error;
+				});
 		},
 		liquidityPoolUserTransactions({
 			max = Infinity,
@@ -1964,19 +2151,24 @@ module.exports = {
 						'liquidityPoolType',
 					],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round, liquidityPoolType }) => ({
-					id,
-					liquidityPool,
-					hash,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount: convertAmount(amount, network),
-					round: Number(round),
-					liquidityPoolType,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round, liquidityPoolType }) => ({
+						id,
+						liquidityPool,
+						hash,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount: convertAmount(amount, network),
+						round: Number(round),
+						liquidityPoolType,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.liquidityPoolUserTransactions', error);
+					throw error;
+				});
 		},
 	},
 	sportMarketsV2: {
@@ -2022,49 +2214,54 @@ module.exports = {
 						'collateral',
 					],
 				},
-			}).then(results =>
-				results.map(
-					({
-						id,
-						txHash,
-						timestamp,
-						markets,
-						lastGameStarts,
-						owner,
-						buyInAmount,
-						payout,
-						isLive,
-						totalQuote,
-						fees,
-						collateral,
-					}) => ({
-						id,
-						txHash,
-						timestamp: Number(timestamp * 1000),
-						markets: markets.map(market => {
-							return {
-								id: market.id,
-								gameId: market.gameId,
-								typeId: Number(market.typeId),
-								maturity: Number(market.maturity * 1000),
-								status: Number(market.status),
-								line: Number(market.line) / 100,
-								playerId: Number(market.playerId),
-								position: Number(market.position),
-								odd: market.odd / 1e18,
-							};
+			})
+				.then(results =>
+					results.map(
+						({
+							id,
+							txHash,
+							timestamp,
+							markets,
+							lastGameStarts,
+							owner,
+							buyInAmount,
+							payout,
+							isLive,
+							totalQuote,
+							fees,
+							collateral,
+						}) => ({
+							id,
+							txHash,
+							timestamp: Number(timestamp * 1000),
+							markets: markets.map(market => {
+								return {
+									id: market.id,
+									gameId: market.gameId,
+									typeId: Number(market.typeId),
+									maturity: Number(market.maturity * 1000),
+									status: Number(market.status),
+									line: Number(market.line) / 100,
+									playerId: Number(market.playerId),
+									position: Number(market.position),
+									odd: market.odd / 1e18,
+								};
+							}),
+							lastGameStarts: Number(lastGameStarts * 1000),
+							owner,
+							buyInAmount: convertAmount(Number(buyInAmount), network, collateral),
+							payout: convertAmount(Number(payout), network, collateral),
+							isLive,
+							totalQuote: Number(totalQuote) / 1e18,
+							fees: convertAmount(Number(fees), network, collateral),
+							collateral,
 						}),
-						lastGameStarts: Number(lastGameStarts * 1000),
-						owner,
-						buyInAmount: convertAmount(Number(buyInAmount), network, collateral),
-						payout: convertAmount(Number(payout), network, collateral),
-						isLive,
-						totalQuote: Number(totalQuote) / 1e18,
-						fees: convertAmount(Number(fees), network, collateral),
-						collateral,
-					}),
-				),
-			);
+					),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarketsV2.tickets', error);
+					throw error;
+				});
 		},
 		liquidityPoolPnls({
 			max = Infinity,
@@ -2089,15 +2286,20 @@ module.exports = {
 					},
 					properties: ['id', 'liquidityPool', 'timestamp', 'round', 'pnl'],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
-					id,
-					liquidityPool,
-					timestamp,
-					round: Number(round),
-					pnl: Number(pnl) / 1e18,
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, timestamp, round, pnl }) => ({
+						id,
+						liquidityPool,
+						timestamp,
+						round: Number(round),
+						pnl: Number(pnl) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarketsV2.liquidityPoolPnls', error);
+					throw error;
+				});
 		},
 		liquidityPoolUserTransactions({
 			max = Infinity,
@@ -2128,18 +2330,23 @@ module.exports = {
 					},
 					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
 				},
-			}).then(results =>
-				results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
-					id,
-					liquidityPool,
-					hash,
-					timestamp: Number(timestamp * 1000),
-					type,
-					account,
-					amount,
-					round: Number(round),
-				})),
-			);
+			})
+				.then(results =>
+					results.map(({ id, liquidityPool, hash, timestamp, type, account, amount, round }) => ({
+						id,
+						liquidityPool,
+						hash,
+						timestamp: Number(timestamp * 1000),
+						type,
+						account,
+						amount,
+						round: Number(round),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarketsV2.liquidityPoolUserTransactions', error);
+					throw error;
+				});
 		},
 	},
 };
