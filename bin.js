@@ -460,4 +460,20 @@ program
 			.then(showResultCount({ max }));
 	});
 
+program
+	.command('sportMarketsV2.liquidityPoolPnls')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-g, --gameId <value>', 'Game ID', Infinity)
+	.option('-u, --isUnblocked <value>', 'Is game unblocked')
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, gameId, isUnblocked, minTimestamp, maxTimestamp, network }) => {
+		sportMarketsV2
+			.liquidityPoolPnls({ max, gameId, isUnblocked, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
 program.parse(process.argv);

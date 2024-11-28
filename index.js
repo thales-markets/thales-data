@@ -82,6 +82,7 @@ const graphAPIEndpoints = {
 	sportMarketsV2: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[10], API_KEYS.OvertimeV2), // optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[42161], API_KEYS.OvertimeV2), // arbitrum
+		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[11155420], API_KEYS.OvertimeV2), // optimism sepolia
 	},
 };
 
@@ -2345,6 +2346,48 @@ module.exports = {
 				)
 				.catch(error => {
 					console.log('Error in thales-data sportMarketsV2.liquidityPoolUserTransactions', error);
+					throw error;
+				});
+		},
+		blockedGames({
+			max = Infinity,
+			gameId = undefined,
+			isUnblocked = undefined,
+			minTimestamp = undefined,
+			maxTimestamp = undefined,
+			network = 10,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.sportMarketsV2[network],
+				max,
+				query: {
+					entity: 'blockedGames',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							gameId: gameId ? `\\"${gameId}\\"` : undefined,
+							isUnblocked: isUnblocked !== undefined ? isUnblocked : undefined,
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'hash', 'gameId', 'reason', 'isUnblocked', 'unblockedBy'],
+				},
+			})
+				.then(results =>
+					results.map(({ id, timestamp, hash, gameId, reason, isUnblocked, unblockedBy }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						hash,
+						gameId,
+						reason,
+						isUnblocked,
+						unblockedBy,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarketsV2.blockedGames', error);
 					throw error;
 				});
 		},

@@ -115,6 +115,7 @@ const LAST_DEPLOYMENT_IDS = {
 		8453: '',
 		1: '',
 		137: '',
+		11155420: 'QmR1gaeBTAo572NiMyp72TX1BCdBFk5QMj1g1JNTc6VGQ3',
 	},
 };
 
