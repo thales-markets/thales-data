@@ -110,8 +110,8 @@ const LAST_DEPLOYMENT_IDS = {
 		137: '',
 	},
 	SportsMarketsV2: {
-		10: 'QmfSiTBoZbVKKKuqgwjxx1ZZfpa9UtVJ4vGu2k6aqt2wCF',
-		42161: 'QmcuiCKfqaKb5N27UJKNyStsYjfaDztAKUfg87QYtv2p1w',
+		10: 'QmdP8FQRwUsfwmeaXabNLR9WcgoQT3Xm7LdJNusdjb7daS',
+		42161: 'QmYrFDHiDx3qC5zEMLyUWZy3yE5VT9m2SMsKdnqAWj5Uxc',
 		8453: '',
 		1: '',
 		137: '',
