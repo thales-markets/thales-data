@@ -22,7 +22,12 @@ const convertAmount = (amount, networkId, address) => {
 		if (!address) return amount / 1e6;
 	}
 	if (networkId == 8453) {
-		if (address && address == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca') return amount / 1e6;
+		if (
+			address &&
+			(address == '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca' ||
+				address == '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913')
+		)
+			return amount / 1e6;
 		if (!address) return amount / 1e6;
 	}
 	if (networkId == 10) {
@@ -82,6 +87,7 @@ const graphAPIEndpoints = {
 	sportMarketsV2: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[10], API_KEYS.OvertimeV2), // optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[42161], API_KEYS.OvertimeV2), // arbitrum
+		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[8453], API_KEYS.OvertimeV2), // base
 		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[11155420], API_KEYS.OvertimeV2), // optimism sepolia
 	},
 };
