@@ -90,6 +90,11 @@ const graphAPIEndpoints = {
 		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[8453], API_KEYS.OvertimeV2), // base
 		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.SportsMarketsV2[11155420], API_KEYS.OvertimeV2), // optimism sepolia
 	},
+
+	marchMadness: {
+		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[10], API_KEYS.MarchMadness), //  optimism
+		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[42161], API_KEYS.MarchMadness), // arbitrum
+	},
 };
 
 module.exports = {
@@ -2174,6 +2179,47 @@ module.exports = {
 				)
 				.catch(error => {
 					console.log('Error in thales-data sportMarkets.liquidityPoolUserTransactions', error);
+					throw error;
+				});
+		},
+		marchMadnessToken({
+			max = Infinity,
+			minter = undefined,
+			network = 420,
+			minCreatedTimestamp = undefined,
+			maxCreatedTimestamp = undefined,
+		} = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.marchMadness[network],
+				max,
+				query: {
+					entity: 'tokens',
+					selection: {
+						orderBy: 'itemId',
+						orderDirection: 'asc',
+						where: {
+							minter: minter ? `\\"${minter}\\"` : undefined,
+							createdAt_gte: minCreatedTimestamp || undefined,
+							createdAt_lte: maxCreatedTimestamp || undefined,
+						},
+					},
+					properties: ['id', 'createdHash', 'lastUpdateHash', 'minter', 'itemId', 'brackets', 'createdAt', 'updatedAt'],
+				},
+			})
+				.then(results =>
+					results.map(({ id, createdHash, lastUpdateHash, minter, itemId, brackets, createdAt, updatedAt }) => ({
+						id,
+						createdHash,
+						lastUpdateHash,
+						minter,
+						itemId,
+						brackets,
+						createdAt: Number(createdAt * 1000),
+						updatedAt: Number(updatedAt * 1000),
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data sportMarkets.marchMadnessToken', error);
 					throw error;
 				});
 		},
