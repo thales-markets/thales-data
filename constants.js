@@ -101,6 +101,7 @@ const LAST_DEPLOYMENT_IDS = {
 		8453: '',
 		1: '',
 		137: '',
+		11155420: 'QmNMJkmKc2H1bQZLHb6WpCki6KKRURe5xqd3H1H2PM55PF',
 	},
 	TaleOfThales: {
 		10: 'QmUWHqAcH5FutcVBmGJYFfquu98CXrVSPLjWRbveV1GnDG',

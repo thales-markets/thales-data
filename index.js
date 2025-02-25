@@ -94,6 +94,7 @@ const graphAPIEndpoints = {
 	marchMadness: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[10], API_KEYS.MarchMadness), //  optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[42161], API_KEYS.MarchMadness), // arbitrum
+		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[11155420], API_KEYS.MarchMadness), // optimism sepolia
 	},
 };
 
