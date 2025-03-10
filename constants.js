@@ -97,7 +97,7 @@ const LAST_DEPLOYMENT_IDS = {
 	},
 	MarchMadness: {
 		10: 'QmYetKzc4ejBxu2YYsKoAJwJw8yN5Nu2XoXjJfRMVLqkSn',
-		42161: 'QmSnKk6M4QcTzFo4KvstvtNQDjLNdswFoT85JcmzrM6NUp',
+		42161: 'QmRPjR5CvEbS1zfyjZJxTCDp7GX25rGiBoAS4Dox9q5aQj',
 		8453: '',
 		1: '',
 		137: '',
