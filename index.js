@@ -94,6 +94,7 @@ const graphAPIEndpoints = {
 	marchMadness: {
 		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[10], API_KEYS.MarchMadness), //  optimism
 		42161: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[42161], API_KEYS.MarchMadness), // arbitrum
+		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[8453], API_KEYS.MarchMadness), // base
 		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[11155420], API_KEYS.MarchMadness), // optimism sepolia
 	},
 };
@@ -2186,7 +2187,7 @@ module.exports = {
 		marchMadnessToken({
 			max = Infinity,
 			minter = undefined,
-			network = 420,
+			network = 10,
 			minCreatedTimestamp = undefined,
 			maxCreatedTimestamp = undefined,
 		} = {}) {
