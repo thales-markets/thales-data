@@ -3,7 +3,7 @@
 const program = require('commander');
 const stringify = require('csv-stringify');
 
-const { binaryOptions, sportMarkets, sportMarketsV2 } = require('.');
+const { binaryOptions, sportMarkets, sportMarketsV2, overToken } = require('.');
 
 const logResults = ({ json, csv } = {}) => results => {
 	if (json) {
@@ -451,11 +451,12 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
+	.option('-d, --defaultLiquidityPool <value>', 'The default liquidity pool address')
 	.option('-n, --network <value>', 'The network', 10)
 
-	.action(async ({ max, liquidityPool, type, account, network }) => {
+	.action(async ({ max, liquidityPool, type, account, defaultLiquidityPool, network }) => {
 		sportMarketsV2
-			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, network })
+			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, defaultLiquidityPool, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});
@@ -472,6 +473,34 @@ program
 	.action(async ({ max, gameId, isUnblocked, minTimestamp, maxTimestamp, network }) => {
 		sportMarketsV2
 			.liquidityPoolPnls({ max, gameId, isUnblocked, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('overToken.buybackTransactions')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, minTimestamp, maxTimestamp, network }) => {
+		overToken
+			.buybackTransactions({ max, minTimestamp, maxTimestamp, network })
+			.then(logResults())
+			.then(showResultCount({ max }));
+	});
+
+program
+	.command('overToken.buybackByDates')
+	.option('-m, --max <value>', 'Maximum number of results', Infinity)
+	.option('-t, --minTimestamp <value>', 'The oldest timestamp to include, if any')
+	.option('-T, --maxTimestamp <value>', 'The youngest timestamp to include, if any')
+	.option('-n, --network <value>', 'The network', 10)
+
+	.action(async ({ max, minTimestamp, maxTimestamp, network }) => {
+		overToken
+			.buybackByDates({ max, minTimestamp, maxTimestamp, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

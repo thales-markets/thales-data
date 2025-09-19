@@ -5,6 +5,7 @@ const API_KEYS = {
 	MarchMadness: '9ab2d34bfd0ca23bf69102403c4631f3',
 	TaleOfThales: '2c6305efe0806f0160e111f5f03e600d',
 	OvertimeV2: '9e4d7057d40ebc4a5a3b672cd67d2994',
+	OverToken: 'b39cf80d046bac15a487990b1e129b59',
 };
 
 const SUBGRAPH_IDS = {
@@ -117,6 +118,9 @@ const LAST_DEPLOYMENT_IDS = {
 		1: '',
 		137: '',
 		11155420: 'QmR1gaeBTAo572NiMyp72TX1BCdBFk5QMj1g1JNTc6VGQ3',
+	},
+	OverToken: {
+		10: 'QmbjcreoUyAkC3DoXCuoVjHxGyJWcE1UaB8c168j4nnzNP',
 	},
 };
 

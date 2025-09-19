@@ -97,6 +97,10 @@ const graphAPIEndpoints = {
 		8453: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[8453], API_KEYS.MarchMadness), // base
 		11155420: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.MarchMadness[11155420], API_KEYS.MarchMadness), // optimism sepolia
 	},
+
+	overToken: {
+		10: getGraphStudioLatestDeploymentUrl(LAST_DEPLOYMENT_IDS.OverToken[10], API_KEYS.OverToken), // optimism
+	},
 };
 
 module.exports = {
@@ -2364,6 +2368,7 @@ module.exports = {
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			round = undefined,
+			defaultLiquidityPool = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -2381,6 +2386,7 @@ module.exports = {
 							round: round ? round : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+							account_not: defaultLiquidityPool ? `\\"${defaultLiquidityPool}\\"` : undefined,
 						},
 					},
 					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
@@ -2442,6 +2448,70 @@ module.exports = {
 				)
 				.catch(error => {
 					console.log('Error in thales-data sportMarketsV2.blockedGames', error);
+					throw error;
+				});
+		},
+	},
+	overToken: {
+		buybackTransactions({ max = Infinity, minTimestamp = undefined, maxTimestamp = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.overToken[network],
+				max,
+				query: {
+					entity: 'buybackTransactions',
+					selection: {
+						orderBy: 'timestamp',
+						orderDirection: 'desc',
+						where: {
+							timestamp_gte: minTimestamp ? minTimestamp : undefined,
+							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'timestamp', 'transactionHash', 'amountIn', 'amountOut'],
+				},
+			})
+				.then(results =>
+					results.map(({ id, timestamp, transactionHash, amountIn, amountOut }) => ({
+						id,
+						timestamp: Number(timestamp * 1000),
+						transactionHash,
+						amountIn: Number(amountIn) / 1e6,
+						amountOut: Number(amountOut) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data overToken.buybackTransactions', error);
+					throw error;
+				});
+		},
+		buybackByDates({ max = Infinity, minTimestamp = undefined, maxTimestamp = undefined, network = 10 } = {}) {
+			return pageResults({
+				api: graphAPIEndpoints.overToken[network],
+				max,
+				query: {
+					entity: 'buybackByDates',
+					selection: {
+						orderBy: 'lastUpdate',
+						orderDirection: 'desc',
+						where: {
+							lastUpdate_gte: minTimestamp ? minTimestamp : undefined,
+							lastUpdate_lte: maxTimestamp ? maxTimestamp : undefined,
+						},
+					},
+					properties: ['id', 'lastUpdate', 'date', 'amountIn', 'amountOut'],
+				},
+			})
+				.then(results =>
+					results.map(({ id, lastUpdate, date, amountIn, amountOut }) => ({
+						id,
+						lastUpdate: Number(lastUpdate * 1000),
+						date,
+						amountIn: Number(amountIn) / 1e6,
+						amountOut: Number(amountOut) / 1e18,
+					})),
+				)
+				.catch(error => {
+					console.log('Error in thales-data overToken.buybackByDates', error);
 					throw error;
 				});
 		},
