@@ -451,11 +451,12 @@ program
 	.option('-v, --liquidityPool <value>', 'The liquidity pool address')
 	.option('-t, --type <value>', 'The transaction type')
 	.option('-a, --account <value>', 'The account address')
+	.option('-d, --defaultLiquidityPool <value>', 'The default liquidity pool address')
 	.option('-n, --network <value>', 'The network', 10)
 
-	.action(async ({ max, liquidityPool, type, account, network }) => {
+	.action(async ({ max, liquidityPool, type, account, defaultLiquidityPool, network }) => {
 		sportMarketsV2
-			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, network })
+			.liquidityPoolUserTransactions({ max, liquidityPool, type, account, defaultLiquidityPool, network })
 			.then(logResults())
 			.then(showResultCount({ max }));
 	});

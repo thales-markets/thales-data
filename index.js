@@ -2368,6 +2368,7 @@ module.exports = {
 			minTimestamp = undefined,
 			maxTimestamp = undefined,
 			round = undefined,
+			defaultLiquidityPool = undefined,
 			network = 10,
 		} = {}) {
 			return pageResults({
@@ -2385,6 +2386,7 @@ module.exports = {
 							round: round ? round : undefined,
 							timestamp_gte: minTimestamp ? minTimestamp : undefined,
 							timestamp_lte: maxTimestamp ? maxTimestamp : undefined,
+							account_not: defaultLiquidityPool ? `\\"${defaultLiquidityPool}\\"` : undefined,
 						},
 					},
 					properties: ['id', 'liquidityPool', 'hash', 'timestamp', 'type', 'account', 'amount', 'round'],
