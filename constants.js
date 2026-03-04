@@ -97,12 +97,12 @@ const LAST_DEPLOYMENT_IDS = {
 		137: '',
 	},
 	MarchMadness: {
-		10: 'QmfPftwMyuQg5CLMqCRyZGRrJzffE19jceKRc7oYQAd9Zf',
-		42161: 'QmRPjR5CvEbS1zfyjZJxTCDp7GX25rGiBoAS4Dox9q5aQj',
-		8453: 'QmejM2H2dxmNMnjVyXoue1GtaVigH4eQ8pannbmiAtgjvj',
+		10: 'QmSLZ3F391TjzYssi89paNQyXDAo8ps2pHTm22cpzQcLo7',
+		42161: 'QmdfRk5gewNTFrR4HRwJas7X7VsqP8EGApr1YM2FPBG877',
+		8453: 'Qmdp7JTokCtaJG2WDALow84hUh149KxBqpHGvuuemdoKEb',
 		1: '',
 		137: '',
-		11155420: 'QmTnG6h9KKyKK7k5EwWhcMWoNF5PoCSyMSHZHFcdS8rHct',
+		11155420: 'QmWs972Eq3BFb6uohDa5C5UscGKvCEAxJpRnsmsrLaLemw',
 	},
 	TaleOfThales: {
 		10: 'QmUWHqAcH5FutcVBmGJYFfquu98CXrVSPLjWRbveV1GnDG',
